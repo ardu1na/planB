@@ -1,0 +1,310 @@
+{% extends 'dashboard/elements/layouts/admin.html' %}
+
+{% load static %}
+
+{% block additional_css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- MAIN CLIENTS -->
+    
+
+    <div class="row">
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body  p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-danger text-danger">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">Revenue TOTAL</p>
+                            <h4 class="mb-0">{{total_rr_k|floatformat:0}} </h4>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body  p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-light text-ligth">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">CAV</p>
+                            <h4 class="mb-0">{{formula|floatformat:0}}  </h4>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-dark text-dark">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">SEO</p>
+                            <h4 class="mb-0">{{seo|floatformat:0}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-warning text-warning">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">GADS</p>
+                            <h4 class="mb-0">{{gads|floatformat:0}} </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-secondary text-secondary">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">FADS</p>
+                            <h4 class="mb-0">{{fads|floatformat:0}} </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-primary text-primary">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">LinkedIn</p>
+                            <h4 class="mb-0">{{lin|floatformat:0}} </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-info text-info">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">Community Management</p>
+                            <h4 class="mb-0">{{cm|floatformat:0}}  </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
+            <div class="widget-stat card">
+                <div class="card-body p-4">
+                    <div class="media ai-icon">
+                        <span class="me-3 bgl-success text-success">
+                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </span>
+                        <div class="media-body">
+                            <p class="mb-1">Combo</p>
+                            <h4 class="mb-0">{{combo|floatformat:0}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-xl-12">            
+            <div class="card students-list">
+                <div class="card-header border-0 flex-wrap pb-0 mb-5">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD Alarma Barrial<span class="btn-icon-end">
+                        <i class="fa fa-plus"></i></span>
+                </div>                
+                <!-- TABLE CLIENTS -->
+                <div class="card-body py-0">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                            <div class="table-responsive">
+                                <table id="example4" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>ALARMA</th>
+                                            <th>GOOGLE HOME</th>
+                                            <th>ALTA</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{% if barrios %}
+                                        {% for barrio in barrios %}
+                                        <tr>
+                                            <td><input type="checkbox" name="selected_barrios" value="{{ barrio.id }}" data-row-index="{{ forloop.counter0 }}"></td>
+
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <a class="mb-0 fs-16 font-w500" href="#">{{barrio.nombre}}</a>
+                                                </div>
+                                            </td>
+                                            <td>{{barrio.account}}</td>
+                                            <td>{{barrio.created_at}}</td>
+                                  
+                                            <td>
+                                                <div class="d-flex flex-row">
+                                                    
+                                                        <!-- delete BUTTON -->
+                                                            <button type="button" class="shadow-sm btn btn-danger px-3 mx-1" data-bs-toggle="modal" data-bs-target="#deletebarrio{{barrio.id}}">
+                                                            <i class="fa-solid fa-trash fs-7"></i>
+                                                            </button>                                                                                  
+                                                        <!-- edit BUTTON -->
+                                                            <a href="#" class="px-3 shadow-sm btn btn-secondary mx-1">
+                                                                <i class="fa-solid fa-pen-to-square "></i>
+                                                            </a>                                                
+                                                </div>                                        
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endif %}
+
+                                    </tbody>
+                                </table>
+
+                                <div class="d-flex flex-row-reverse">
+                                    <button type="submit" name="delete" class="btn btn-danger my-4 sweet-wrong">DELETE SELECTED<i class="fa-solid fa-trash fs-7 px-3"></i></button>
+                                </div>  
+                            </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!-- end MAIN barrios -->
+
+
+<!-- modals delete barrios -->
+    {% for barrio in barrios %}
+        <div class="modal" id="deletebarrio{{barrio.id}}">
+            {% include 'dashboard/sistema/barrios/deletebarrio.html' %}
+        </div>
+    {% endfor %}
+
+
+<!-- START modal add barrio -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add a new Alarma Barrial</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>           
+                <p>acá va el form de add alarmabariial</p>
+            </div>
+        </div>
+    </div>
+<!-- END modal add barrio -->
+{% endblock %}
+
+
+{% block additional_js %}
+    <!-- NEWMODAL -->
+        <script>
+            const deletebarrio = new bootstrap.Modal('#deletebarrio',   {keyboard: true}    )
+        </script>
+
+    <!-- charts -->
+    <script src="{% static 'dashboard/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'dashboard/vendor/chart.js/chart.min.js' %}"></script>
+    <script src="{% static 'dashboard/vendor/echarts/echarts.min.js' %}"></script>
+
+
+    
+<script>
+    var lastChecked = null;
+  
+    $(document).ready(function() {
+      // Escuchar el evento 'click' en los checkboxes de la tabla
+      $('#example4 tbody').on('click', 'input[type="checkbox"]', function(e) {
+        if(!lastChecked) {
+          lastChecked = this;
+          return;
+        }
+  
+        if(e.shiftKey) {
+          var start = $('#example4 tbody input[type="checkbox"]').index(this);
+          var end = $('#example4 tbody input[type="checkbox"]').index(lastChecked);
+  
+          $('#example4 tbody input[type="checkbox"]').slice(Math.min(start,end), Math.max(start,end)+ 1).prop('checked', lastChecked.checked);
+  
+        }
+  
+        lastChecked = this;
+      });
+    });
+  </script>
+
+{% endblock %}
