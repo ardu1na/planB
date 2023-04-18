@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from dashboard.forms import ConfigurationForm
+from dashboard.forms import *
+from alarms.forms import *
+
 from dashboard.models import Configurations
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -20,8 +22,19 @@ from django.core.paginator import Paginator
 def barrios_list(request):
     template_name = 'dashboard/sistema/barrios/barrios.html'
     barrios=GrupoBarrial.objects.filter(state="Yes")
+    if request.method == "GET":
+        addform=NewGrupoBarrialForm()
+    if request.method == "POST":
+        if "addnew" in request.POST:
+            addform = NewGrupoBarrialForm(request.POST)
+            if addform.is_valid():
+                newgrupo = addform.save()
+                return redirect('dashboard:barrios')
+            else:
+                return HttpResponse("Something wrong with the form")
     context={
         "barrios": barrios,
+        "addform": addform,
         "page_title":"Alarmas Vecinales"
     }
     return render(request, template_name, context)

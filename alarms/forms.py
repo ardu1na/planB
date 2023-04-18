@@ -1,4 +1,4 @@
-from django.forms import ModelForm, EmailInput, TextInput, Textarea
+from django.forms import ModelForm, EmailInput, TextInput, Textarea, URLInput
 from alarms.models import *
 
 
@@ -13,6 +13,7 @@ class NewGrupoBarrialForm(ModelForm):
                   'nombre',
                   'google_account',
                   'descripcion',
+                  'whatsapp_group',
                   )
                     
         widgets = {
@@ -27,6 +28,13 @@ class NewGrupoBarrialForm(ModelForm):
                 'class':"form-control",
                 'id':"google_account",
                 'placeholder' : "Google Account"
+                }
+            ),
+            
+            'whatsapp_group' : URLInput(attrs={
+                'class':"form-control",
+                'id':"whatsapp_group",
+                'placeholder' : "Grupo de WhatsApp"
                 }
             ),
             

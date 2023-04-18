@@ -46,6 +46,7 @@ class GrupoBarrial(models.Model):
 
     #add zona in coordenadas and rango
     google_account = models.EmailField(blank=True, null=True)
+    whatsapp_group = models.URLField(blank=True, null=True)
     
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)  
