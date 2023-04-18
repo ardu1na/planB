@@ -106,14 +106,17 @@ class Casa(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
 
     grupo_barrial = models.ForeignKey(GrupoBarrial, on_delete=models.CASCADE, blank=True, null=True, related_name="casas")
+    nota =  models.CharField(max_length=400, null=True, blank=True)
        
     calle = models.CharField(max_length=300, blank=True, null=True, verbose_name="CALLE")
     numero = models.IntegerField(blank=True, null=True)
+    departamento = models.CharField(max_length=300, blank=True, null=True, verbose_name="DEPARTAMENTO (opcional)")
+
     municipio = models.CharField(max_length=300, blank=True, null=True, verbose_name="MUNICIPIO")
     provincia = models.CharField(max_length=100, null=True, blank=True)
 
-    altitud = models.DecimalField(decimal_places=30, max_digits=80, blank=True, null=True,  verbose_name="ALTITUD")
-    latitud = models.DecimalField(decimal_places=30, max_digits=80, blank=True, null=True,  verbose_name="LATITUD")
+    altitud = models.DecimalField(decimal_places=7, max_digits=9, blank=True, null=True,  verbose_name="ALTITUD")
+    latitud = models.DecimalField(decimal_places=7, max_digits=9, blank=True, null=True,  verbose_name="LATITUD")
 
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -143,6 +146,10 @@ class Casa(models.Model):
         miembros = Miembro.objects.filter(casa__id=self.id)
         return miembros
     
+    @property
+    def get_miembros_number(self, *args, **kwargs):
+        miembros = Miembro.objects.filter(casa__id=self.id)
+        return len(miembros)
     
     @property
     def get_referencia(self, *args, **kwargs):

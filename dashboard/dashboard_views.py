@@ -18,6 +18,10 @@ from dashboard.cms import utils
 from django.core.paginator import Paginator
 
 
+
+#### sistema de alarmas barriales ######
+
+### crud de alarma barrial ###
 @login_required(login_url='dashboard:login')
 def barrios_list(request):
     template_name = 'dashboard/sistema/barrios/barrios.html'
@@ -40,13 +44,86 @@ def barrios_list(request):
     return render(request, template_name, context)
 
 
-
 @login_required(login_url='dashboard:login')
 def barrio_delete(request, pk):
     barrio = get_object_or_404(GrupoBarrial, id=pk)
     barrio.state = "No"
     barrio.save()
     return redirect('dashboard:barrios')
+
+
+### crud de viviendas ###
+
+@login_required(login_url='dashboard:login')
+def barrio_detail(request, pk): 
+    template_name = 'dashboard/sistema/barrios/verbarrio.html'
+    
+    barrio = get_object_or_404(GrupoBarrial, id=pk)
+    viviendas = Casa.objects.filter(state="Yes", grupo_barrial = barrio)
+    
+    if request.method == "GET":
+        addform=NewCasaForm()
+    if request.method == "POST":
+        if "addnew" in request.POST:
+            addform = NewCasaForm(request.POST)
+            if addform.is_valid():
+                casa = addform.save(commit=False)
+                casa.grupo_barrial=barrio
+                casa.save()
+                return redirect('dashboard:barrio', pk=barrio.pk)
+            else:
+                return HttpResponse("Something wrong with the form")
+    context={
+        "viviendas": viviendas,
+        "barrio":barrio,
+        "addform": addform,
+        "page_title":f"Alarma Vecinal {barrio.nombre}"
+    }
+    return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+def vivienda_delete(request, pk):
+    
+    vivienda = get_object_or_404(Casa, id=pk)
+    vivienda.state = "No"
+    vivienda.save()
+    return redirect('dashboard:barrio', pk=vivienda.grupo_barrial.id)
+
+### crud de usuarios ###
+
+
+### crud de alarma barrial ###
+@login_required(login_url='dashboard:login')
+def usuarios(request):
+    template_name = 'dashboard/sistema/barrios/barrios.html'
+    barrios=GrupoBarrial.objects.filter(state="Yes")
+    if request.method == "GET":
+        addform=NewGrupoBarrialForm()
+    if request.method == "POST":
+        if "addnew" in request.POST:
+            addform = NewGrupoBarrialForm(request.POST)
+            if addform.is_valid():
+                newgrupo = addform.save()
+                return redirect('dashboard:barrios')
+            else:
+                return HttpResponse("Something wrong with the form")
+    context={
+        "barrios": barrios,
+        "addform": addform,
+        "page_title":"Alarmas Vecinales"
+    }
+    return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+def usuario_delete(request, pk):
+    barrio = get_object_or_404(GrupoBarrial, id=pk)
+    barrio.state = "No"
+    barrio.save()
+    return redirect('dashboard:barrios')
+
+
 
 
 @login_required(login_url='dashboard:login')

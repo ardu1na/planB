@@ -151,7 +151,7 @@ dz_array = {
                                 "cms_blog_list":[
                                     f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.css",
                                 ],
-                                "barrios_list_list":[
+                                "barrios_list":[
                                     f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.css",
                                 ],
                                 "cms_blog_create":[
@@ -221,6 +221,9 @@ dz_array = {
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
                                 ],
                                 "barrios_list":[
+                                    f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
+                                ],
+                                "barrio_detail":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
                                 ],
                                 "instructor_resources":[],
@@ -415,7 +418,7 @@ dz_array = {
                                     f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
                                     'cms/blog/js/blog_list.js'
                                 ],
-                                "barrios_list_list":[
+                                "barrios_list":[
                                     f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
                                     'cms/blog/js/blog_list.js'
                                 ],
@@ -528,6 +531,15 @@ dz_array = {
                                     f"{foldername_d}/js/dashboard/instructor-student.js",
                                 ],
                                 "barrios_list":[
+                                    f"{foldername_d}/vendor/chart.js/Chart.bundle.min.js",
+                                    f"{foldername_d}/vendor/apexchart/apexchart.js",
+                                    f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
+                                    f"{foldername_d}/js/plugins-init/datatables.init.js",
+                                    f"{foldername_d}/vendor/owl-carousel/owl.carousel.js",
+                                    f"{foldername_d}/js/dashboard/instructor-student.js",
+                                ],
+                                
+                                "barrio_detail":[
                                     f"{foldername_d}/vendor/chart.js/Chart.bundle.min.js",
                                     f"{foldername_d}/vendor/apexchart/apexchart.js",
                                     f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
