@@ -27,6 +27,15 @@ def barrios_list(request):
     return render(request, template_name, context)
 
 
+
+@login_required(login_url='dashboard:login')
+def barrio_delete(request, pk):
+    barrio = get_object_or_404(GrupoBarrial, id=pk)
+    barrio.state = "No"
+    barrio.save()
+    return redirect('dashboard:barrios')
+
+
 @login_required(login_url='dashboard:login')
 @permission_required({'dashboard.view_configurations'}, raise_exception=True)
 def all_config(request):

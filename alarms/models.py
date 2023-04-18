@@ -42,6 +42,7 @@ class GrupoBarrial(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     
     nombre =  models.CharField(max_length=150)
+    descripcion =  models.TextField(null=True, blank=True)
 
     #add zona in coordenadas and rango
     google_account = models.EmailField(blank=True, null=True)

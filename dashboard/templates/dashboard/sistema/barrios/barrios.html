@@ -209,7 +209,7 @@
                                                     <a class="mb-0 fs-16 font-w500" href="#">{{barrio.nombre}}</a>
                                                 </div>
                                             </td>
-                                            <td>{{barrio.account}}</td>
+                                            <td>{{barrio.google_account}}</td>
                                             <td>{{barrio.created_at}}</td>
                                   
                                             <td>
@@ -281,9 +281,11 @@
     <script src="{% static 'dashboard/vendor/chart.js/chart.min.js' %}"></script>
     <script src="{% static 'dashboard/vendor/echarts/echarts.min.js' %}"></script>
 
+   
 
     
 <script>
+
     var lastChecked = null;
   
     $(document).ready(function() {
