@@ -56,7 +56,7 @@ def barrio_delete(request, pk):
 
 @login_required(login_url='dashboard:login')
 def barrio_detail(request, pk): 
-    template_name = 'dashboard/sistema/barrios/verbarrio.html'
+    template_name = 'dashboard/sistema/barrios/barrio.html'
     
     barrio = get_object_or_404(GrupoBarrial, id=pk)
     viviendas = Casa.objects.filter(state="Yes", grupo_barrial = barrio)
@@ -89,6 +89,20 @@ def vivienda_delete(request, pk):
     vivienda.state = "No"
     vivienda.save()
     return redirect('dashboard:barrio', pk=vivienda.grupo_barrial.pk)
+
+
+@login_required(login_url='dashboard:login')
+def vivienda_detail(request, pk):
+    
+    vivienda = get_object_or_404(Casa, id=pk)
+    usuarios = vivienda.miembros.all()
+    template_name= 'dashboard/sistema/barrios/vivienda.html'
+    context ={
+        "vivienda" : vivienda,
+        "usuarios": usuarios,
+        "page_title":f"{vivienda.grupo_barrial.nombre}: {vivienda.get_direccion}"
+    }
+    return render(request, template_name, context)
 
 ### crud de usuarios ###
 

@@ -74,9 +74,16 @@ class Miembro(models.Model):
 
     nombre = models.CharField(max_length=150)
     apellido = models.CharField(max_length=150)
-    
+    M="Mujer"
+    H="Hombre"
+    GENERO_CHOICES = (
+        (M, ("Mujer")),
+        (H, ("Hombre")),
+    )
+    genero = models.CharField(max_length=34, choices=GENERO_CHOICES, null=True, default=None)
     es_referente = models.BooleanField(default=False)
     
+    telefono = models.CharField(max_length=90, null=True, blank=True)
     fecha_de_nacimiento = models.DateField(blank=True, null=True)
 
     contacto_nombre = models.CharField(max_length=150,  blank=True, null=True)
@@ -97,9 +104,21 @@ class Miembro(models.Model):
             self.deleted_at = date.today()
         super(Miembro, self).save(*args, **kwargs)
 
-
-    def __str__ (self):
+    @property
+    def get_edad(self):
+        if self.fecha_de_nacimiento:
+            hoy = date.today()
+            edad = (hoy - self.fecha_de_nacimiento).days // 365.25
+            return int(edad)
+        else:
+            return None
+    
+    @property
+    def get_nombre_completo(self):
         return f'{self.apellido}, {self.nombre}'
+    
+    def __str__ (self):
+        return self.get_nombre_completo
     
         
 class Casa(models.Model):    

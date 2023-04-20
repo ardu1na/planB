@@ -66,7 +66,7 @@
                             </svg>
                         </span>
                         <div class="media-body">
-                            <p class="mb-1">CANTIDAD DE CASAS</p>
+                            <p class="mb-1">CANTIDAD DE MIEMBROS</p>
                             <h4 class="mb-0">{{lin|floatformat:0}} </h4>
                         </div>
                     </div>
@@ -75,24 +75,6 @@
         </div>
 
 
-        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
-            <div class="widget-stat card">
-                <div class="card-body p-4">
-                    <div class="media ai-icon">
-                        <span class="me-3 bgl-info text-info">
-                            <svg id="icon-revenue" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
-                        </span>
-                        <div class="media-body">
-                            <p class="mb-1">CANTIDAD DE MIEMBROS</p>
-                            <h4 class="mb-0">{{cm|floatformat:0}}  </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
@@ -126,7 +108,7 @@
                             </svg>
                         </span>
                         <div class="media-body">
-                            <p class="mb-1">FUEGO ESTE MES</p>
+                            <p class="mb-1">FUEGO ESTE AÑO</p>
                             <h4 class="mb-0">{{seo|floatformat:0}}</h4>
                         </div>
                     </div>
@@ -146,7 +128,7 @@
                             </svg>
                         </span>
                         <div class="media-body">
-                            <p class="mb-1">SOS ESTE MES</p>
+                            <p class="mb-1">SOS ESTE AÑO</p>
                             <h4 class="mb-0">{{gads|floatformat:0}} </h4>
                         </div>
                     </div>
@@ -166,7 +148,7 @@
                             </svg>
                         </span>
                         <div class="media-body">
-                            <p class="mb-1">EMERGEGNCIA ESTE MES</p>
+                            <p class="mb-1">EMERGEGNCIA ESTE AÑO</p>
                             <h4 class="mb-0">{{fads|floatformat:0}} </h4>
                         </div>
                     </div>
@@ -185,7 +167,7 @@
         <div class="col-xl-12">            
             <div class="card students-list">
                 <div class="card-header border-0 flex-wrap pb-0 mb-5">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Nueva Vivienda<span class="btn-icon-end">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Usuario<span class="btn-icon-end">
                         <i class="fa fa-plus"></i></span>
                 </div>                
                 <!-- TABLE VIVIENDAS -->
@@ -194,40 +176,33 @@
                                 <table id="example4" style="min-width: 845px">
                                     <thead>
                                         <tr>
-                                            <th>DIRECCION</th>
-                                            <th>MUNICIPIO</th>
-                                            <th>PROVINCIA</th>
-                                            <th>COORDENADAS</th>
-                                            <th>N° MIEMBROS</th>
-                                            <th>MIEMBROS</th>
-                                            <th>FECHA ALTA</th>
-
+                                            <th>NOMBRE</th>
+                                            <th>APELLIDO</th>
+                                            <th>EDAD</th>
+                                            <th>ALARMAS ESTE MES</th>
+                                            <th>ALARMAS ESTE AÑO</th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>{% if viviendas %}
-                                        {% for vivienda in viviendas %}
+                                    <tbody>{% if usuarios %}
+                                        {% for usuario in usuarios %}
                                         <tr>
 
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <a class="mb-0 fs-16 font-w500" href="#">{{vivienda.get_direccion}}</a>
+                                                    <a class="mb-0 fs-16 font-w500" href="#">{{usuario.get_direccion}}</a>
                                                 </div>
                                             </td>
-                                            <td>{{vivienda.municipio}}</td>
-                                            <td>{{vivienda.provincia}}</td>
-                                            <td>{{vivienda.get_coordenadas|truncatechars:25}}</td>
-                                            <td>{{vivienda.get_miembros_number}}</td>
-                                            <td>{{vivienda.get_miembros_string|truncatechars:25}}</td>
-
-                                            <td>{{vivienda.created_at}}</td>
-
-
+                                            <td>{{usuario.nombre}}</td>
+                                            <td>{{usuario.apellido}}</td>
+                                            <td>{{usuario.get_edad}}</td>
+                                            <td>0</td>
+                                            <td>0</td>
                                             <td>
                                                 <div class="d-flex flex-row">
                                                     
                                                         <!-- delete BUTTON -->
-                                                            <button type="button" class="shadow-sm btn btn-danger px-3 mx-1" data-bs-toggle="modal" data-bs-target="#deletevivienda{{vivienda.id}}">
+                                                            <button type="button" class="shadow-sm btn btn-danger px-3 mx-1" data-bs-toggle="modal" data-bs-target="#deleteusuario{{usuario.id}}">
                                                             <i class="fa-solid fa-trash fs-7"></i>
                                                             </button>                                                                                  
                                                         <!-- edit BUTTON -->
@@ -251,23 +226,23 @@
             </div>
         </div>
     </div>
-<!-- end MAIN viviendas -->
+<!-- end MAIN usuarios -->
 
 
-<!-- modals delete viviendas -->
-    {% for vivienda in viviendas %}
-        <div class="modal" id="deletevivienda{{vivienda.id}}">
+<!-- modals delete usuarios -->
+    {% for usuario in usuarios %}
+        <div class="modal" id="deleteusuario{{usuario.id}}">
             {% include 'dashboard/sistema/barrios/deletecasa.html' %}
         </div>
     {% endfor %}
 
 
-<!-- START modal add vivienda -->
+<!-- START modal add usuario -->
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Vivienda</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Usuario</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>           
                 <form  method="post">
@@ -324,14 +299,14 @@
             </div>
         </div>
     </div>
-<!-- END modal add vivienda -->
+<!-- END modal add usuario -->
 {% endblock %}
 
 
 {% block additional_js %}
     <!-- NEWMODAL -->
         <script>
-            const deletevivienda = new bootstrap.Modal('#deletevivienda',   {keyboard: true}    )
+            const deleteusuario = new bootstrap.Modal('#deleteusuario',   {keyboard: true}    )
         </script>
 
     <!-- charts -->
