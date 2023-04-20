@@ -142,6 +142,30 @@ def vivienda_edit(request, pk):
     return render(request, template_name, context)
 
 
+
+@login_required(login_url='dashboard:login')
+def barrio_edit(request, pk):
+    
+    barrio = get_object_or_404(AlarmaVecinal, id=pk)
+    template_name= 'dashboard/sistema/barrios/barrioedit.html'
+    editform=NewAlarmaVecinalForm(instance=barrio)
+             
+        
+    if request.method == "POST":
+            editform = NewAlarmaVecinalForm(request.POST, instance=barrio)
+            if editform.is_valid():
+                editform.save()
+                return redirect('dashboard:barrio', pk=barrio.pk)
+            else:
+                return HttpResponse("Something wrong with the form")
+            
+    context ={
+        "barrio" : barrio,
+        "editform" : editform,
+    }
+    return render(request, template_name, context)
+
+
 ### crud de usuarios ###
 @login_required(login_url='dashboard:login')
 def usuario_detail(request, pk):

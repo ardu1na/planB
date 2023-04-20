@@ -12,6 +12,8 @@ urlpatterns = [
     path('barrios/',dashboard_views.barrios_list, name="barrios"),
     path('barrio/<uuid:pk>/delete/',dashboard_views.barrio_delete, name="barriodelete"),
     path('barrio/<uuid:pk>/',dashboard_views.barrio_detail, name="barrio"),
+    path('barrio/<uuid:pk>/change/',dashboard_views.barrio_edit, name="barrioedit"),
+
     path('vivienda/<uuid:pk>/delete/',dashboard_views.vivienda_delete, name="viviendadelete"),
     path('vivienda/<uuid:pk>/',dashboard_views.vivienda_detail, name="vivienda"),
     path('vivienda/<uuid:pk>/change/',dashboard_views.vivienda_edit, name="viviendaedit"),
