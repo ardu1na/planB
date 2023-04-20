@@ -226,6 +226,9 @@ dz_array = {
                                 "barrio_detail":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
                                 ],
+                                "vivienda_detail":[
+                                    f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
+                                ],
                                 "instructor_resources":[],
                                 "instructor_transactions":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",

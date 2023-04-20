@@ -179,23 +179,26 @@
                                             <th>NOMBRE</th>
                                             <th>APELLIDO</th>
                                             <th>EDAD</th>
+                                            <th>H/M</th>
+
                                             <th>ALARMAS ESTE MES</th>
                                             <th>ALARMAS ESTE AÑO</th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>{% if usuarios %}
+                                    <tbody>
                                         {% for usuario in usuarios %}
                                         <tr>
 
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <a class="mb-0 fs-16 font-w500" href="#">{{usuario.get_direccion}}</a>
+                                                    <a class="mb-0 fs-16 font-w500" href="#">{{usuario.nombre}}</a>
                                                 </div>
                                             </td>
-                                            <td>{{usuario.nombre}}</td>
                                             <td>{{usuario.apellido}}</td>
                                             <td>{{usuario.get_edad}}</td>
+                                            <td>{{usuario.genero}}</td>
+
                                             <td>0</td>
                                             <td>0</td>
                                             <td>
@@ -213,7 +216,6 @@
                                             </td>
                                         </tr>
                                         {% endfor %}
-                                        {% endif %}
 
                                     </tbody>
                                 </table>
@@ -317,29 +319,5 @@
    
 
     
-<script>
-
-    var lastChecked = null;
-  
-    $(document).ready(function() {
-      // Escuchar el evento 'click' en los checkboxes de la tabla
-      $('#example4 tbody').on('click', 'input[type="checkbox"]', function(e) {
-        if(!lastChecked) {
-          lastChecked = this;
-          return;
-        }
-  
-        if(e.shiftKey) {
-          var start = $('#example4 tbody input[type="checkbox"]').index(this);
-          var end = $('#example4 tbody input[type="checkbox"]').index(lastChecked);
-  
-          $('#example4 tbody input[type="checkbox"]').slice(Math.min(start,end), Math.max(start,end)+ 1).prop('checked', lastChecked.checked);
-  
-        }
-  
-        lastChecked = this;
-      });
-    });
-  </script>
 
 {% endblock %}
