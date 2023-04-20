@@ -25,12 +25,12 @@ from django.core.paginator import Paginator
 @login_required(login_url='dashboard:login')
 def barrios_list(request):
     template_name = 'dashboard/sistema/barrios/barrios.html'
-    barrios=GrupoBarrial.objects.filter(state="Yes")
+    barrios=AlarmaVecinal.objects.filter(state="Yes")
     if request.method == "GET":
-        addform=NewGrupoBarrialForm()
+        addform=NewAlarmaVecinalForm()
     if request.method == "POST":
         if "addnew" in request.POST:
-            addform = NewGrupoBarrialForm(request.POST)
+            addform = NewAlarmaVecinalForm(request.POST)
             if addform.is_valid():
                 newgrupo = addform.save()
                 return redirect('dashboard:barrios')
@@ -46,7 +46,7 @@ def barrios_list(request):
 
 @login_required(login_url='dashboard:login')
 def barrio_delete(request, pk):
-    barrio = get_object_or_404(GrupoBarrial, id=pk)
+    barrio = get_object_or_404(AlarmaVecinal, id=pk)
     barrio.state = "No"
     barrio.save()
     return redirect('dashboard:barrios')
@@ -58,18 +58,18 @@ def barrio_delete(request, pk):
 def barrio_detail(request, pk): 
     template_name = 'dashboard/sistema/barrios/barrio.html'
     
-    barrio = get_object_or_404(GrupoBarrial, id=pk)
-    viviendas = Casa.objects.filter(state="Yes", grupo_barrial = barrio)
+    barrio = get_object_or_404(AlarmaVecinal, id=pk)
+    viviendas = Vivienda.objects.filter(state="Yes", alarma_vecinal = barrio)
     
     if request.method == "GET":
-        addform=NewCasaForm()
+        addform=NewViviendaForm()
     if request.method == "POST":
         if "addnew" in request.POST:
-            addform = NewCasaForm(request.POST)
+            addform = NewViviendaForm(request.POST)
             if addform.is_valid():
-                casa = addform.save(commit=False)
-                casa.grupo_barrial=barrio
-                casa.save()
+                vivienda = addform.save(commit=False)
+                vivienda.alarma_vecinal=barrio
+                vivienda.save()
                 return redirect('dashboard:barrio', pk=barrio.pk)
             else:
                 return HttpResponse("Something wrong with the form")
@@ -85,16 +85,16 @@ def barrio_detail(request, pk):
 @login_required(login_url='dashboard:login')
 def vivienda_delete(request, pk):
     
-    vivienda = get_object_or_404(Casa, id=pk)
+    vivienda = get_object_or_404(Vivienda, id=pk)
     vivienda.state = "No"
     vivienda.save()
-    return redirect('dashboard:barrio', pk=vivienda.grupo_barrial.pk)
+    return redirect('dashboard:barrio', pk=vivienda.alarma_vecinal.pk)
 
 
 @login_required(login_url='dashboard:login')
 def vivienda_detail(request, pk):
     
-    vivienda = get_object_or_404(Casa, id=pk)
+    vivienda = get_object_or_404(Vivienda, id=pk)
     usuarios = vivienda.miembros.filter(state="Yes")
     template_name= 'dashboard/sistema/barrios/vivienda.html'
     addform=NewUsuarioForm()
@@ -105,7 +105,7 @@ def vivienda_detail(request, pk):
             addform = NewUsuarioForm(request.POST)
             if addform.is_valid():
                 usuario = addform.save(commit=False)
-                usuario.casa=vivienda
+                usuario.vivienda=vivienda
                 usuario.save()
                 return redirect('dashboard:vivienda', pk=vivienda.pk)
             else:
@@ -115,7 +115,29 @@ def vivienda_detail(request, pk):
         "vivienda" : vivienda,
         "usuarios": usuarios,
         "addform" : addform,
-        "page_title":f"{vivienda.grupo_barrial.nombre}: {vivienda.get_direccion}"
+    }
+    return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+def vivienda_edit(request, pk):
+    
+    vivienda = get_object_or_404(Vivienda, id=pk)
+    template_name= 'dashboard/sistema/barrios/viviendaedit.html'
+    editform=NewViviendaForm(instance=vivienda)
+             
+        
+    if request.method == "POST":
+            editform = NewViviendaForm(request.POST, instance=vivienda)
+            if editform.is_valid():
+                editform.save()
+                return redirect('dashboard:vivienda', pk=vivienda.pk)
+            else:
+                return HttpResponse("Something wrong with the form")
+            
+    context ={
+        "vivienda" : vivienda,
+        "editform" : editform,
     }
     return render(request, template_name, context)
 
@@ -130,7 +152,6 @@ def usuario_detail(request, pk):
              
         
     if request.method == "POST":
-        if "editusuario" in request.POST:
             editform = NewUsuarioForm(request.POST, instance=usuario)
             if editform.is_valid():
                 editform.save()
@@ -140,8 +161,7 @@ def usuario_detail(request, pk):
             
     context ={
         "usuario" : usuario,
-        "addform" : editform,
-        "page_title":f"{usuario.casa.get_direccion}: {usuario.get_nombre_completo}"
+        "editform" : editform,
     }
     return render(request, template_name, context)
 
@@ -153,7 +173,18 @@ def usuario_delete(request, pk):
     usuario = get_object_or_404(Miembro, id=pk)
     usuario.state = "No"
     usuario.save()
-    return redirect('dashboard:vivienda', pk=usuario.casa.pk)
+    return redirect('dashboard:vivienda', pk=usuario.vivienda.pk)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

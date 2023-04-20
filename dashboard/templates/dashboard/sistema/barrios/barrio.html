@@ -176,7 +176,13 @@
 
        
 
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:barrios' %}">Inicio</a></li>
 
+                <li class="breadcrumb-item active"><a> Viviendas en {{barrio.nombre}} </a> </li>
+            </ol>
+        </div>
        
 
 
@@ -257,7 +263,7 @@
 <!-- modals delete viviendas -->
     {% for vivienda in viviendas %}
         <div class="modal" id="deletevivienda{{vivienda.id}}">
-            {% include 'dashboard/sistema/barrios/deletecasa.html' %}
+            {% include 'dashboard/sistema/barrios/deletevivienda.html' %}
         </div>
     {% endfor %}
 
@@ -276,7 +282,7 @@
                             <div class="pt-1 pb-4">
                                 <div class="formcontrol">                                         
                                     <div class="form-floating mb-3">
-                                        <input type="hidden" name="grupo_barrial" value="{{ barrio.id }}">
+                                        <input type="hidden" name="alarma_vecinal" value="{{ barrio.id }}">
         
                                         <div class="form-group my-3">
                                             

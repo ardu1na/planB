@@ -7,19 +7,19 @@
 
 {% block content %}
 
-<!-- modal delete usuario -->
-<div class="modal" id="deleteusuario{{usuario.id}}">
+<!-- modal delete vivienda -->
+<div class="modal" id="deletevivienda{{vivienda.id}}">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center py-5">
-                <h4 class="fs-2 my-2">Deleting {{usuario.get_nombre_completo}} permanently...</h4>
+                <h4 class="fs-2 my-2">Deleting {{vivienda.get_direccion}} de {{vivienda.alarma_vecinal}} permanently...</h4>
                 <h4 class="fs-2 my-2">¿Are you sure?</h4>
 
                 <div class="form-floating mt-5">
                     <a href="./" class="btn fs-7 mx-2">
                         <i class="fa-solid fa-arrow-left me-2 fs-7"></i> Nop, go back.
                     </a>
-                    <a href="{% url 'dashboard:usuariodelete' pk=usuario.id %}" class="shadow-sm btn btn-danger fs-6 p-3">
+                    <a href="{% url 'dashboard:viviendadelete' pk=vivienda.id %}" class="shadow-sm btn btn-danger fs-6 p-3">
                         <i class="fa-regular fa-trash-can fs-5 me-1"></i> Yes!
                     </a>
                 </div>
@@ -35,10 +35,9 @@
 
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:barrio' pk=usuario.vivienda.alarma_vecinal.id %}">{{usuario.vivienda.alarma_vecinal}}</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:barrio' pk=vivienda.alarma_vecinal.id %}">{{vivienda.alarma_vecinal}}</a></li>
 
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:vivienda' pk=usuario.vivienda.id %}">{{usuario.vivienda.get_direccion}}</a></li>
-                <li class="breadcrumb-item active"><a> {{usuario.nombre}} {{usuario.apellido}}</a> </li>
+                <li class="breadcrumb-item active"><a href="{% url 'dashboard:vivienda' pk=vivienda.id %}"> {{vivienda.get_direccion}} </a> </li>
             </ol>
         </div>
        
@@ -46,10 +45,10 @@
             <div class="col-xl-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h3>
+                        <h3 class="card-title">{{vivienda}}</h3>
                         <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
                                                 
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusuario{{usuario.id}}">Delete<span class="btn-icon-end">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletevivienda{{vivienda.id}}">Delete<span class="btn-icon-end">
                                 <i class="fa-solid fa-trash fs-7"></i></span></button>
                         </div>
                                               
@@ -79,41 +78,58 @@
                                                             <div class="form-floating mb-3">
 
                                                                 
-                                                                <input type="hidden" name="vivienda" value="{{ usuario.vivienda.id }}">
+                                                                <input type="hidden" name="alarma_vecinal" value="{{ vivienda.alarma_vecinal.id }}">
         
                                                                               
                                         
                                                                 <div class="form-group my-3">
-                                                                    {{editform.nombre}}
+                                                                    {{editform.calle}}
                                                                 </div>
 
                                                                 <div class="form-group my-3">
-                                                                    {{editform.apellido}}
+                                                                    {{editform.numero}}
                                                                 </div>
 
                                                                 <div class="form-group my-3">
-                                                                    {{editform.telefono}}
+                                                                    {{editform.departamento}}
                                                                 </div>
 
 
                                                                 <div class="form-group my-3">
-                                                                    {{editform.genero}}
+                                                                    {{editform.municipio}}
                                                                 </div>
 
 
 
                                                                 <div class="form-group my-3">
                                                                     
-                                                                    {{editform.fecha_de_nacimiento}}
+                                                                    {{editform.provincia}}
                                                                 </div>
+
+                                                                <div class="form-group my-3">
+                                                                    {{editform.altitud}}
+                                                                </div>
+
+
+
+                                                                <div class="form-group my-3">
+                                                                    
+                                                                    {{editform.latitud}}
+                                                                </div>
+                                                                <div class="form-group my-3">
+                                                                    {{editform.nota}}
+                                                                </div>
+
+
+
                                                                 
                                                             </div>
                                                         </div>       
                 
                                                         <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
-                                                            <button type="submit" class="shadow-sm btn btn-secondary fs-3 " name="editusuario"><i class="fa-solid fa-check"></i> Save </button>
+                                                            <button type="submit" class="shadow-sm btn btn-secondary fs-3 " name="editvivienda"><i class="fa-solid fa-check"></i> Save </button>
 
-                                                            <a href="{% url 'dashboard:vivienda' pk=usuario.vivienda.pk %}" class="btn fs-7 mx-2">
+                                                            <a href="{% url 'dashboard:vivienda' pk=vivienda.pk %}" class="btn fs-7 mx-2">
                                                                 <i class="fa-solid fa-arrow-left me-2 fs-7"></i> Cancel
                                                             </a>
                                                         </div>
@@ -167,7 +183,7 @@
 
 <!-- NEWMODAL -->
 <script>
-    const deleteusuario = new bootstrap.Modal('#deleteusuario',   {keyboard: true}    )
+    const deletevivienda = new bootstrap.Modal('#deletevivienda',   {keyboard: true}    )
 </script>
 
 {% endblock %}

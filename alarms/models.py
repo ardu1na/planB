@@ -33,12 +33,12 @@ class AlarmaEvent(models.Model):
 
 
     def __str__ (self):
-        return f'Alarma {self.tipo} en {self.miembro.casa.grupo_barrial}, {self.miembro.casa.get_direccion}' 
+        return f'Alarma {self.tipo} en {self.miembro.vivienda.alarma_vecinal}, {self.miembro.vivienda.get_direccion}' 
 
     
     
 
-class GrupoBarrial(models.Model):
+class AlarmaVecinal(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     
     nombre =  models.CharField(max_length=150)
@@ -61,16 +61,33 @@ class GrupoBarrial(models.Model):
     def save(self, *args, **kwargs):
         if self.state == "No":
             self.deleted_at = date.today()
-        super(GrupoBarrial, self).save(*args, **kwargs)    
+        super(AlarmaVecinal, self).save(*args, **kwargs)    
         
     def __str__ (self):
         return self.nombre
+    
+    @property
+    def get_n_usuarios(self):
+        usuarios = []
+        viviendas = self.viviendas.filter(state="Yes")
+        for vivienda in viviendas:
+            for usuario in vivienda.miembros.filter(state="Yes"):
+                usuarios.append(usuario)
+        return len(usuarios)  
+    
+    @property
+    def get_n_viviendas(self):
+        viviendas = self.viviendas.filter(state="Yes")        
+        return len(viviendas)
+    
+    
+    
     
     
 class Miembro(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
 
-    casa = models.ForeignKey('Casa', on_delete=models.CASCADE, related_name="miembros")
+    vivienda = models.ForeignKey('Vivienda', on_delete=models.CASCADE, related_name="miembros")
 
     nombre = models.CharField(max_length=150)
     apellido = models.CharField(max_length=150)
@@ -121,10 +138,10 @@ class Miembro(models.Model):
         return self.get_nombre_completo
     
         
-class Casa(models.Model):    
+class Vivienda(models.Model):    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
 
-    grupo_barrial = models.ForeignKey(GrupoBarrial, on_delete=models.CASCADE, blank=True, null=True, related_name="casas")
+    alarma_vecinal = models.ForeignKey(AlarmaVecinal, on_delete=models.CASCADE, blank=True, null=True, related_name="viviendas")
     nota =  models.CharField(max_length=400, null=True, blank=True)
        
     calle = models.CharField(max_length=300, blank=True, null=True, verbose_name="CALLE")
@@ -155,25 +172,25 @@ class Casa(models.Model):
 
     @property
     def get_miembros_string(self, *args, **kwargs):
-        miembros = Miembro.objects.filter(casa__id=self.id)
+        miembros = Miembro.objects.filter(vivienda__id=self.id)
         nombres = ["{} {}".format(miembro.nombre, miembro.apellido) for miembro in miembros]
         return ", ".join(nombres)
     
     
     @property
     def get_miembros(self, *args, **kwargs):
-        miembros = Miembro.objects.filter(casa__id=self.id)
+        miembros = Miembro.objects.filter(vivienda__id=self.id)
         return miembros
     
     @property
     def get_miembros_number(self, *args, **kwargs):
-        miembros = Miembro.objects.filter(casa__id=self.id)
+        miembros = Miembro.objects.filter(vivienda__id=self.id)
         return len(miembros)
     
     @property
     def get_referencia(self, *args, **kwargs):
         try:            
-            referencia = Miembro.objects.get(casa__id=self.id, es_referente=True)
+            referencia = Miembro.objects.get(vivienda__id=self.id, es_referente=True)
             return f"{referencia.nombre} {referencia.apellido}"
         except:
             return "None"
@@ -194,11 +211,11 @@ class Casa(models.Model):
     def save(self, *args, **kwargs):
         if self.state == "No":
             self.deleted_at = date.today()
-        super(Casa, self).save(*args, **kwargs)
+        super(Vivienda, self).save(*args, **kwargs)
 
 
     def __str__ (self):
-        return f'{self.grupo_barrial}: {self.get_direccion}'
+        return f'{self.alarma_vecinal}: {self.get_direccion}'
     
     
     

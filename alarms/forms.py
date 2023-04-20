@@ -6,7 +6,7 @@ from alarms.models import *
 
 class NewUsuarioForm(ModelForm):
     
-    casa = UUIDField(widget=HiddenInput())
+    vivienda = UUIDField(widget=HiddenInput())
 
     class Meta:
         model = Miembro
@@ -54,10 +54,10 @@ class NewUsuarioForm(ModelForm):
 
 
 
-class NewGrupoBarrialForm(ModelForm):
+class NewAlarmaVecinalForm(ModelForm):
     
     class Meta:
-        model = GrupoBarrial
+        model = AlarmaVecinal
         fields = ( 
                   'nombre',
                   'google_account',
@@ -103,13 +103,13 @@ class NewGrupoBarrialForm(ModelForm):
         
 
 
-class NewCasaForm(ModelForm):
+class NewViviendaForm(ModelForm):
     
 
-    grupo_barrial = UUIDField(widget=HiddenInput())
+    alarma_vecinal = UUIDField(widget=HiddenInput())
 
     class Meta:
-        model = Casa
+        model = Vivienda
         fields = ( 
                   'calle',
                   'numero',
