@@ -88,7 +88,7 @@ def vivienda_delete(request, pk):
     vivienda = get_object_or_404(Casa, id=pk)
     vivienda.state = "No"
     vivienda.save()
-    return redirect('dashboard:barrio', pk=vivienda.grupo_barrial.id)
+    return redirect('dashboard:barrio', pk=vivienda.grupo_barrial.pk)
 
 ### crud de usuarios ###
 
