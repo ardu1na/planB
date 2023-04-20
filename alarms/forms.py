@@ -1,7 +1,56 @@
-from django.forms import ModelForm, EmailInput, TextInput, Textarea, URLInput, NumberInput, HiddenInput, UUIDField
+from django.forms import ModelForm, EmailInput,\
+        TextInput, Textarea, URLInput, NumberInput,\
+        HiddenInput, UUIDField, Select
+        
 from alarms.models import *
 
+class NewUsuarioForm(ModelForm):
+    
+    casa = UUIDField(widget=HiddenInput())
 
+    class Meta:
+        model = Miembro
+        fields = ( 
+                  'nombre',
+                  'apellido',
+                  'genero',
+                  
+                  'telefono',                  
+                  'fecha_de_nacimiento',
+                  )
+                    
+        widgets = {
+            
+            'nombre' : TextInput(attrs={'class':"form-control",
+            'id':"nombre",
+            'placeholder':"Nombre",}),
+
+            'apellido' : TextInput(attrs={'class':"form-control",
+            'id':"apellido",
+            'placeholder':"Apellido",}),
+            
+
+
+            'genero' : Select(attrs={
+                'class':"default-select form-control wide mb-3",
+                'id':"genero",
+                'placeholder':"Género",}),
+            
+            'telefono' : TextInput(attrs={'class':"form-control",
+            'id':"telefono",
+            'placeholder':"Teléfono",}),
+            
+            'fecha_de_nacimiento' : TextInput(attrs={'class':"datetimepicker form-control",
+            'id':"PublishDateTimeTextbox",
+            'type':"date",
+            'placeholder':"Date",}),
+            
+            
+            
+
+
+        }
+        
 
 
 
@@ -56,7 +105,6 @@ class NewGrupoBarrialForm(ModelForm):
 
 class NewCasaForm(ModelForm):
     
-    #                     c
 
     grupo_barrial = UUIDField(widget=HiddenInput())
 

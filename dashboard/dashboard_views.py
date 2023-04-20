@@ -97,9 +97,27 @@ def vivienda_detail(request, pk):
     vivienda = get_object_or_404(Casa, id=pk)
     usuarios = vivienda.miembros.all()
     template_name= 'dashboard/sistema/barrios/vivienda.html'
+    
+    
+    if request.method == "GET":
+        addform=NewUsuarioForm() 
+        
+    if request.method == "POST":
+        if "addnew" in request.POST:
+            addform = NewUsuarioForm(request.POST)
+            if addform.is_valid():
+                usuario = addform.save(commit=False)
+                usuario.casa=vivienda
+                usuario.save()
+                return redirect('dashboard:vivienda', pk=vivienda.pk)
+            else:
+                return HttpResponse("Something wrong with the form")
+            
+            
     context ={
         "vivienda" : vivienda,
         "usuarios": usuarios,
+        "addform" : addform,
         "page_title":f"{vivienda.grupo_barrial.nombre}: {vivienda.get_direccion}"
     }
     return render(request, template_name, context)
