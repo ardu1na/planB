@@ -192,7 +192,7 @@
 
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <a class="mb-0 fs-16 font-w500" href="#">{{usuario.nombre}}</a>
+                                                    <a class="mb-0 fs-16 font-w500" href="{% url 'dashboard:usuario' pk=usuario.pk %}">{{usuario.nombre}}</a>
                                                 </div>
                                             </td>
                                             <td>{{usuario.apellido}}</td>

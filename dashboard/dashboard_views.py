@@ -97,10 +97,8 @@ def vivienda_detail(request, pk):
     vivienda = get_object_or_404(Casa, id=pk)
     usuarios = vivienda.miembros.filter(state="Yes")
     template_name= 'dashboard/sistema/barrios/vivienda.html'
-    
-    
-    if request.method == "GET":
-        addform=NewUsuarioForm() 
+    addform=NewUsuarioForm()
+             
         
     if request.method == "POST":
         if "addnew" in request.POST:
@@ -113,7 +111,6 @@ def vivienda_detail(request, pk):
             else:
                 return HttpResponse("Something wrong with the form")
             
-            
     context ={
         "vivienda" : vivienda,
         "usuarios": usuarios,
@@ -122,27 +119,29 @@ def vivienda_detail(request, pk):
     }
     return render(request, template_name, context)
 
+
 ### crud de usuarios ###
-
-
 @login_required(login_url='dashboard:login')
-def usuarios(request):
-    template_name = 'dashboard/sistema/barrios/barrios.html'
-    barrios=GrupoBarrial.objects.filter(state="Yes")
-    if request.method == "GET":
-        addform=NewGrupoBarrialForm()
+def usuario_detail(request, pk):
+    
+    usuario = get_object_or_404(Miembro, id=pk)
+    template_name= 'dashboard/sistema/barrios/usuario.html'
+    editform=NewUsuarioForm(instance=usuario)
+             
+        
     if request.method == "POST":
-        if "addnew" in request.POST:
-            addform = NewGrupoBarrialForm(request.POST)
-            if addform.is_valid():
-                newgrupo = addform.save()
-                return redirect('dashboard:barrios')
+        if "editusuario" in request.POST:
+            editform = NewUsuarioForm(request.POST, instance=usuario)
+            if editform.is_valid():
+                editform.save()
+                return redirect('dashboard:usuario', pk=usuario.pk)
             else:
                 return HttpResponse("Something wrong with the form")
-    context={
-        "barrios": barrios,
-        "addform": addform,
-        "page_title":"Alarmas Vecinales"
+            
+    context ={
+        "usuario" : usuario,
+        "addform" : editform,
+        "page_title":f"{usuario.casa.get_direccion}: {usuario.get_nombre_completo}"
     }
     return render(request, template_name, context)
 
