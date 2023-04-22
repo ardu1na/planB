@@ -17,9 +17,15 @@ class NewUsuarioForm(ModelForm):
                   
                   'telefono',                  
                   'fecha_de_nacimiento',
+                  'nota',
                   )
                     
         widgets = {
+            
+            'nota' : TextInput(attrs={'class':"form-control",
+            'id':"nota",
+            'placeholder':"nota",}),
+            
             
             'nombre' : TextInput(attrs={'class':"form-control",
             'id':"nombre",

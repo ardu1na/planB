@@ -49,7 +49,7 @@
                         <h3 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h3>
                         <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
                                                 
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusuario{{usuario.id}}">Delete<span class="btn-icon-end">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusuario{{usuario.id}}">Borrar usuario<span class="btn-icon-end">
                                 <i class="fa-solid fa-trash fs-7"></i></span></button>
                         </div>
                                               
@@ -107,14 +107,19 @@
                                                                     {{editform.fecha_de_nacimiento}}
                                                                 </div>
                                                                 
+
+                                                                <div class="form-group my-3">
+                                                                    {{editform.nota}}
+                                                                </div>
+
                                                             </div>
                                                         </div>       
                 
                                                         <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
-                                                            <button type="submit" class="shadow-sm btn btn-secondary fs-3 " name="editusuario"><i class="fa-solid fa-check"></i> Save </button>
+                                                            <button type="submit" class="shadow-sm btn btn-secondary fs-3 " name="editusuario"><i class="fa-solid fa-floppy-disk pe-3"></i> Guardar cambios </button>
 
                                                             <a href="{% url 'dashboard:vivienda' pk=usuario.vivienda.pk %}" class="btn fs-7 mx-2">
-                                                                <i class="fa-solid fa-arrow-left me-2 fs-7"></i> Cancel
+                                                                <i class="fa-solid fa-arrow-left me-2 fs-7"></i> Volver
                                                             </a>
                                                         </div>
                 

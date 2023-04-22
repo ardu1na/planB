@@ -178,7 +178,9 @@
 
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'dashboard:barrios' %}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Inicio</a></li>
+
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:barrios' %}">Alarmas Vecinales</a></li>
 
                 <li class="breadcrumb-item active"><a> Viviendas en {{barrio.nombre}} </a> </li>
             </ol>
@@ -192,11 +194,10 @@
             <div class="card students-list">
 
 
-                <div class="d-flex flex-row px-xs-1 px-4 py-5">
-                    <button type="button" class="btn btn-success fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Nueva Vivienda
-                        <i class="fa fa-plus pe-2"></i></button>
+                <div class="d-flex flex-row-reverse px-xs-1 px-4 py-3 ">
+                    <button type="button" class="btn btn-dark py-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-plus me-2 fs-3 me-3"></i><i class="fa-solid fa-house fs-2"></i></button>
 
-                        <a class="btn btn-warning mx-3 fs-4" href="{% url 'dashboard:barrioedit' pk=barrio.id %}">{{barrio}}</a>
                 </div>      
                 
                 
@@ -244,7 +245,8 @@
                                                             <i class="fa-solid fa-trash fs-7"></i>
                                                             </button>                                                                                  
                                                         <!-- edit BUTTON -->
-                                                            <a href="{% url 'dashboard:vivienda' pk=vivienda.id %}" class="px-3 shadow-sm btn btn-secondary mx-1">
+
+                                                            <a href="{% url 'dashboard:viviendaedit' pk=vivienda.id %}" class="px-3 shadow-sm btn btn-secondary mx-1">
                                                                 <i class="fa-solid fa-pen-to-square "></i>
                                                             </a>                                                
                                                 </div>                                        
@@ -260,7 +262,12 @@
                             </div>
 
                 </div>
+                <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
 
+                    <a href="{% url 'dashboard:barrios'%}" class="btn fs-4 mx-2">
+                        <i class="fa-solid fa-arrow-left me-2 fs-4"></i> Volver
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -330,7 +337,7 @@
                                 
                             </div>
                             <div class="form-floating my-3 text-center">
-                                <button type="submit" class="shadow-sm btn btn-secondary" name="addnew"><i class="fa-solid fa-check me-2"></i> Submit</button>
+                                <button type="submit" class=" fs-3 shadow-sm btn btn-secondary" name="addnew"><i class="fa fa-plus me-2 fs-3 me-3"></i> Agregar </button>
                             </div>
                         </div>
                     </form>

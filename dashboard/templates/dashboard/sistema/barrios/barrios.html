@@ -137,10 +137,16 @@
 
         <div class="col-xl-12">            
             <div class="card students-list">
-                <div class="card-header border-0 flex-wrap pb-0 mb-5">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD Alarma Vecinal<span class="btn-icon-end">
-                        <i class="fa fa-plus"></i></span>
-                </div>                
+
+                
+                <div class="d-flex flex-row-reverse px-xs-1 mx-5 mt-5 mb-4">
+                    <button type="button" class="btn btn-primary py-4 px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-plus fs-3 me-3"></i><i class="fa-solid fa-broadcast-tower fs-2"></i></button>
+
+                            
+                </div>      
+
+
                 <!-- TABLE CLIENTS -->
                 <div class="card-body py-0">
                     
@@ -151,7 +157,10 @@
                                             <th>ALARMA</th>
                                             <th>GOOGLE HOME</th>
                                             <th>USUARIOS</th>
-                                            <th>VIVIENDAS</th>
+                                            <th>FUEGO</th>
+                                            <th>SOS</th>
+                                            <th>URGENCIA</th>
+                                            <th>ÚLTIMA ALERTA</th>
                                             <th>ALTA</th>
 
                                             <th></th>
@@ -168,9 +177,13 @@
                                             </td>
                                             <td>{{barrio.google_account}}</td>
                                             <td>{{barrio.get_n_usuarios}}</td>
-                                            <td>{{barrio.get_n_viviendas}}</td>
+                                            <td> 342</td>
+                                            <td> 133</td>
+                                            <td> 142</td>
+                                            <td> 6/4 03:43 (SOS)</td>
+
                                             <td>{{barrio.created_at}}</td>
-                                  
+
                                             <td>
                                                 <div class="d-flex flex-row">
                                                     
@@ -179,7 +192,8 @@
                                                             <i class="fa-solid fa-trash fs-7"></i>
                                                             </button>                                                                                  
                                                         <!-- edit BUTTON -->
-                                                            <a href="{% url 'dashboard:barrio' pk=barrio.id%}" class="px-3 shadow-sm btn btn-secondary mx-1">
+
+                                                            <a href="{% url 'dashboard:barrioedit' pk=barrio.id %}" class="px-3 shadow-sm btn btn-secondary mx-1">
                                                                 <i class="fa-solid fa-pen-to-square "></i>
                                                             </a>                                                
                                                 </div>                                        
@@ -193,7 +207,12 @@
                             </div>
 
                 </div>
+                <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
 
+                    <a href="{% url 'dashboard:index' %}" class="btn fs-4 mx-2">
+                        <i class="fa-solid fa-arrow-left me-2 fs-4"></i> Volver
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -245,7 +264,7 @@
                                 
                             </div>
                             <div class="form-floating my-3 text-center">
-                                <button type="submit" class="shadow-sm btn btn-secondary" name="addnew"><i class="fa-solid fa-check me-2"></i> Submit</button>
+                                <button type="submit" class=" fs-3 shadow-sm btn btn-secondary" name="addnew"><i class="fa fa-plus me-2 fs-3 me-3"></i> Agregar </button>
                             </div>
                         </div>
                     </form>
