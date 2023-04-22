@@ -6,10 +6,24 @@ from dashboard import dashboard_views
 from dashboard.users import users_views
 app_name='dashboard'
 urlpatterns = [
-    ### start alarms module
 
+#########################################################################    
+################  PLANB 
+
+
+    
+  ###  ALARMS ALERTS module
+    
+    path('barrios/',dashboard_views.barrios_list, name="barrios"),
+
+
+
+
+
+  ###  BARRIOS VIVIENDA USERS module
 
     path('barrios/',dashboard_views.barrios_list, name="barrios"),
+    
     path('barrio/<uuid:pk>/delete/',dashboard_views.barrio_delete, name="barriodelete"),
     path('barrio/<uuid:pk>/',dashboard_views.barrio_detail, name="barrio"),
     path('barrio/<uuid:pk>/change/',dashboard_views.barrio_edit, name="barrioedit"),
@@ -19,11 +33,11 @@ urlpatterns = [
     path('vivienda/<uuid:pk>/change/',dashboard_views.vivienda_edit, name="viviendaedit"),
 
     path('usuario/<uuid:pk>/',dashboard_views.usuario_detail, name="usuario"),
-
     path('usuario/<uuid:pk>/delete/',dashboard_views.usuario_delete, name="usuariodelete"),
-
-    ### end alarms module
     
+
+################   end PLANB += index
+#########################################################################3    
     
     
     

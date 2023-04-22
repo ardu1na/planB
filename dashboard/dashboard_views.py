@@ -38,6 +38,15 @@ def index(request):
 
 
 
+@login_required(login_url='dashboard:login')
+def alertas(request):
+    template_name = 'dashboard/sistema/alertas/alertas.html'
+
+    context={
+        "page_title":"Alertas de Alarma"
+    }
+    return render(request, template_name,  context)
+
 
 
 
