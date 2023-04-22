@@ -3,6 +3,22 @@
 <div class="dlabnav">
     <div class="dlabnav-scroll">
         <ul class="metismenu" id="menu">
+
+
+            <li><a href="{% url 'dashboard:alertas' %}" class="" aria-expanded="false">
+                    <i class="fa-solid fa-broadcast-tower"></i>
+                    <span class="nav-text">Alertas de Alarma</span>
+                 </a>
+            </li>
+
+            <li><a href="{% url 'dashboard:barrios' %}" class="" aria-expanded="false">
+                <i class="fa-solid fa-house"></i>
+                <span class="nav-text">Alarmas Vecinales</span>
+             </a>
+        </li>
+
+
+
             {% if perms.users.view_customuser or perms.auth.view_group or perms.auth.view_permission %} 
                 <li>
                     <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">

@@ -15,22 +15,27 @@
 {% block content %}
 
     
-            <div class="col-12 d-flex justify-content-center align-items-center mt-5">
+            <div class="col-12 d-flex justify-content-center align-items-center mt-4">
 
 
                 <div class="col-md-6 ">
 
                     <div class="text-center error-page mt-5 ">
 
-                        <h1 class="error-text fw-bold mb-3 mt-5">{{alerta.tipo}}</h1>
+                        <h6 class="fs-4 text-white">Gracias {{alerta.miembro.nombre}} por confiar en PlanB</h6>
 
-                        <h4><i class="fa fa-thumbs-up text-danger mt-4"></i> Alerta Enviada </h4>
+                        <div class="media col-4 m-auto">
+                            <img src="{{ site_config.Site.logo_icon.value }}" class="img-fluid" >
+                        </div>
+
+                        <h1 class="error-text fw-bold my-4 ">{{alerta.tipo}}</h1>
+
+                        <h4>Alerta Enviada <i class="fa fa-thumbs-up text-danger mt-4"></i> </h4>
 
 
                         <div class="mt-4 ">
 
-                            <h6 class="fs-4 text-white">Gracias {{alerta.miembro.nombre}}, (etc etc, lo que le quieras decir)</h6>
-                            <a class="btn btn-success my-4 fs-3" href="#">Abrir Grupo<i class="fa-brands fa-whatsapp fs-2 ps-3"></i></a>
+                            <a class="btn btn-success my-5 fs-3" href="https://{{alerta.miembro.vivienda.alarma_vecinal.whatsapp_group}}">Abrir Grupo<i class="fa-brands fa-whatsapp fs-2 ps-3"></i></a>
                         </div>
                         
                     </div>

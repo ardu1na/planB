@@ -17,6 +17,7 @@ from alarms.models import*
 from dashboard.cms import utils
 from django.core.paginator import Paginator
 
+today = date.today()
 
 ############################################################################################################
 #### sistema de alarmas barriales ######
@@ -40,8 +41,22 @@ def alertas(request):
     template_name = 'dashboard/sistema/alertas/alertas.html'
 
     alertas = AlarmaEvent.objects.all()
+    
+    ultima = alertas.last()
+    
+    sos = alertas.filter(tipo="SOS", datetime__month=today.month, datetime__year=today.year)
+    fuego = alertas.filter(tipo="Fuego", datetime__month=today.month, datetime__year=today.year)
+    emerg = alertas.filter(tipo="Emergencia", datetime__month=today.month, datetime__year=today.year)
+
     context={
         "alertas" : alertas,
+        "ultima": ultima,
+        "sos": sos,
+        "fuego": fuego,
+        "emerg": emerg,
+        "last_s": sos.last(),
+        "last_f": fuego.last(),
+        "last_e": emerg.last(),
         "page_title":"Alertas de Alarma"
     }
     return render(request, template_name,  context)
@@ -74,9 +89,7 @@ def get_emergencia(request, pk):
 
 
 def success (request, pk):
-    print(pk)
     alerta = AlarmaEvent.objects.get(id=pk)
-    print (alerta)
 
     template_name = 'dashboard/sistema/alertas/recibida.html'
     context={
@@ -107,6 +120,11 @@ def success (request, pk):
 def barrios_list(request):
     template_name = 'dashboard/sistema/barrios/barrios.html'
     barrios=AlarmaVecinal.objects.filter(state="Yes")
+    alertas = AlarmaEvent.objects.filter(datetime__year=today.year, datetime__month=today.month)
+    usuarios=Miembro.objects.filter(state="Yes")
+    viviendas= Vivienda.objects.filter(state="Yes")
+    
+    
     if request.method == "GET":
         addform=NewAlarmaVecinalForm()
     if request.method == "POST":
@@ -120,6 +138,11 @@ def barrios_list(request):
     context={
         "barrios": barrios,
         "addform": addform,
+        "n_alertas": len(alertas),
+        "n_usuarios": len(usuarios),
+        "n_casas": len(viviendas),
+        "ultima": alertas.last(),
+
         "page_title":"Alarmas Vecinales"
     }
     return render(request, template_name, context)

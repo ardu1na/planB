@@ -86,7 +86,7 @@ class NewAlarmaVecinalForm(ModelForm):
                 }
             ),
             
-            'whatsapp_group' : URLInput(attrs={
+            'whatsapp_group' : TextInput(attrs={
                 'class':"form-control",
                 'id':"whatsapp_group",
                 'placeholder' : "Grupo de WhatsApp"
