@@ -30,7 +30,7 @@ admin.site.register(Vivienda, ViviendaAdmin)
 
 
 class UsuarioAdmin(ModelAdmin):
-    list_display = [ 'nombre', 'apellido', 'get_edad', 'get_barrio', 'vivienda']
+    list_display = [ 'pk', 'nombre', 'apellido', 'get_edad', 'get_barrio', 'vivienda']
     inlines =  [AlarmaInline,]
 admin.site.register(Miembro, UsuarioAdmin)
 

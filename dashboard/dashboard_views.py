@@ -35,9 +35,6 @@ def index(request):
 ############ monitoreo dealarmas ################################################
 
 
-
-
-
 @login_required(login_url='dashboard:login')
 def alertas(request):
     template_name = 'dashboard/sistema/alertas/alertas.html'
@@ -48,6 +45,42 @@ def alertas(request):
         "page_title":"Alertas de Alarma"
     }
     return render(request, template_name,  context)
+
+   
+   
+    # HAGO @LOGIN_REQUIRED?
+    
+def get_sos(request, pk):
+    usuario = Miembro.objects.get(pk=pk)
+    print (usuario)
+    return redirect ('dashboard:index')
+
+
+def get_fuego(request, pk):
+
+    return redirect ('dashboard:index')
+
+
+
+def get_emergencia(request, pk):
+
+    return redirect ('dashboard:index')
+
+
+"""
+ TOCAN EL BOTON DE ALARMA
+    GOOGLE HOME abre el navegador con la URL POST de la data
+    
+    boton sos           def POST_SOS(pk=user.id)        url: /sistema/alertas/sos/<pk:uuid>/
+    boton fuego         def POST_FUEGO(pk=user.id)      url: /sistema/alertas/fuego/<pk:uuid>/
+    boton urgencia      def POST_URG(pk=user.id)       url: /sistema/alertas/urgencia/<pk:uuid>/
+    
+    
+    se redirecciona a una página ----->  return redirect template: sistema/alertas/success.html     -
+
+    EL USUARIO VE LA PAGINA DE ÉXITO
+"""
+
 
 
 
