@@ -35,7 +35,10 @@ class AlarmaEvent(models.Model):
     def __str__ (self):
         return f'Alarma {self.tipo} en {self.miembro.vivienda.alarma_vecinal}, {self.miembro.vivienda.get_direccion}' 
 
-    
+    class Meta:
+        get_latest_by = "-datetime"
+        ordering = ["-datetime"]
+
     
 
 class AlarmaVecinal(models.Model):
@@ -134,6 +137,10 @@ class Miembro(models.Model):
     @property
     def get_nombre_completo(self):
         return f'{self.apellido}, {self.nombre}'
+    
+    @property
+    def get_barrio(self):
+        return self.vivienda.alarma_vecinal
     
     def __str__ (self):
         return self.get_nombre_completo

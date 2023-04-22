@@ -228,9 +228,9 @@ dz_array = {
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
                                 ],
                                 
-                                "alertas":[
-                                    f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
-                                    'cms/blog/js/blog_list.js'
+                                "alertas":[                                   
+                                    f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
+
                                 ],
                                 "barrio_detail":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
