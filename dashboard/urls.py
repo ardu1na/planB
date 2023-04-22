@@ -14,7 +14,7 @@ urlpatterns = [
     
   ###  ALARMS ALERTS module
     
-    path('barrios/',dashboard_views.barrios_list, name="barrios"),
+    path('alarmas/', dashboard_views.alertas, name="alertas"),
 
 
 

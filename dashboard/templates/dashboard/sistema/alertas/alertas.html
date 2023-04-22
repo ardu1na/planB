@@ -3,18 +3,12 @@
 {% load static %}
 
 {% block additional_css %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 {% endblock %}
-
-
-
-
-{% block message %}
-{% include 'dashboard/elements/alert.html' %}
-{% endblock %}
-
-
 
 {% block content %}
+
 
 
 <!-- MAIN CLIENTS -->
@@ -22,27 +16,7 @@
 
     <div class="row">
 
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3 mt-5">
-            <div class="widget-stat card">
-                <div class="card-body  p-4">
-                    <div class="media ai-icon">
-                        <span class="me-3 bgl-info text-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 48C288 21.49 309.5 0 336 0H432C458.5 0 480 21.49 480 48V192H520V120C520 106.7 530.7 96 544 96C557.3 96 568 106.7 568 120V192H592C618.5 192 640 213.5 640 240V464C640 490.5 618.5 512 592 512H336C309.5 512 288 490.5 288 464V48zM352 112C352 120.8 359.2 128 368 128H400C408.8 128 416 120.8 416 112V80C416 71.16 408.8 64 400 64H368C359.2 64 352 71.16 352 80V112zM368 160C359.2 160 352 167.2 352 176V208C352 216.8 359.2 224 368 224H400C408.8 224 416 216.8 416 208V176C416 167.2 408.8 160 400 160H368zM352 304C352 312.8 359.2 320 368 320H400C408.8 320 416 312.8 416 304V272C416 263.2 408.8 256 400 256H368C359.2 256 352 263.2 352 272V304zM528 256C519.2 256 512 263.2 512 272V304C512 312.8 519.2 320 528 320H560C568.8 320 576 312.8 576 304V272C576 263.2 568.8 256 560 256H528zM512 400C512 408.8 519.2 416 528 416H560C568.8 416 576 408.8 576 400V368C576 359.2 568.8 352 560 352H528C519.2 352 512 359.2 512 368V400zM224 160C224 166 223 171 222 176C242 190 256 214 256 240C256 285 220 320 176 320H160V480C160 498 145 512 128 512C110 512 96 498 96 480V320H80C35 320 0 285 0 240C0 214 13 190 33 176C32 171 32 166 32 160C32 107 74 64 128 64C181 64 224 107 224 160z"/></svg>
-                        </span>
-                        <div class="media-body">
-                            <p class="mb-1">Alarmas instaladas</p>
-                            <h4 class="mb-0"> 7687 barrios </h4>
-                            <h5 class="mb-0"> 10 Alertas este mes </h5>
-
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3 mt-5">
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
             <div class="widget-stat card">
                 <div class="card-body  p-4">
                     <div class="media ai-icon">
@@ -51,7 +25,7 @@
                         </span>
                         <div class="media-body">
                             <p class="mb-1">Última alerta</p>
-                            <h4 class="mb-0"> (fecha, hora, barrio) </h4>
+                            <h4 class="mb-0"> (fecha, hora, alerta) </h4>
                             <h5 class="mb-0"> el color varia según el tipo de alerta </h5>
 
                         </div>
@@ -63,29 +37,10 @@
 
 
 
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3 mt-5">
-            <div class="widget-stat card">
-                <div class="card-body  p-4">
-                    <div class="media ai-icon">
-                        <span class="me-3 bgl-success text-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M511.8 287.6L512.5 447.7C512.6 483.2 483.9 512 448.5 512H128.1C92.75 512 64.09 483.3 64.09 448V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L416 100.7V64C416 46.33 430.3 32 448 32H480C497.7 32 512 46.33 512 64V185L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6L511.8 287.6zM288 288C323.3 288 352 259.3 352 224C352 188.7 323.3 160 288 160C252.7 160 224 188.7 224 224C224 259.3 252.7 288 288 288zM192 416H384C392.8 416 400 408.8 400 400C400 355.8 364.2 320 320 320H256C211.8 320 176 355.8 176 400C176 408.8 183.2 416 192 416z"/></svg>
-                        </span>
-                        <div class="media-body">
-                            <p class="mb-1">Usuarios</p>
-                            <h4 class="mb-0"> 232432 usuarios</h4>
-                            <p class="mb-1 fs-4">2323 viviendas</p>
-
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
         
 
 
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3 mt-5">
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
             <div class="widget-stat card">
                 <div class="card-body p-4">
                     <div class="media ai-icon">
@@ -95,14 +50,14 @@
                         <div class="media-body">
                             <p class="mb-1">1337 alertas este mes </p>
                             <h4 class="mb-0">Urgencia</h4>
-                            <p class="my-1 fs-5"> (último: nombre del barrio - fecha y hora) </p>
+                            <p class="my-1 fs-5"> (último: nombre del alerta - fecha y hora) </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3 mt-5">
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
             <div class="widget-stat card">
                 <div class="card-body p-4">
                     <div class="media ai-icon">
@@ -112,7 +67,7 @@
                         <div class="media-body">
                             <p class="mb-1">232342 alertas este mes </p>
                             <h4 class="mb-0">SOS</h4>
-                            <p class="my-1 fs-5"> (último: nombre del barrio - fecha y hora) </p>
+                            <p class="my-1 fs-5"> (último: nombre del alerta - fecha y hora) </p>
                         </div>
                     </div>
                 </div>
@@ -122,7 +77,7 @@
 
 
 
-        <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3 mt-5">
+        <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-3">
             <div class="widget-stat card">
                 <div class="card-body p-4">
                     <div class="media ai-icon">
@@ -132,39 +87,83 @@
                         <div class="media-body">
                             <p class="mb-1">3342 alertas este mes </p>
                             <h4 class="mb-0"> Fuego</h4>
-                            <p class="my-1 fs-5"> (último: nombre del barrio - fecha y hora) </p>
+                            <p class="my-1 fs-5"> (último: nombre del alerta - fecha y hora) </p>
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">Inicio</a></li>
 
+                <li class="breadcrumb-item"><a>Alertas de Alarma</a></li>
 
-
-    <div class="col-lg-8 m-auto flex-column">
-
-
-        <div class="row justify-content-center">
-
-            <a href="{% url 'dashboard:barrios' %}" class="btn btn-primary px-3 m-4 fs-2"> ALARMAS VECINALES </a>
-
-            <a class="btn btn-primary px-3 m-4 fs-2" href="{% url 'dashboard:alertas' %}"> ALERTAS DE ALARMA </a>
+            </ol>
         </div>
 
+
+        <div class="col-xl-12">            
+            <div class="card students-list">
+
+                <div class="d-flex flex-row-reverse px-xs-1 px-4 mt-4 mb-4">
+                            
+                </div>  
+
+
+                <!-- TABLE alertas de alarma -->
+                <div class="card-body py-0">
+                    
+                            <div class="table-responsive">
+                                <table id="example4" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th>ALERTA</th>
+                                            <th>FECHA</th>
+                                            <th>BARRIO</th>
+                                            <th>DIRECCION</th>
+                                            <th>USUARIO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{% if alertas %}
+                                        {% for alerta in alertas %}
+                                        <tr>
+
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <a class="mb-0 fs-16 font-w500" href="#">{{alerta.tipo}}</a>
+                                                </div>
+                                            </td>
+                                            <td> {{alerta.datetime}}</td>
+                                            <td>  <a class="mb-0 fs-16 font-w500" href="{% url 'dashboard:barrio' pk=alerta.miembro.vivienda.alarma_vecinal.id %}"> {{alerta.miembro.vivienda.alarma_vecinal}}</a></td>
+                                            <td> {{alerta.miembro.vivienda}}</td>
+                                            <td> {{alerta.miembro.get_nombre_completo}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endif %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                </div>
+                <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
+
+                    <a href="{% url 'dashboard:index' %}" class="btn fs-4 mx-2">
+                        <i class="fa-solid fa-arrow-left me-2 fs-4"></i> Volver
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+<!-- end MAIN alertas -->
 
-
-
-
-<!-- end MAIN barrios -->
 {% endblock %}
 
 
 {% block additional_js %}
-
 
 {% endblock %}

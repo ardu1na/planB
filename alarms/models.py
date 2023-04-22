@@ -216,7 +216,7 @@ class Vivienda(models.Model):
 
 
     def __str__ (self):
-        return f'{self.alarma_vecinal}: {self.get_direccion}'
+        return self.get_direccion
     
     
     

@@ -42,7 +42,9 @@ def index(request):
 def alertas(request):
     template_name = 'dashboard/sistema/alertas/alertas.html'
 
+    alertas = AlarmaEvent.objects.all()
     context={
+        "alertas" : alertas,
         "page_title":"Alertas de Alarma"
     }
     return render(request, template_name,  context)

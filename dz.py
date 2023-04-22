@@ -154,6 +154,10 @@ dz_array = {
                                 "barrios_list":[
                                     f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.css",
                                 ],
+                                
+                                "alertas":[
+                                    f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.css",
+                                ],
                                 "cms_blog_create":[
                                 f"{foldername_d}/vendor/select2/css/select2.min.css",
                                 "cms/blog/css/bootstrap-tagsinput.css",
@@ -222,6 +226,11 @@ dz_array = {
                                 ],
                                 "barrios_list":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
+                                ],
+                                
+                                "alertas":[
+                                    f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
+                                    'cms/blog/js/blog_list.js'
                                 ],
                                 "barrio_detail":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
@@ -426,6 +435,10 @@ dz_array = {
                                     'cms/blog/js/blog_list.js'
                                 ],
 
+                                "alertas":[
+                                    f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
+                                    'cms/blog/js/blog_list.js'
+                                ],
                                 "cms_blog_create":[
                                     f"{foldername_d}/vendor/select2/js/select2.full.min.js",
                                     f"{foldername_d}/js/plugins-init/select2-init.js",
@@ -526,6 +539,14 @@ dz_array = {
                                     f"{foldername_d}/js/plugins-init/fullcalendar-init.js"
                                 ],
                                 "instructor_students":[
+                                    f"{foldername_d}/vendor/chart.js/Chart.bundle.min.js",
+                                    f"{foldername_d}/vendor/apexchart/apexchart.js",
+                                    f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
+                                    f"{foldername_d}/js/plugins-init/datatables.init.js",
+                                    f"{foldername_d}/vendor/owl-carousel/owl.carousel.js",
+                                    f"{foldername_d}/js/dashboard/instructor-student.js",
+                                ],
+                                "alertas":[
                                     f"{foldername_d}/vendor/chart.js/Chart.bundle.min.js",
                                     f"{foldername_d}/vendor/apexchart/apexchart.js",
                                     f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
