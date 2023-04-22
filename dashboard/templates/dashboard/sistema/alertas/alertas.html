@@ -124,8 +124,9 @@
                                             <th>FECHA</th>
                                             <th>ALERTA</th>
                                             <th>BARRIO</th>
-                                            <th>DIRECCION</th>
                                             <th>USUARIO</th>
+
+                                            <th>DIRECCION</th>
                                         </tr>
                                     </thead>
                                     <tbody >{% if alertas %}
@@ -134,7 +135,10 @@
                                                 {% comment "" %} SI EL USUARIO EL BARRIO O LA CASA ESTÁN CANCELADOS MANDAR EN EL LINK UNA DATA PARA 
                                                 DAR UNA ALERTA EN LA VISTA {% endcomment %}
 
-                                            <td> {{alerta.datetime}}</td>
+                                            <td>{{ alerta.datetime|date:"d/m/Y" }}   {{ alerta.datetime|time:"H:i" }}</td>
+
+                                            
+
 
                                             <td>
                                                 <div class="d-flex align-items-center">
@@ -152,15 +156,21 @@
                                                 </div>                                                
                                             </td>                                     
 
-                                            <td>  <a href="{% url 'dashboard:barrio' pk=alerta.miembro.vivienda.alarma_vecinal.id %}"> {{alerta.miembro.vivienda.alarma_vecinal}}</a></td>
+                                            <td>  <a href="{% url 'dashboard:barrio' pk=alerta.miembro.vivienda.alarma_vecinal.id %}">
+                                                <strong> {{alerta.miembro.vivienda.alarma_vecinal}}</strong></a>
+                                            </td>
                                             
-                                            <td>  <a href="{% url 'dashboard:vivienda' pk=alerta.miembro.vivienda.id %}">{{alerta.miembro.vivienda}} </a></td>
+
 
                                             <td>  
                                                 <div class="d-flex align-items-center">
-                                                    <a href="{% url 'dashboard:usuario' pk=alerta.miembro.id %}">{{alerta.miembro}}</a></td>
+                                                    <a href="{% url 'dashboard:usuario' pk=alerta.miembro.id %}">{{alerta.miembro}}</a>
                                                 </div>
+                                            </td>
+                                            
+                                            <td>  <a href="{% url 'dashboard:vivienda' pk=alerta.miembro.vivienda.id %}">{{alerta.miembro.vivienda}} </a></td>
 
+                                            
                                         </tr>
                                         {% endfor %}
                                         {% endif %}

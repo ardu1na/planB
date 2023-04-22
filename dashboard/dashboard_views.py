@@ -51,30 +51,44 @@ def alertas(request):
     # HAGO @LOGIN_REQUIRED?
     
 def get_sos(request, pk):
+    
     usuario = Miembro.objects.get(pk=pk)
-    print (usuario)
-    return redirect ('dashboard:index')
+    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="SOS")
+
+    template_name = 'dashboard/sistema/alertas/recibida.html'
+    context={
+        "alerta" : alerta,
+        "usuario": usuario,
+    }
+    return render(request, template_name, context)
 
 
 def get_fuego(request, pk):
+    usuario = Miembro.objects.get(pk=pk)
+    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Fuego")
 
-    return redirect ('dashboard:index')
+    template_name = 'dashboard/sistema/alertas/recibida.html'
+    context={
+        "alerta" : alerta,
+        "usuario": usuario,
+    }
+    return render(request, template_name, context)
 
 
 
 def get_emergencia(request, pk):
+    usuario = Miembro.objects.get(pk=pk)
+    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Emergencia")
 
-    return redirect ('dashboard:index')
+    template_name = 'dashboard/sistema/alertas/recibida.html'
+    context={
+        "alerta" : alerta,
+        "usuario": usuario,
+    }
+    return render(request, template_name, context)
 
 
 """
- TOCAN EL BOTON DE ALARMA
-    GOOGLE HOME abre el navegador con la URL POST de la data
-    
-    boton sos           def POST_SOS(pk=user.id)        url: /sistema/alertas/sos/<pk:uuid>/
-    boton fuego         def POST_FUEGO(pk=user.id)      url: /sistema/alertas/fuego/<pk:uuid>/
-    boton urgencia      def POST_URG(pk=user.id)       url: /sistema/alertas/urgencia/<pk:uuid>/
-    
     
     se redirecciona a una página ----->  return redirect template: sistema/alertas/success.html     -
 

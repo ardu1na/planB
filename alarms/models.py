@@ -36,8 +36,8 @@ class AlarmaEvent(models.Model):
         return f'Alarma {self.tipo} en {self.miembro.vivienda.alarma_vecinal}, {self.miembro.vivienda.get_direccion}' 
 
     class Meta:
-        get_latest_by = "-datetime"
-        ordering = ["-datetime"]
+        get_latest_by = "datetime"
+        ordering = ["datetime"]
 
     
 

@@ -18,12 +18,10 @@ urlpatterns = [
     
     
     ## envios de alertas desde el dispositivo del usuario a través de google home y estos links:
-    path('usuario/<uuid:pk>/sos/', dashboard_views.get_sos, name="sos"), 
-    path('usuario/<uuid:pk>/emergencia/', dashboard_views.get_emergencia, name="emergencia"), 
-    path('usuario/<uuid:pk>/fuego/', dashboard_views.get_fuego, name="fuego"),  
-
-
-
+    path('sos/usuario/<uuid:pk>/sos/', dashboard_views.get_sos, name="sos"), 
+    path('emergencia/usuario/<uuid:pk>/', dashboard_views.get_emergencia, name="emergencia"), 
+    path('fuego/usuario/<uuid:pk>/', dashboard_views.get_fuego, name="fuego"),  
+    
 
 
   ###  BARRIOS VIVIENDA USERS module
