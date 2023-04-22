@@ -46,44 +46,42 @@ def alertas(request):
     }
     return render(request, template_name,  context)
 
+
+
    
    
     # HAGO @LOGIN_REQUIRED?
     
 def get_sos(request, pk):
     
-    usuario = Miembro.objects.get(pk=pk)
+    usuario = Miembro.objects.get(id=pk)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="SOS")
-
-    template_name = 'dashboard/sistema/alertas/recibida.html'
-    context={
-        "alerta" : alerta,
-        "usuario": usuario,
-    }
-    return render(request, template_name, context)
+    return redirect('dashboard:success', pk=alerta.pk)
 
 
 def get_fuego(request, pk):
-    usuario = Miembro.objects.get(pk=pk)
+    usuario = Miembro.objects.get(id=pk)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Fuego")
-
-    template_name = 'dashboard/sistema/alertas/recibida.html'
-    context={
-        "alerta" : alerta,
-        "usuario": usuario,
-    }
-    return render(request, template_name, context)
+    return redirect('dashboard:success', pk=alerta.pk)
 
 
 
 def get_emergencia(request, pk):
-    usuario = Miembro.objects.get(pk=pk)
+    usuario = Miembro.objects.get(id=pk)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Emergencia")
+    alerta.save()
+    return redirect('dashboard:success', pk=alerta.pk)
+
+
+def success (request, pk):
+    print(pk)
+    alerta = AlarmaEvent.objects.get(id=pk)
+    print (alerta)
 
     template_name = 'dashboard/sistema/alertas/recibida.html'
     context={
         "alerta" : alerta,
-        "usuario": usuario,
+        
     }
     return render(request, template_name, context)
 

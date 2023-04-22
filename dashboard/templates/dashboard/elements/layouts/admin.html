@@ -51,6 +51,8 @@
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
+
+        {% block 'top' %}
 		{% include 'dashboard/elements/ellipse.html' %}
 
         <!--**********************************
@@ -89,6 +91,7 @@
 		<!--**********************************
             Content body start
         ***********************************-->
+        {% endblock %}
 
 
         <div class="content-body p-0">
