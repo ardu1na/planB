@@ -17,8 +17,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from dashboard.dashboard_views import get_sos, get_emergencia, get_fuego
 
 urlpatterns = [
+    
+    
+    ## envios de alertas desde el dispositivo del usuario a través de google home y estos links:
+    path('s/<uuid:pk>/', get_sos, name="sos"), 
+    path('e/<uuid:pk>/', get_emergencia, name="emergencia"), 
+    path('f/<uuid:pk>/', get_fuego, name="fuego"),  
+    
     path('admin/', admin.site.urls),
    
     #Dashboard
