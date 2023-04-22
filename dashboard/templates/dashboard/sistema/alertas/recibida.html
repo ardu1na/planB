@@ -14,20 +14,35 @@
 
 {% block content %}
 
+    
+            <div class="col-12 d-flex justify-content-center align-items-center mt-5">
 
-        <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
-                <div class="col-md-5">
-                    <div class="form-input-content text-center error-page">
-                        <h1 class="error-text fw-bold">{{alerta.tipo}}</h1>
-                        <h4><i class="fa fa-thumbs-down text-danger"></i> Alerta Enviada </h4>
-                        <h5>Gracias {{alerta.miembro.nombre}}, (etc etc, lo que le quieras decir)</h5>
-						<div>
-                            <a class="btn btn-primary" href="#">otra accion (x ej ir al grupo de whatsapp)</a>
+
+                <div class="col-md-6 ">
+
+                    <div class="text-center error-page mt-5 ">
+
+                        <h1 class="error-text fw-bold mb-3 mt-5">{{alerta.tipo}}</h1>
+
+                        <h4><i class="fa fa-thumbs-up text-danger mt-4"></i> Alerta Enviada </h4>
+
+
+                        <div class="mt-4 ">
+
+                            <h6 class="fs-4 text-white">Gracias {{alerta.miembro.nombre}}, (etc etc, lo que le quieras decir)</h6>
+                            <a class="btn btn-success my-4 fs-3" href="#">Abrir Grupo<i class="fa-brands fa-whatsapp fs-2 ps-3"></i></a>
                         </div>
+                        
                     </div>
+
                 </div>
+
             </div>
+
+
+
+
+
 {% endblock %}
 
 
