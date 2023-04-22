@@ -18,12 +18,8 @@ from dashboard.cms import utils
 from django.core.paginator import Paginator
 
 
-
+############################################################################################################
 #### sistema de alarmas barriales ######
-
-
-
-
 
 @login_required(login_url='dashboard:login')
 def index(request):
@@ -35,7 +31,22 @@ def index(request):
     return render(request, template_name,  context)
 
 
-### crud de alarma barrial ###
+###########################################################################################
+############ monitoreo dealarmas ################################################
+
+
+
+
+
+
+
+
+
+
+
+########################################################################
+########################### crud de barrios #######################################
+
 @login_required(login_url='dashboard:login')
 def barrios_list(request):
     template_name = 'dashboard/sistema/barrios/barrios.html'
@@ -65,8 +76,8 @@ def barrio_delete(request, pk):
     barrio.save()
     return redirect('dashboard:barrios')
 
-
-### crud de viviendas ###
+############################################################################################################
+########################### crud de viviendas ###########################
 
 @login_required(login_url='dashboard:login')
 def barrio_detail(request, pk): 
@@ -180,7 +191,13 @@ def barrio_edit(request, pk):
     return render(request, template_name, context)
 
 
-### crud de usuarios ###
+
+
+
+
+############################################################################################################
+####################################### crud de usuarios ###########################
+
 @login_required(login_url='dashboard:login')
 def usuario_detail(request, pk):
     
@@ -212,6 +229,7 @@ def usuario_delete(request, pk):
     usuario.state = "No"
     usuario.save()
     return redirect('dashboard:vivienda', pk=usuario.vivienda.pk)
+########################################################################################################################
 
 
 
@@ -224,8 +242,7 @@ def usuario_delete(request, pk):
 
 
 
-
-
+################################################################################################################################################
 #### start w3cms views ####
 @login_required(login_url='dashboard:login')
 @permission_required({'dashboard.view_configurations'}, raise_exception=True)
