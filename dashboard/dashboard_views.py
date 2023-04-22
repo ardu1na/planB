@@ -21,6 +21,20 @@ from django.core.paginator import Paginator
 
 #### sistema de alarmas barriales ######
 
+
+
+
+
+@login_required(login_url='dashboard:login')
+def index(request):
+    template_name = 'dashboard/index.html'
+
+    context={
+        "page_title":"Plan B"
+    }
+    return render(request, template_name,  context)
+
+
 ### crud de alarma barrial ###
 @login_required(login_url='dashboard:login')
 def barrios_list(request):
@@ -413,13 +427,6 @@ def download_config(request):
 
 #######################################################################################
 
-
-@login_required(login_url='dashboard:login')
-def index(request):
-    context={
-        "page_title":"Dashboard"
-    }
-    return render(request,'dashboard/index.html',context)
 
 @login_required(login_url='dashboard:login')
 def index2(request):
