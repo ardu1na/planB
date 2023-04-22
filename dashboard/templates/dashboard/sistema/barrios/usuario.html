@@ -47,6 +47,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h3>
+                        <h3 class="card-title"> {{usuario.id}}</h3>
+
                         <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
                                                 
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusuario{{usuario.id}}">Borrar usuario<span class="btn-icon-end">
@@ -81,8 +83,6 @@
                                                                 
                                                                 <input type="hidden" name="vivienda" value="{{ usuario.vivienda.id }}">
         
-                                                                              
-                                        
                                                                 <div class="form-group my-3">
                                                                     {{editform.nombre}}
                                                                 </div>
@@ -111,6 +111,8 @@
                                                                 <div class="form-group my-3">
                                                                     {{editform.nota}}
                                                                 </div>
+
+                                                            
 
                                                             </div>
                                                         </div>       

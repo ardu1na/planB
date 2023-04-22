@@ -89,7 +89,7 @@ class NewAlarmaVecinalForm(ModelForm):
             'whatsapp_group' : TextInput(attrs={
                 'class':"form-control",
                 'id':"whatsapp_group",
-                'placeholder' : "Grupo de WhatsApp"
+                'placeholder' : "Grupo de WhatsApp (sin el 'https://')"
                 }
             ),
             
