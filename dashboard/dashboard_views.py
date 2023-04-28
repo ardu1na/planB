@@ -19,6 +19,11 @@ from django.core.paginator import Paginator
 
 today = date.today()
 
+
+
+def planb(request):
+    return render (request, 'dashboard/planb.html', {})
+
 ############################################################################################################
 #### sistema de alarmas barriales ######
 
@@ -71,13 +76,13 @@ def get_sos(request, pk):
     
     usuario = Miembro.objects.get(id=pk)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="SOS")
-    return redirect('dashboard:success', pk=alerta.pk)
+    return redirect('success', pk=alerta.pk)
 
 
 def get_fuego(request, pk):
     usuario = Miembro.objects.get(id=pk)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Fuego")
-    return redirect('dashboard:success', pk=alerta.pk)
+    return redirect('success', pk=alerta.pk)
 
 
 
@@ -85,7 +90,7 @@ def get_emergencia(request, pk):
     usuario = Miembro.objects.get(id=pk)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Emergencia")
     alerta.save()
-    return redirect('dashboard:success', pk=alerta.pk)
+    return redirect('success', pk=alerta.pk)
 
 
 def success (request, pk):

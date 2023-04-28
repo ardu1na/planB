@@ -10,20 +10,14 @@ urlpatterns = [
 #########################################################################    
 ################  PLANB 
 
+    path('',dashboard_views.index,name="index"),
+    path('index/',dashboard_views.index,name="index"),
 
     
   ###  ALARMS ALERTS module
     
     path('alarmas/', dashboard_views.alertas, name="alertas"),
-    
-    
-    ## envios de alertas desde el dispositivo del usuario a través de google home y estos links:
-    path('s/<uuid:pk>/', dashboard_views.get_sos, name="sos"), 
-    path('e/<uuid:pk>/', dashboard_views.get_emergencia, name="emergencia"), 
-    path('f/<uuid:pk>/', dashboard_views.get_fuego, name="fuego"),  
-    
-    path('alerta-enviada/<uuid:pk>/', dashboard_views.success, name="success"),  
-
+  
 
   ###  BARRIOS VIVIENDA USERS module
 
@@ -42,6 +36,42 @@ urlpatterns = [
     
 
 ################   end PLANB += index
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #########################################################################3    
     
     

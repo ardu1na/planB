@@ -41,32 +41,13 @@
 				<div class="card">
 					<div class="card-body p-0">
 						<div class="row m-0">
-							<div class="col-xl-6 col-md-6 sign text-center">
-								<div class="my-5">
-									<a href="{% url 'dashboard:index' %}" class="brand-logo login-logo mt-5">
-										<img src="{% static 'dashboard/images/logo-full.png' %}">
-								   </a>
-								   <div class="col-xl-12 col-md-12 text-center my-5">
-										<a class="mx-2" target="_blank" href="https://w3cms.dexignzone.com/django/doc">
-											<img class="round-img my-2" src="{% static 'dashboard/images/doc.jpg' %}">
-										</a>
-										<a class="mx-2"  target="_blank" href="https://www.youtube.com/watch?v=iKqUIxyctGc">
-											<img class="round-img my-2" src="{% static 'dashboard/images/video.jpg' %}">
-										</a>
-									</div>
-									<img src="{% static 'dashboard/images/log.png' %}" class="education-img"></img>
-								</div>	
-							</div>
+							
 
 
 							<div class="col-xl-6 col-md-6">
 								<div class="sign-in-your">
 									<h4 class="fs-20 font-w800 text-black">Sign in your account</h4>
-									<span>Welcome back! Login with your data that you entered<br> during registration</span>
-									<div class="login-social">
-										<a href="javascript:void(0);" class="btn font-w800 d-block my-4"><i class="fab fa-google me-2 text-primary"></i>Login with Google</a>
-										<a href="javascript:void(0);" class="btn font-w800 d-block my-4"><i class="fab fa-facebook-f me-2 facebook-log"></i>Login with Facebook</a>
-									</div>
+									
 
                   {% include 'dashboard/elements/alert.html' %} 
 
@@ -102,22 +83,7 @@
 									</form>
 
 
-                  <div class="new-account mt-2">
-                    <p> Don't have an account? <a class="text-secondary" href="{% url 'dashboard:signup' %}"> Sign up </a>
-                    </p>
-                  </div>
-
-				  <div class="row">
-					<div class="d-flex justify-content-center col p-0 mb-4">
-					  <button type="button" id="Admin" class="btn btn-success    btn-sm">Admin</button>
-					</div>
-					<div class="d-flex justify-content-center col p-0 mb-4">
-					  <button type="button" id="Manager" class="btn btn-warning  btn-sm">Manager</button>
-					</div>
-					<div class="d-flex justify-content-center col p-0 mb-4">
-					  <button type="button" id="Customer" class="btn btn-secondary   btn-sm">Customer</button>
-					</div>
-				  </div>
+                  
 
 								</div>
 							</div>
