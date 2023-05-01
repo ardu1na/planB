@@ -129,7 +129,8 @@ def barrios_list(request):
     alertas = AlarmaEvent.objects.filter(datetime__year=today.year, datetime__month=today.month)
     usuarios=Miembro.objects.filter(state="Yes")
     viviendas= Vivienda.objects.filter(state="Yes")
-    
+    ultima = AlarmaEvent.objects.last()
+
     
     
     if request.method == "GET":
@@ -148,7 +149,7 @@ def barrios_list(request):
         "n_alertas": len(alertas),
         "n_usuarios": len(usuarios),
         "n_casas": len(viviendas),
-        "ultima": alertas.last(),
+        "ultima": ultima,
 
         "page_title":"Alarmas Vecinales"
     }
