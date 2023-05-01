@@ -1,5 +1,5 @@
 from django.forms import ModelForm, EmailInput,\
-        TextInput, Textarea, URLInput, NumberInput,\
+        TextInput, Textarea, FileInput, NumberInput,\
         HiddenInput, UUIDField, Select
         
 from alarms.models import *
@@ -11,6 +11,7 @@ class NewUsuarioForm(ModelForm):
     class Meta:
         model = Miembro
         fields = ( 
+                  'avatar',
                   'nombre',
                   'apellido',
                   'genero',
@@ -21,6 +22,9 @@ class NewUsuarioForm(ModelForm):
                   )
                     
         widgets = {
+            
+            'avatar': FileInput(),
+
             
             'nota' : TextInput(attrs={'class':"form-control",
             'id':"nota",

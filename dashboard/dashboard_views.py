@@ -371,15 +371,18 @@ def usuario_detail(request, pk):
     usuario = get_object_or_404(Miembro, id=pk)
     template_name= 'dashboard/sistema/barrios/usuario.html'
     editform=NewUsuarioForm(instance=usuario)
-             
-        
+   
+            
     if request.method == "POST":
-            editform = NewUsuarioForm(request.POST, instance=usuario)
-            if editform.is_valid():
-                editform.save()
-                return redirect('dashboard:usuario', pk=usuario.pk)
-            else:
-                return HttpResponse("Something wrong with the form")
+        editform = NewUsuarioForm(request.POST, request.FILES, instance=usuario)
+        if editform.is_valid():
+            if 'avatar' in request.FILES:
+                usuario.avatar = request.FILES['avatar']
+            usuario.save()
+            return redirect('dashboard:usuario', pk=usuario.pk)
+        else:
+            return HttpResponse("Something wrong with the form")
+
             
     context ={
         "usuario" : usuario,

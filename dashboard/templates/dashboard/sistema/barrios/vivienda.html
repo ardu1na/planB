@@ -1,6 +1,6 @@
 {% extends 'dashboard/elements/layouts/admin.html' %}
 
-{% load static %}
+{% load static widget_tweaks %}
 
 {% block additional_css %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -174,7 +174,7 @@
 
                                                                        
                                                                         <div class="col-6 m-auto">
-                                                                            <img class="img-fluid w-100 h-100" src="{{ usuario.foto.url }}"  alt="">
+                                                                            {% if usuario.avatar %} <img class="img-fluid w-100 h-100" src="{{ usuario.avatar.url }}"  alt="">{% endif %}
                                                                         </div>
                                                                         <br>
                                                                         <br>
@@ -343,6 +343,17 @@
 
                                         <div class="form-group my-3">
                                             {{addform.nota}}
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <div class="avatar-upload">
+                                               <div class="avatar-edit">
+                                                  {{ addform.avatar|attr:"type:file" }}
+                                                  <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
+                                               </div>
+                                         </div>
+                                         <div class="text-danger w-100 d-block mt-1">
+                                            {{ addform.avatar.errors }}     
                                         </div>
 
                                     </div>
