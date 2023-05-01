@@ -196,7 +196,15 @@ class Miembro(models.Model):
     @property
     def get_barrio(self):
         return self.vivienda.alarma_vecinal
+
+    @property
+    def alarmas_this_m(self):
+        return self.alertas.filter(datetime__month=today.month, datetime__year=today.year)
     
+    @property
+    def alarmas_this_y(self):
+        return self.alertas.filter(datetime__year=today.year)
+
     def __str__ (self):
         return self.get_nombre_completo
     
