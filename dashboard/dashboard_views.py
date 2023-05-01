@@ -70,6 +70,7 @@ def alertas(request):
 
     alertas = AlarmaEvent.objects.all()
     
+    
     ultima = alertas.last()
     
     sos = alertas.filter(tipo="SOS", datetime__month=today.month, datetime__year=today.year)

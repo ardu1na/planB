@@ -165,46 +165,57 @@
                                                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                 <div class="modal-content px-3">
                                                                     <div class="modal-header">
-                                                                        <h4 class="mb-1"> {{usuario.nombre}} {{usuario.apellido}} {% if usuario.fecha_de_nacimiento %} ({{usuario.get_edad}} años) {% endif %}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>           
-                                                                    <div class="modal-body text-center my-4">
+                                                                    <div class="modal-body text-center my-2">
 
 
-                                                                               
+                                                                        <h3 class="mb-3"> {{usuario.nombre}} {{usuario.apellido}} {% if usuario.fecha_de_nacimiento %} ({{usuario.get_edad}} años) {% endif %}</h3>
 
-                                                                                    
+                                                                       
+                                                                        <div class="col-6 m-auto">
+                                                                            <img class="img-fluid w-100 h-100" src="{{ usuario.foto.url }}"  alt="">
+                                                                        </div>
+                                                                        <br>
+                                                                        <br>
+              
 
-                                                                                    <div class="row m-auto">
-                                                                                        <div class="col-3 py-auto">
-                                                                                            <span>Alertas</span>
-                                                                                            <h4>{{usuario.alarmas.all|length}}</h4>
-                                                                                        </div>
-                                                                                        <div class="col-9 text-end">
-
-                                                                                        <img class="img-fluid w-100  h-100 mt-3" src="{{ usuario.foto.url }}"  alt="">
-                                                                                    </div>
-
-
-                                                                                    </div>
+                                                                                            <a href="#"> Alertas</a>
+                                                                                            <h4 >{{usuario.alarmas.all|length}}</h4>
+                                                                                            <hr>
 
 
+                                                                                           
+
+                                                                                            <div class="text-start my-5">
+
+                                                                                                <p class="mb-1"><a class="pe-4"><strong>Dirección:</strong></a> {{usuario.vivienda.get_direccion}} - {{usuario.vivienda.alarma_vecinal}}</p>
+                                                                                                <p class="mb-1"><a class="pe-4"><strong>Teléfono:</strong></a> {{usuario.telefono}}</p>
+                                                                                            </div>
+
+                                                                                            {% if usuario.nota %}
+                                                                                                <hr>
+                                                                                                <div class="bio text-start my-4">
+                                                                                                    <h4 class="mb-3">Nota</h4>
+                                                                                                    <div class="bio-content">
+                                                                                                        <p>{{usuario.nota}}</p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            {% endif %}
+
+                                                                                                
+
+                                                                                           
 
 
-                                                                            <div class="text-start my-5">
 
-                                                                                    <p class="mb-1"><a class="pe-4"><strong>Dirección:</strong></a> {{usuario.vivienda.get_direccion}} - {{usuario.vivienda.alarma_vecinal}}</p>
-                                                                                    <p class="mb-1"><a class="pe-4"><strong>Teléfono:</strong></a> {{usuario.telefono}}</p>
-                                                                            </div>
 
-                                                                            {% if usuario.nota %}
-                                                                            <div class="bio text-start my-4">
-                                                                                <h4 class="mb-3">Nota</h4>
-                                                                                <div class="bio-content">
-                                                                                    <p>{{usuario.nota}}</p>
-                                                                                </div>
-                                                                            </div>
-                                                                            {% endif %}
+
+
+
+                                                                            
+
+                                                                            
 
 
                                                                             <div class="text-center my-5">
