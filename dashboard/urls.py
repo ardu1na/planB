@@ -17,7 +17,8 @@ urlpatterns = [
   ###  ALARMS ALERTS module
     
     path('alarmas/', dashboard_views.alertas, name="alertas"),
-  
+      path('alarmas/user/<uuid:pk>', dashboard_views.alertas, name="usuarioalertas"),
+
 
   ###  BARRIOS VIVIENDA USERS module
 

@@ -65,10 +65,13 @@ def index(request):
 
 
 @login_required(login_url='dashboard:login')
-def alertas(request):
+def alertas(request, pk=None):
     template_name = 'dashboard/sistema/alertas/alertas.html'
 
-    alertas = AlarmaEvent.objects.all()
+    if pk:
+        alertas = AlarmaEvent.objects.filter(miembro__id=pk)
+    else:
+        alertas = AlarmaEvent.objects.all()
     
     
     ultima = alertas.last()

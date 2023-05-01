@@ -180,8 +180,8 @@
                                                                         <br>
               
 
-                                                                                            <a href="#"> Alertas</a>
-                                                                                            <h4 >{{usuario.alarmas.all|length}}</h4>
+                                                                                            <a href="{% url 'dashboard:usuarioalertas' pk=usuario.id %}"> Ver Alertas de {{usuario.nombre}}
+                                                                                            <h4 >{{usuario.alertas.all|length}} {% if usuario.alearts.all|length != 1 %} alertas {% else %} alerta {% endif %}</h4></a>
                                                                                             <hr>
 
 
@@ -201,25 +201,11 @@
                                                                                                         <p>{{usuario.nota}}</p>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            {% endif %}
-
-                                                                                                
-
-                                                                                           
-
-
-
-
-
-
-
-                                                                            
-
-                                                                            
+                                                                                            {% endif %}                                                                                          
 
 
                                                                             <div class="text-center my-5">
-
+                                                                                <h5> código de usuario </h5>
                                                                                 <p class="mb-1">{{usuario.id}}</p>
                                                                             </div>
                                                                     </div> 
