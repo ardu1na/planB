@@ -147,7 +147,12 @@
                         <div class="media-body">
                             <p class="mb-1">{{f_this_m|length}} alertas este mes </p>
                             <h4 class="mb-0">FUEGO</h4>
+                            {% if f_this_m %}
+
                             <p class="my-1 fs-5"> último: {{fuego.miembro}} - {{fuego.datetime}} </p>
+                            {% else %}
+                            <p class="my-1 fs-5"> sin alertas </p>
+                            {% endif %}   
                         </div>
                     </div>
                 </div>
