@@ -102,6 +102,15 @@ class AlarmaVecinal(models.Model):
             for alerta in usuario.alertas.all():
                 alarmas.append(alerta)
         return alarmas
+    
+    @property  
+    def get_alarmas_this_m(self):
+        este_mes = []
+        alarmas = self.get_alarmas
+        for alarma in alarmas:
+            if alarma.datetime.year == today.year and alarma.datetime.month == today.month:
+                este_mes.append(alarma)
+        return este_mes
                 
     @property
     def get_f(self):

@@ -172,6 +172,29 @@ def barrio_detail(request, pk):
     
     barrio = get_object_or_404(AlarmaVecinal, id=pk)
     viviendas = Vivienda.objects.filter(state="Yes", alarma_vecinal = barrio)
+    ultima = AlarmaEvent.objects.last()
+    
+    emergencia = barrio.get_e[0]
+    emergencias = barrio.get_e
+    e_this_m = []
+    for e in emergencias:
+        if e.datetime.month == today.month and e.datetime.year == today.year:
+            e_this_m.append(e)
+            
+    sos = barrio.get_s[0]
+    soss = barrio.get_s
+    s_this_m = []
+    for s in soss:
+        if s.datetime.month == today.month and s.datetime.year == today.year:
+            s_this_m.append(s)
+            
+    fuego = barrio.get_f[0]
+    fuegos = barrio.get_f
+    f_this_m = []
+    for f in fuegos:
+        if f.datetime.month == today.month and f.datetime.year == today.year:
+            f_this_m.append(f)
+            
     
     if request.method == "GET":
         addform=NewViviendaForm()
@@ -189,7 +212,14 @@ def barrio_detail(request, pk):
         "viviendas": viviendas,
         "barrio":barrio,
         "addform": addform,
-        "page_title":f"Alarma Vecinal {barrio.nombre}"
+        "ultima": ultima,
+        "page_title":f"Alarma Vecinal {barrio.nombre}",
+        "emergencia": emergencia,
+        "e_this_m": e_this_m,
+        "sos": sos,
+        "s_this_m": s_this_m,
+        "fuego": fuego,
+        "f_this_m": f_this_m,
     }
     return render(request, template_name, context)
 
