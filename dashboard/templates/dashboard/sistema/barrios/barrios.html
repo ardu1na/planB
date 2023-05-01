@@ -25,8 +25,8 @@
                         </span>
                         <div class="media-body">
                             <p class="mb-1">Alarmas instaladas</p>
-                            <h4 class="mb-0"> {{barrios|length}} barrios </h4>
-                            <h5 class="mb-0"> {{n_alertas}} Alertas este mes </h5>
+                            <h4 class="mb-0"> {{barrios|length}} {% if barrios|length != 1 %} barrios {% else %}barrio {% endif %}</h4>
+                            <h5 class="mb-0"> {{n_alertas}} {% if n_alertas != 1 %} alertas {% else %} alerta {% endif %} este mes </h5>
 
                         </div>
                     </div>
@@ -81,8 +81,8 @@
                         </span>
                         <div class="media-body">
                             <p class="mb-1">Usuarios Activos</p>
-                            <h4 class="mb-0 fs-3">{{n_usuarios}} {% if n_usuarios|length != 1 %} personas {% else %} persona 
-                                {% endif %} en {{n_casas}}  {% if n_casas|length != 1 %} viviendas {% else %} vivienda {% endif %} </h4>
+                            <h4 class="mb-0 fs-3">{{n_usuarios}} {% if n_usuarios != 1 %} personas {% else %} persona 
+                                {% endif %} en {{n_casas}}  {% if n_casas != 1 %} viviendas {% else %} vivienda {% endif %} </h4>
                         </div>
                     </div>
                     
