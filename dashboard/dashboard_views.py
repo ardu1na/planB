@@ -124,10 +124,12 @@ def success (request, pk):
 @login_required(login_url='dashboard:login')
 def barrios_list(request):
     template_name = 'dashboard/sistema/barrios/barrios.html'
+    
     barrios=AlarmaVecinal.objects.filter(state="Yes")
     alertas = AlarmaEvent.objects.filter(datetime__year=today.year, datetime__month=today.month)
     usuarios=Miembro.objects.filter(state="Yes")
     viviendas= Vivienda.objects.filter(state="Yes")
+    
     
     
     if request.method == "GET":

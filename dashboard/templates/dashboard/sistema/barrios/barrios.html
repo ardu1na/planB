@@ -140,10 +140,10 @@
                                             <td>{{barrio.get_n_viviendas}}</td>
                                             <td>{{barrio.get_n_usuarios}}</td>
 
-                                            <td> 342</td>
-                                            <td> 133</td>
-                                            <td> 142</td>
-                                            <td> 6/4 03:43 (SOS)</td>
+                                            <td> {{barrio.get_f|length}}</td>
+                                            <td> {{barrio.get_s|length}}</td>
+                                            <td> {{barrio.get_e|length}}</td>
+                                            <td> {{barrio.get_alarmas|last}}</td>
 
                                             <td>{{barrio.created_at}}</td>
 

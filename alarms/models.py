@@ -3,6 +3,7 @@ from datetime import date
 
 from django.db import models
 
+today = date.today()
 
 class AlarmaEvent(models.Model):
     
@@ -80,9 +81,54 @@ class AlarmaVecinal(models.Model):
     
     @property
     def get_n_viviendas(self):
-        viviendas = self.viviendas.filter(state="Yes")        
+        viviendas = self.viviendas.filter(state="Yes")
         return len(viviendas)
+
+    @property
+    def get_viviendas(self):
+        viviendas = self.viviendas.filter(state="Yes")
+        return viviendas
     
+    
+    @property  
+    def get_alarmas(self):
+        usuarios = []
+        viviendas = self.viviendas.all()
+        for vivienda in viviendas:
+            for usuario in vivienda.miembros.all():
+                usuarios.append(usuario)
+        alarmas = []
+        for usuario in usuarios:
+            for alerta in usuario.alertas.all():
+                alarmas.append(alerta)
+        return alarmas
+                
+    @property
+    def get_f(self):
+        f = []
+        alarmas = self.get_alarmas
+        for alarma in alarmas:
+            if alarma.tipo == "Fuego":
+                f.append(alarma)
+        return f
+            
+    @property
+    def get_s(self):
+        s = []
+        alarmas = self.get_alarmas
+        for alarma in alarmas:
+            if alarma.tipo == "SOS":
+                s.append(alarma)
+        return s
+            
+    @property
+    def get_e(self):
+        e = []
+        alarmas = self.get_alarmas
+        for alarma in alarmas:
+            if alarma.tipo =="Emergencia":
+                e.append(alarma)
+        return e
     
     
     
