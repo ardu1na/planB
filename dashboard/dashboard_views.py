@@ -30,8 +30,31 @@ def planb(request):
 @login_required(login_url='dashboard:login')
 def index(request):
     template_name = 'dashboard/index.html'
+    barrios = AlarmaVecinal.objects.filter(state="Yes")
+    alarmas_this_m = AlarmaEvent.objects.filter(datetime__month=today.month, datetime__year=today.year)
+    alarmas = AlarmaEvent.objects.all()
+    ultima = alarmas.last()
+    usuarios = Miembro.objects.filter(state="Yes")
+    viviendas = Vivienda.objects.filter(state="Yes")
+    e_this_m = alarmas_this_m.filter(tipo="Emergencia")
+    e_last = alarmas.filter(tipo="Emergencia").last()   
+    s_this_m = alarmas_this_m.filter(tipo="SOS")
+    s_last = alarmas.filter(tipo="SOS").last()     
+    f_this_m = alarmas_this_m.filter(tipo="Fuego")
+    f_last = alarmas.filter(tipo="Fuego").last() 
 
     context={
+        "barrios" : barrios,
+        "alarmas_this_m": alarmas_this_m,
+        "ultima": ultima,
+        "usuarios": usuarios,
+        "viviendas": viviendas,
+        "e_this_m": e_this_m,
+        "e_last": e_last,
+        "s_this_m": s_this_m,
+        "s_last": s_last,
+        "f_this_m": f_this_m,
+        "f_last": f_last,
         "page_title":"Plan B"
     }
     return render(request, template_name,  context)
