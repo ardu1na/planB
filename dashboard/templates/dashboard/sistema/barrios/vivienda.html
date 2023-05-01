@@ -313,7 +313,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Usuario</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>           
-                <form  method="post">
+                <form  method="post" enctype="multipart/form-data" novalidate autocomplete="off">
                     {% csrf_token %}
                         <div class="modal-body">
                             <div class="pt-1 pb-4">
@@ -351,9 +351,17 @@
                                                   {{ addform.avatar|attr:"type:file" }}
                                                   <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
                                                </div>
+                                               <div class="avatar-preview">
+                                                {% if addform.instance.avatar %}
+                                                <div id="imagePreview" style="background-image: url('{{ addform.instance.avatar.url }}');">
+                                              {% else %}
+                                                <div id="imagePreview">
+                                              {% endif %}
+                                              
+                                               </div>
                                          </div>
                                          <div class="text-danger w-100 d-block mt-1">
-                                            {{ addform.avatar.errors }}     
+                                            {{ editform.avatar.errors }}     
                                         </div>
 
                                     </div>
@@ -376,6 +384,28 @@
 
 
 {% block additional_js %}
+
+
+
+
+<script>
+    function readURL(input) {
+ 
+       if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function(e) {
+                $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+             }
+             reader.readAsDataURL(input.files[0]);
+       }
+    }
+    $("#id_avatar").change(function() {
+       readURL(this);
+    });
+ </script> 
+ 
     <!-- NEWMODAL -->
         <script>
             const deleteusuario = new bootstrap.Modal('#deleteusuario',   {keyboard: true}    )

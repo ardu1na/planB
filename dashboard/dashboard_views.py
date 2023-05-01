@@ -286,14 +286,16 @@ def vivienda_detail(request, pk):
     
     template_name= 'dashboard/sistema/barrios/vivienda.html'
     addform=NewUsuarioForm()
-             
+         
         
     if request.method == "POST":
         if "addnew" in request.POST:
-            addform = NewUsuarioForm(request.POST)
+            addform = NewUsuarioForm(request.POST, request.FILES)
             if addform.is_valid():
                 usuario = addform.save(commit=False)
                 usuario.vivienda=vivienda
+                if 'avatar' in request.FILES:
+                    usuario.avatar = request.FILES['avatar']
                 usuario.save()
                 return redirect('dashboard:vivienda', pk=vivienda.pk)
             else:

@@ -1,5 +1,6 @@
 import uuid
 from datetime import date
+from PIL import Image
 
 from django.db import models
 
@@ -180,6 +181,17 @@ class Miembro(models.Model):
         if self.state == "No":
             self.deleted_at = date.today()
         super(Miembro, self).save(*args, **kwargs)
+        if self.avatar:
+            image = Image.open(self.avatar.path)
+            output_size = (300, 300)
+            image.thumbnail(output_size)
+            if image.width < output_size[0] or image.height < output_size[1]:
+                background = Image.new('RGB', output_size, (255, 255, 255))
+                offset = ((output_size[0] - image.width) // 2, (output_size[1] - image.height) // 2)
+                background.paste(image, offset)
+                image = background
+            image.save(self.avatar.path)
+        
 
     @property
     def get_edad(self):
@@ -208,6 +220,7 @@ class Miembro(models.Model):
 
     def __str__ (self):
         return self.get_nombre_completo
+
     
         
 class Vivienda(models.Model):    
