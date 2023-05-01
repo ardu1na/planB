@@ -172,7 +172,7 @@ def barrio_detail(request, pk):
     
     barrio = get_object_or_404(AlarmaVecinal, id=pk)
     viviendas = Vivienda.objects.filter(state="Yes", alarma_vecinal = barrio)
-    ultima = AlarmaEvent.objects.last()
+    ultima = AlarmaEvent.objects.filter(miembro__vivienda__alarma_vecinal = barrio).last()
     
     emergencias = barrio.get_e
     if len(emergencias) != 0:

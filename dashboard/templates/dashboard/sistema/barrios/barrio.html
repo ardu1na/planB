@@ -100,7 +100,13 @@
                         <div class="media-body">
                             <p class="mb-1">{{e_this_m|length}} alertas este mes </p>
                             <h4 class="mb-0">Urgencia</h4>
+                            {% if e_this_m %}
+
                             <p class="my-1 fs-5"> último: {{emergencia.miembro}} - {{emergencia.datetime}} </p>
+                            {% else %}
+                            <p class="my-1 fs-5"> sin alertas </p>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -117,8 +123,12 @@
                         <div class="media-body">
                             <p class="mb-1">{{s_this_m|length}} alertas este mes </p>
                             <h4 class="mb-0">SOS</h4>
+                            {% if s_this_m %}
+
                             <p class="my-1 fs-5"> último: {{sos.miembro}} - {{sos.datetime}} </p>
-                        </div>
+                            {% else %}
+                            <p class="my-1 fs-5"> sin alertas </p>
+                            {% endif %}                        </div>
                     </div>
                 </div>
             </div>
