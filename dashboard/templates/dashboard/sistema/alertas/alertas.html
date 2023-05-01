@@ -33,9 +33,16 @@
                         </span>
                         <div class="media-body">
                             <h4 class="mb-0">  Última  </h4>
+                            {% if ultima %}
                             <h5 class="mb-0 mb-3"> {{ultima.tipo}} en {{ultima.miembro.vivienda.alarma_vecinal}}</h5>
 
                             <p class="my-1 fs-5">El {{ultima.datetime|date:"d/m/Y" }} a las {{ ultima.datetime|time:"H:i" }} hs</p>
+                            {% else %}
+                            
+                            <h5 class="mb-0 mb-3"></h5>
+
+                            <p class="my-1 fs-5">sin alertas</p>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -59,8 +66,12 @@
                         <div class="media-body">
                             <h4 class="mb-0">Emergencia</h4>
 
-                            <p class="mb-3">{{emerg|length}} alertas este mes </p> 
+                            <p class="mb-3">{{emerg|length}} {% if emer|length != 1 %} alertas {% else %} alerta {% endif %}</p> 
+                            {% if emer %}
                             <p class="my-1 fs-5"> Ultima el {{last_e.datetime|date:"l d" }} a las {{ last_e.datetime|time:"H:i" }} hs en {{last_e.miembro.vivienda.alarma_vecinal}}</p>
+                            {% else %}
+                            <p class="my-1 fs-5"> sin alertas </p>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -78,8 +89,12 @@
                         <div class="media-body">
                             <h4 class="mb-0">SOS</h4>
 
-                            <p class="mb-3">{{sos|length}} alertas este mes </p> 
+                            <p class="mb-3">{{sos|length}} {% if sos|length != 1 %} alertas {% else %} alerta {% endif %}  </p> 
+                            {% if sos %}
                             <p class="my-1 fs-5"> Ultima el {{last_s.datetime|date:"l d" }} a las {{ last_s.datetime|time:"H:i" }} hs en {{last_s.miembro.vivienda.alarma_vecinal}}</p>
+                            {% else %}
+                            <p class="my-1 fs-5"> sin alertas </p>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -100,9 +115,13 @@
                         <div class="media-body">
                             <h4 class="mb-0">Fuego</h4>
 
-                            <p class="mb-3">{{fuego|length}} alertas este mes </p> 
+                            <p class="mb-3">{{fuego|length}} {% if fuego|length != 1 %} alertas {% else %} alerta {% endif %}  </p> 
                             
+                            {% if fuego %}
                             <p class="my-1 fs-5"> Ultima el {{last_f.datetime|date:"l d" }} a las {{ last_f.datetime|time:"H:i" }} hs en {{last_f.miembro.vivienda.alarma_vecinal}}</p>
+                            {% else %}
+                            <p class="my-1 fs-5"> sin alertas </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
