@@ -274,6 +274,12 @@ def vivienda_detail(request, pk):
     
     vivienda = get_object_or_404(Vivienda, id=pk)
     usuarios = vivienda.miembros.filter(state="Yes")
+    alarmas = AlarmaEvent.objects.filter(miembro__vivienda= vivienda.pk)
+    ultima = alarmas.last()
+    e = alarmas.filter(tipo="Emergencia")
+    f = alarmas.filter(tipo="Fuego")
+    s = alarmas.filter(tipo="SOS")
+    
     template_name= 'dashboard/sistema/barrios/vivienda.html'
     addform=NewUsuarioForm()
              
@@ -292,6 +298,10 @@ def vivienda_detail(request, pk):
     context ={
         "vivienda" : vivienda,
         "usuarios": usuarios,
+        "ultima": ultima,
+        "e":e,
+        "f":f,
+        "s":s,
         "addform" : addform,
     }
     return render(request, template_name, context)
