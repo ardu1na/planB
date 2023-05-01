@@ -174,26 +174,39 @@ def barrio_detail(request, pk):
     viviendas = Vivienda.objects.filter(state="Yes", alarma_vecinal = barrio)
     ultima = AlarmaEvent.objects.last()
     
-    emergencia = barrio.get_e[0]
     emergencias = barrio.get_e
-    e_this_m = []
-    for e in emergencias:
-        if e.datetime.month == today.month and e.datetime.year == today.year:
-            e_this_m.append(e)
+    if len(emergencias) != 0:
+        emergencia = barrio.get_e[0]
+        e_this_m = []
+        for e in emergencias:
+            if e.datetime.month == today.month and e.datetime.year == today.year:
+                e_this_m.append(e)
+    else:
+        emergencia = None
+        e_this_m = None
             
-    sos = barrio.get_s[0]
+
     soss = barrio.get_s
-    s_this_m = []
-    for s in soss:
-        if s.datetime.month == today.month and s.datetime.year == today.year:
-            s_this_m.append(s)
+    if len(soss) != 0:
+        sos = barrio.get_s[0]
+        s_this_m = []
+        for s in soss:
+            if s.datetime.month == today.month and s.datetime.year == today.year:
+                s_this_m.append(s)
+    else:
+        sos = None
+        s_this_m = None
             
-    fuego = barrio.get_f[0]
     fuegos = barrio.get_f
-    f_this_m = []
-    for f in fuegos:
-        if f.datetime.month == today.month and f.datetime.year == today.year:
-            f_this_m.append(f)
+    if len(fuegos) != 0:
+        fuego = barrio.get_f[0]
+        f_this_m = []
+        for f in fuegos:
+            if f.datetime.month == today.month and f.datetime.year == today.year:
+                f_this_m.append(f)
+    else:
+        fuego = None
+        f_this_m = None
             
     
     if request.method == "GET":
