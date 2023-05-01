@@ -155,62 +155,63 @@
                                                     
                                                     <a class="mb-0 fs-16 font-w500" href="{% url 'dashboard:usuario' pk=usuario.pk %}"></a>
                                                     <!-- ver code BUTTON -->
-                                                    <button type="button" class="mb-0 fs-16 font-w500" data-bs-toggle="modal" data-bs-target="#detail{{usuario.id}}">
+                                                    <button type="button" class="btn mb-0 fs-16 font-w500" data-bs-toggle="modal" data-bs-target="#detail{{usuario.id}}">
                                                        {{usuario}} </button> 
 
 
                                                                                                                 
                                                         <!-- START modal ver usuario -->
                                                         <div class="modal fade " id="detail{{usuario.id}}" tabindex="-1" aria-labelledby="detail{{usuario.id}}Label" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                 <div class="modal-content px-3">
                                                                     <div class="modal-header">
-                                                                        
+                                                                        <h4 class="mb-1"> {{usuario.nombre}} {{usuario.apellido}} {% if usuario.fecha_de_nacimiento %} ({{usuario.get_edad}} años) {% endif %}</h4>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>           
-                                                                            <div class="modal-body">
-                                                                                <div class="pt-1 pb-4">
-                                                                                    <h1 class="modal-title text-center fs-4 mb-3" id="detail{{usuario.id}}Label">{{usuario.nombre}} {{usuario.apellido}}</h1>
+                                                                    <div class="modal-body text-center my-4">
 
-                                                                                    <div class="form-control text-center">
-                                                                                        <p id="p">
-                                                                                            {{usuario.id}}
-                                                                                        </p>   
-                                                                                    </div>   
 
-                                                                                    <div class="form-group my-3">
-                                                                                        {{usuario.vivienda.get_direccion}}
-                                                                                    </div>
-                    
-                                                                                    <div class="form-group my-3">
-                                                                                        {{usuario.vivienda.alarma_vecinal}}
-                                                                                    </div>
-                    
-                                                                                    <div class="form-group my-3">
-                                                                                        {{usuario.telefono}}
-                                                                                    </div>
-                    
-                    
-                                                                                    <div class="form-group my-3">
-                                                                                        {{usuario.genero}}
-                                                                                    </div>
-                    
-                    
-                    
-                                                                                    <div class="form-group my-3">
-                                                                                        
-                                                                                        {{usuario.fecha_de_nacimiento}} - {{usuario.get_edad}}
-                                                                                    </div>
+                                                                               
+
                                                                                     
-                    
-                                                                                    <div class="form-group my-3">
-                                                                                        {{usuario.nota}}
+
+                                                                                    <div class="row m-auto">
+                                                                                        <div class="col-3 py-auto">
+                                                                                            <span>Alertas</span>
+                                                                                            <h4>{{usuario.alarmas.all|length}}</h4>
+                                                                                        </div>
+                                                                                        <div class="col-9 text-end">
+
+                                                                                        <img class="img-fluid w-100  h-100 mt-3" src="{{ usuario.foto.url }}"  alt="">
                                                                                     </div>
 
+
+                                                                                    </div>
+
+
+
+
+                                                                            <div class="text-start my-5">
+
+                                                                                    <p class="mb-1"><a class="pe-4"><strong>Dirección:</strong></a> {{usuario.vivienda.get_direccion}} - {{usuario.vivienda.alarma_vecinal}}</p>
+                                                                                    <p class="mb-1"><a class="pe-4"><strong>Teléfono:</strong></a> {{usuario.telefono}}</p>
+                                                                            </div>
+
+                                                                            {% if usuario.nota %}
+                                                                            <div class="bio text-start my-4">
+                                                                                <h4 class="mb-3">Nota</h4>
+                                                                                <div class="bio-content">
+                                                                                    <p>{{usuario.nota}}</p>
                                                                                 </div>
-                                                                            </div> 
+                                                                            </div>
+                                                                            {% endif %}
 
 
+                                                                            <div class="text-center my-5">
+
+                                                                                <p class="mb-1">{{usuario.id}}</p>
+                                                                            </div>
+                                                                    </div> 
                                                                 </div>
                                                             </div>
                                                         </div>

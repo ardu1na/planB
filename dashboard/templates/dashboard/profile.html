@@ -25,37 +25,28 @@
                     </div>
                     <div class="card-body text-center pb-3">
                         <div class="instructors-media">
-                            <img src="{% static 'dashboard/images/courses/pic2.jpg' %}"  alt="">
+                            <img src="{{ usuario.foto.url }}"  alt="">
                             <div class="instructors-media-info mt-4">
-                                <h4 class="mb-1">Nella Vita</h4>
-                                <span class="fs-18">Member Since 2020</span>
+                                <h4 class="mb-1"> {{usuario.nombre}} {{usuario.apellido}}</h4>
+                                <span class="fs-18"> {{usuario.id}}</span>
                                 <div class="d-flex justify-content-center my-3 mt-4">
                                     <div class="info-box text-start style-1">
-                                        <span>Points</span>
-                                        <h4>2300</h4>
+                                        <span>Alarmas</span>
+                                        <h4>{{usuario.alarmas.all|length}}</h4>
                                     </div>
                                     <div class="info-box text-start style-1">
-                                        <span>Certificate</span>
-                                        <h4>50</h4>
+                                        <span>Edad</span>
+                                        <h4>{{usuario.get_edad}}</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="achievements ">
-                            <h4 class="text-start mb-3">Achievements</h4>
-                            <div class="achievements-content flex-wrap">
-                                <span><img src="{% static 'dashboard/images/svg/cup.svg' %}"  alt=""></span>
-                                <span><img src="{% static 'dashboard/images/svg/puzzle.svg' %}" alt=""></span>
-                                <span><img src="{% static 'dashboard/images/svg/planet.svg' %}" alt=""></span>
-                                <span><img src="{% static 'dashboard/images/svg/skill.svg' %}" alt=""></span>
-                                <span><img src="{% static 'dashboard/images/svg/readingtime.svg' %}" alt=""></span>
-                            </div>	
-                        </div>
                         <div class="bio text-start my-4">
                             <h4 class="mb-3">Bio</h4>
                             <div class="bio-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>{{usuario.vivienda.get_direccion}}</p>
+                                <p class="mb-0">{{usuario.vivienda.alarma_vecinal}}</p>
+                                <p>{{usuario.telefono}}</p>
                             </div>
                         </div>
                     </div>
@@ -70,8 +61,8 @@
                                     <div class="d-flex">
                                         <img src="{% static 'dashboard/images/svg/degree-certificate.svg' %}"  alt="">
                                         <div class="ms-4">
-                                            <h4>100</h4>
-                                            <span>Completed</span>
+                                            <h4>{{usuario.telefono}}</h4>
+                                            <span>teléfono</span>
                                         </div>	
                                     </div>	
                                     <a href="{% url 'dashboard:courses' %}"><i class="las la-angle-right text-primary"></i></a>
@@ -86,8 +77,8 @@
                                     <div class="d-flex">
                                         <img src="{% static 'dashboard/images/svg/clock-1.svg' %}"  alt="">
                                         <div class="ms-4">
-                                            <h4>100</h4>
-                                            <span>Progress</span>
+                                            <h4>Nota</h4>
+                                            <span>{{usuario.nota}}</span>
                                         </div>	
                                     </div>	
                                     <a href="{% url 'dashboard:courses' %}"><i class="las la-angle-right text-secondary"></i></a>

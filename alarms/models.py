@@ -144,6 +144,7 @@ class AlarmaVecinal(models.Model):
     
 class Miembro(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
+    foto = models.ImageField(upload_to='profiles/', null=True, blank=True)
 
     vivienda = models.ForeignKey('Vivienda', on_delete=models.CASCADE, related_name="miembros")
 
