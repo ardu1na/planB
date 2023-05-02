@@ -251,6 +251,10 @@ class Vivienda(models.Model):
 
 
 
+    @property
+    def get_map(self):
+        enlace = f"https://www.google.com/maps/place/{self.calle}+{self.numero},+{self.municipio},+{self.provincia}/"
+        return enlace
 
 
 
@@ -284,10 +288,6 @@ class Vivienda(models.Model):
     def get_coordenadas(self, *args, **kwargs):
         return f"{self.altitud}, {self.latitud}"
     
-    @property
-    def get_map(self):
-        enlace = f"https://www.google.com/maps/@{self.latitud},{self.altitud},16z"
-        return enlace
     
     
     @property

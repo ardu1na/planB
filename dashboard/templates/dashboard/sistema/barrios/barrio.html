@@ -195,7 +195,6 @@
                                             <th>DIRECCION</th>
                                             <th>MUNICIPIO</th>
                                             <th>PROVINCIA</th>
-                                            <th>COORDENADAS</th>
                                             <th>N° MIEMBROS</th>
                                             <th>MIEMBROS</th>
                                             <th>FECHA ALTA</th>
@@ -214,7 +213,6 @@
                                             </td>
                                             <td>{{vivienda.municipio}}</td>
                                             <td>{{vivienda.provincia}}</td>
-                                            <td><a href="{{vivienda.get_map}}">{{vivienda.get_coordenadas|truncatechars:25}}</a></td>
                                             <td>{{vivienda.get_miembros_number}}</td>
                                             <td>{{vivienda.get_miembros_string|truncatechars:25}}</td>
 
@@ -226,13 +224,17 @@
                                                     
                                                         <!-- delete BUTTON -->
                                                             <button type="button" class="shadow-sm btn btn-danger px-3 mx-1" data-bs-toggle="modal" data-bs-target="#deletevivienda{{vivienda.id}}">
-                                                            <i class="fa-solid fa-trash fs-7"></i>
+                                                            <i class="fa-solid fa-trash fs-4"></i>  
                                                             </button>                                                                                  
                                                         <!-- edit BUTTON -->
 
                                                             <a href="{% url 'dashboard:viviendaedit' pk=vivienda.id %}" class="px-3 shadow-sm btn btn-secondary mx-1">
-                                                                <i class="fa-solid fa-pen-to-square "></i>
-                                                            </a>                                                
+                                                                <i class="fa-solid fa-pen-to-square fs-4 "></i>
+                                                            </a>          
+                                                            
+                                                        <!-- map BUTTON -->
+                                                        <a href="{{vivienda.get_map}}" class="shadow-sm btn btn-info px-3 mx-1"><i class="fa-solid fa-location-dot fs-4"></i>
+                                                        </a>     
                                                 </div>                                        
                                             </td>
                                         </tr>
