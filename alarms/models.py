@@ -257,14 +257,14 @@ class Vivienda(models.Model):
 
     @property
     def get_miembros_string(self, *args, **kwargs):
-        miembros = Miembro.objects.filter(vivienda__id=self.id)
+        miembros = Miembro.objects.filter(vivienda__id=self.id, state="Yes")
         nombres = ["{} {}".format(miembro.nombre, miembro.apellido) for miembro in miembros]
         return ", ".join(nombres)
     
     
     @property
     def get_miembros(self, *args, **kwargs):
-        miembros = Miembro.objects.filter(vivienda__id=self.id)
+        miembros = Miembro.objects.filter(vivienda__id=self.id, state="Yes")
         return miembros
     
     @property
