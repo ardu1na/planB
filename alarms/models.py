@@ -269,7 +269,7 @@ class Vivienda(models.Model):
     
     @property
     def get_miembros_number(self, *args, **kwargs):
-        miembros = Miembro.objects.filter(vivienda__id=self.id)
+        miembros = Miembro.objects.filter(vivienda__id=self.id, state="Yes")
         return len(miembros)
     
     @property
