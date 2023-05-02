@@ -16,6 +16,8 @@ import mimetypes
 from alarms.models import*
 from dashboard.cms import utils
 from django.core.paginator import Paginator
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage, default_storage
 
 today = date.today()
 
@@ -293,9 +295,11 @@ def vivienda_detail(request, pk):
             addform = NewUsuarioForm(request.POST, request.FILES)
             if addform.is_valid():
                 usuario = addform.save(commit=False)
-                usuario.vivienda=vivienda
+                usuario.vivienda = vivienda
                 if 'avatar' in request.FILES:
-                    usuario.avatar = request.FILES['avatar']
+                    avatar = request.FILES['avatar']
+                    filename = default_storage.save('profiles/' + avatar.name, avatar)
+                    usuario.avatar = filename
                 usuario.save()
                 return redirect('dashboard:vivienda', pk=vivienda.pk)
             else:
@@ -379,11 +383,15 @@ def usuario_detail(request, pk):
         editform = NewUsuarioForm(request.POST, request.FILES, instance=usuario)
         if editform.is_valid():
             if 'avatar' in request.FILES:
-                usuario.avatar = request.FILES['avatar']
+                avatar = request.FILES['avatar']
+                filename = default_storage.save('profiles/' + avatar.name, avatar)
+                usuario.avatar = filename
             usuario.save()
             return redirect('dashboard:usuario', pk=usuario.pk)
         else:
             return HttpResponse("Something wrong with the form")
+        
+        
 
             
     context ={
