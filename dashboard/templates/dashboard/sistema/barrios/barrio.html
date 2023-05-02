@@ -214,7 +214,7 @@
                                             </td>
                                             <td>{{vivienda.municipio}}</td>
                                             <td>{{vivienda.provincia}}</td>
-                                            <td>{{vivienda.get_coordenadas|truncatechars:25}}</td>
+                                            <td><a href="{{vivienda.get_map}}">{{vivienda.get_coordenadas|truncatechars:25}}</a></td>
                                             <td>{{vivienda.get_miembros_number}}</td>
                                             <td>{{vivienda.get_miembros_string|truncatechars:25}}</td>
 

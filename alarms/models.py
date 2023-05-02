@@ -284,6 +284,11 @@ class Vivienda(models.Model):
     def get_coordenadas(self, *args, **kwargs):
         return f"{self.altitud}, {self.latitud}"
     
+    @property
+    def get_map(self):
+        enlace = f"https://www.google.com/maps/@{self.latitud},{self.altitud},16z"
+        return enlace
+    
     
     @property
     def get_direccion_con_municipio_y_provincia(self, *args, **kwargs):
