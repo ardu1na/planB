@@ -4,6 +4,9 @@ from PIL import Image
 
 from django.db import models
 
+
+from dashboard.users.models import CustomUser
+
 today = date.today()
 
 class AlarmaEvent(models.Model):
@@ -147,6 +150,11 @@ class AlarmaVecinal(models.Model):
     
     
 class Miembro(models.Model):
+    
+    # user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+
+
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
     avatar = models.ImageField(upload_to='profiles/', null=True, blank=True)
 

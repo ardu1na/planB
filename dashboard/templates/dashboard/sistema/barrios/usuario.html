@@ -47,12 +47,19 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">{{usuario.nombre}} {{usuario.apellido}}</h3>
-                        <h3 class="card-title"> {{usuario.id}}</h3>
 
                         <div class="form-floating pt-4 my-3 d-flex flex-row-reverse">
-                                                
+
+
+                            <!-- map BUTTON -->
+                            <a href="{{usuario.vivienda.get_map}}" class="shadow-sm btn btn-info px-3 mx-1">Ver ubicación<span class="btn-icon-end"><i class="fa-solid fa-location-dot fs-7"></i></span>
+                            </a>  
+
+                            <!-- delete BUTTON -->
+             
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteusuario{{usuario.id}}">Borrar usuario<span class="btn-icon-end">
                                 <i class="fa-solid fa-trash fs-7"></i></span></button>
+
                         </div>
                                               
                     </div>
@@ -82,56 +89,69 @@
 
                                                                 
                                                                 <input type="hidden" name="vivienda" value="{{ usuario.vivienda.id }}">
-        
-                                                                <div class="form-group my-3">
-                                                                    {{editform.nombre}}
-                                                                </div>
-
-                                                                <div class="form-group my-3">
-                                                                    {{editform.apellido}}
-                                                                </div>
-
-                                                                <div class="form-group my-3">
-                                                                    {{editform.telefono}}
-                                                                </div>
-
-
-                                                                <div class="form-group my-3">
-                                                                    {{editform.genero}}
-                                                                </div>
-
-
-
-                                                                <div class="form-group my-3">
-                                                                    
-                                                                    {{editform.fecha_de_nacimiento}}
-                                                                </div>
                                                                 
+                                                                <div class="row">
 
-                                                                <div class="form-group my-3">
-                                                                    {{editform.nota}}
+                                                                    <div class="mb-3 col-6">
+                                                                        <div class="form-group my-3">
+                                                                            {{editform.nombre}}
+                                                                        </div>
+
+                                                                        <div class="form-group my-3">
+                                                                            {{editform.apellido}}
+                                                                        </div>
+                                                                        <div class="form-group my-3">
+                                                                            {{editform.telefono}}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3 col-6">
+                                                                        <div class="avatar-upload">
+                                                                        <div class="avatar-edit">
+                                                                            {{ editform.avatar|attr:"type:file" }}
+                                                                            <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
+                                                                        </div>
+                                                                        <div class="avatar-preview">
+                                                                                {% if editform.instance.avatar %}
+                                                                                    <div id="imagePreview" style="background-image: url('{{ editform.instance.avatar.url }}');">
+                                                                                {% else %}
+                                                                                    <div id="imagePreview">
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-danger w-100 d-block mt-1">
+                                                                            {{ editform.avatar.errors }}     
+                                                                        </div>                                   
+                                                                    </div>
+
                                                                 </div>
 
-                                                                <div class="mb-3 col-md-6">
-                                                                    <div class="avatar-upload">
-                                                                       <div class="avatar-edit">
-                                                                          {{ editform.avatar|attr:"type:file" }}
-                                                                          <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
-                                                                       </div>
-                                                                       <div class="avatar-preview">
-                                                                        {% if editform.instance.avatar %}
-                                                                        <div id="imagePreview" style="background-image: url('{{ editform.instance.avatar.url }}');">
-                                                                      {% else %}
-                                                                        <div id="imagePreview">
-                                                                      {% endif %}
-                                                                      
-                                                                       </div>
-                                                                 </div>
-                                                                 <div class="text-danger w-100 d-block mt-1">
-                                                                    {{ editform.avatar.errors }}     
+
+                                                               
+
+                                                                <div class="row">
+                                                                    <div class="mb-3 col-6">
+
+                                                                        <div class="form-group my-3">
+                                                                            {{editform.fecha_de_nacimiento}}
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-3 col-6">
+                                                                        <div class="form-group my-3">
+                                                                            {{editform.genero}}
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    
+                                                                    
+
+                                                                    <div class="form-group my-3">
+                                                                        {{editform.nota}}
+                                                                    </div>
                                                                 </div>
-                                   
-                                                           </div>
 
                                                             </div>
                                                         </div>       
