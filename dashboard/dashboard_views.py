@@ -64,16 +64,21 @@ def index(request):
 
 
 ###########################################################################################
-############ monitoreo dealarmas ################################################
+############ monitoreo de alarmas ################################################
 
 def latest(request):
     ultima = AlarmaEvent.objects.last()
     data = {
+        'miembro': str(ultima.miembro),
         'tipo': str(ultima.tipo),
         'alarma_vecinal': str(ultima.miembro.vivienda.alarma_vecinal),
         'datetime': str(ultima.datetime.strftime('%d/%m/%Y %H:%M'))
     }
     return JsonResponse(data)
+
+
+
+
 
 @login_required(login_url='dashboard:login')
 def alertas(request, pk=None):
