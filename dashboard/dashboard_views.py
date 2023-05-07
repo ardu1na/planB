@@ -80,9 +80,11 @@ def alertas(request, pk=None):
     template_name = 'dashboard/sistema/alertas/alertas.html'
 
     if pk:
-        alertas = AlarmaEvent.objects.filter(miembro__id=pk)
+        alertas = AlarmaEvent.objects.filter(miembro__id=pk).order_by('-datetime')
+
     else:
-        alertas = AlarmaEvent.objects.all()
+        alertas = AlarmaEvent.objects.all().order_by('-datetime')
+
     
     
     ultima = alertas.last()

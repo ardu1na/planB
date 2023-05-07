@@ -3,8 +3,9 @@
 {% load static %}
 
 {% block additional_css %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    
+    
 {% endblock %}
 
 {% block content %}
@@ -229,6 +230,25 @@
 
 
 {% block additional_js %}
+
+
+
+<script>
+
+    // Catch any initialization errors that occur when loading the external script
+    $.fn.dataTable.ext.errMode = 'throw';
+    
+    // Modify the options of the external DataTables instance
+    $(document).ready(function() {
+        var table = $('#example4').DataTable();
+    
+        table.order([0, 'desc']).draw();
+    });
+    </script>
+
+
+
+    
 <!-- get real time last alert -->
 <script>
     function updateUltima() {
