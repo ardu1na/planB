@@ -73,6 +73,9 @@ class NewAlarmaVecinalForm(ModelForm):
                   'google_account',
                   'descripcion',
                   'whatsapp_group',
+                  'latitud',
+                  'altitud',
+                  'area'
                   )
                     
         widgets = {
@@ -103,6 +106,26 @@ class NewAlarmaVecinalForm(ModelForm):
                 'class':"form-control",
                 'id':"descripcion",
                 'placeholder' : "Descripcion"
+                }
+            ),
+            
+            'latitud' : NumberInput(attrs={
+                'class':"form-control",
+                'id':"latitud",
+                'placeholder' : "latitud"
+                }
+            ),
+            
+            'altitud' : NumberInput(attrs={
+                'class':"form-control",
+                'id':"altitud",
+                'placeholder' : "altitud"
+                }
+            ),
+             'area' : TextInput(attrs={
+                'class':"form-control",
+                'id':"area",
+                'placeholder' : "area"
                 }
             ),
 

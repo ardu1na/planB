@@ -49,7 +49,10 @@ class AlarmaVecinal(models.Model):
     nombre =  models.CharField(max_length=150)
     descripcion =  models.TextField(null=True, blank=True)
 
-    #add zona in coordenadas and rango
+    altitud = models.DecimalField(decimal_places=7, max_digits=9, blank=True, null=True,  verbose_name="ALTITUD")
+    latitud = models.DecimalField(decimal_places=7, max_digits=9, blank=True, null=True,  verbose_name="LATITUD")
+    area = models.CharField(max_length=10, null=True, blank=True)
+    
     google_account = models.EmailField(blank=True, null=True)
     whatsapp_group = models.CharField(max_length=300, blank=True, null=True)
     
@@ -238,6 +241,7 @@ class Vivienda(models.Model):
 
     altitud = models.DecimalField(decimal_places=7, max_digits=9, blank=True, null=True,  verbose_name="ALTITUD")
     latitud = models.DecimalField(decimal_places=7, max_digits=9, blank=True, null=True,  verbose_name="LATITUD")
+    area = models.CharField(max_length=10, null=True, blank=True)
 
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

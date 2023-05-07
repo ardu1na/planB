@@ -17,6 +17,9 @@ urlpatterns = [
     ###  USERS module
 
     path('usuarios/',dashboard_views.users_list,name="usuarios"),
+    path('usuarios/<uuid:pk>/',dashboard_views.users_list,name="usuariosbarrio"),
+
+    
     path('usuario/<uuid:pk>/',dashboard_views.usuario_detail, name="usuario"),
     path('usuario/<uuid:pk>/delete/',dashboard_views.usuario_delete, name="usuariodelete"),
     

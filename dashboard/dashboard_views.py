@@ -372,14 +372,26 @@ def vivienda_edit(request, pk):
 
 
 @login_required(login_url='dashboard:login')
-def users_list(request):
-    
-    usuarios = Miembro.objects.filter(state="Yes")
+def users_list(request, pk=None):
+    if pk:
+        barrio = get_object_or_404(AlarmaVecinal, id=pk)
+        usuarios = Miembro.objects.filter(state="Yes", vivienda__alarma_vecinal=barrio)
+        context ={
+        "usuarios" : usuarios,
+        "barrio": barrio,
+        
+    }
+    else:
+        usuarios = Miembro.objects.filter(state="Yes")
+        context ={
+        "usuarios" : usuarios,
+        
+    }
+        
+        
     template_name= 'dashboard/sistema/usuarios.html'
             
-    context ={
-        "usuarios" : usuarios,
-    }
+    
     return render(request, template_name, context)
 
 
