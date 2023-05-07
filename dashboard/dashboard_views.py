@@ -15,10 +15,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 import pickle
 import mimetypes
 from alarms.models import*
-from dashboard.cms import utils
-from django.core.paginator import Paginator
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage, default_storage
+from django.core.files.storage import  default_storage
+from django.urls import reverse
 
 today = date.today()
 
@@ -68,11 +67,15 @@ def index(request):
 
 def latest(request):
     ultima = AlarmaEvent.objects.last()
+    userurl = reverse('dashboard:usuario', args=[ultima.miembro.id])
+
     data = {
         'miembro': str(ultima.miembro),
+        'userurl': userurl,
         'tipo': str(ultima.tipo),
         'alarma_vecinal': str(ultima.miembro.vivienda.alarma_vecinal),
-        'datetime': str(ultima.datetime.strftime('%d/%m/%Y %H:%M'))
+        'datetime': str(ultima.datetime.strftime('%d/%m/%Y %H:%M')),
+        
     }
     return JsonResponse(data)
 
