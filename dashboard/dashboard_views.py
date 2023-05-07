@@ -317,27 +317,6 @@ def vivienda_detail(request, pk):
     return render(request, template_name, context)
 
 
-@login_required(login_url='dashboard:login')
-def vivienda_edit(request, pk):
-    
-    vivienda = get_object_or_404(Vivienda, id=pk)
-    template_name= 'dashboard/sistema/barrios/viviendaedit.html'
-    editform=NewViviendaForm(instance=vivienda)
-             
-        
-    if request.method == "POST":
-            editform = NewViviendaForm(request.POST, instance=vivienda)
-            if editform.is_valid():
-                editform.save()
-                return redirect('dashboard:vivienda', pk=vivienda.pk)
-            else:
-                return HttpResponse("Something wrong with the form")
-            
-    context ={
-        "vivienda" : vivienda,
-        "editform" : editform,
-    }
-    return render(request, template_name, context)
 
 
 
@@ -365,11 +344,47 @@ def barrio_edit(request, pk):
 
 
 
-
+@login_required(login_url='dashboard:login')
+def vivienda_edit(request, pk):
+    
+    vivienda = get_object_or_404(Vivienda, id=pk)
+    template_name= 'dashboard/sistema/barrios/viviendaedit.html'
+    editform=NewViviendaForm(instance=vivienda)
+             
+        
+    if request.method == "POST":
+            editform = NewViviendaForm(request.POST, instance=vivienda)
+            if editform.is_valid():
+                editform.save()
+                return redirect('dashboard:vivienda', pk=vivienda.pk)
+            else:
+                return HttpResponse("Something wrong with the form")
+            
+    context ={
+        "vivienda" : vivienda,
+        "editform" : editform,
+    }
+    return render(request, template_name, context)
 
 
 ############################################################################################################
-####################################### crud de usuarios ###########################
+####################################### USUARIOS GRAL ###########################
+
+
+@login_required(login_url='dashboard:login')
+def users_list(request):
+    
+    usuarios = Miembro.objects.all()
+    template_name= 'dashboard/sistema/usuarios.html'
+            
+    context ={
+        "usuarios" : usuarios,
+    }
+    return render(request, template_name, context)
+
+
+############################################################################################################
+####################################### crud de usuarios dentro de vivievnda ###########################
 
 @login_required(login_url='dashboard:login')
 def usuario_detail(request, pk):

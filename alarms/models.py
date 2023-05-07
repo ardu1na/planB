@@ -162,7 +162,7 @@ class Miembro(models.Model):
     
     telefono = models.CharField(max_length=90, null=True, blank=True)
     fecha_de_nacimiento = models.DateField(blank=True, null=True)
-    nota =  models.CharField(max_length=400, null=True, blank=True)
+    nota =  models.CharField(max_length=400, null=True, blank=True, verbose_name="Nota de información médica")
 
     contacto_nombre = models.CharField(max_length=150,  blank=True, null=True)
     contacto_telefono = models.CharField(max_length=150, blank=True, null=True)

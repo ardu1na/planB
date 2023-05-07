@@ -53,8 +53,9 @@
                         </span>
                         <div class="media-body">{% if ultima %}
                             <p class="mb-1">Última alerta: {{ultima.datetime}}</p>
-                            <h4 class="mb-0"> {{ultima.tipo}} en {{ultima.miembro.vivienda.get_direccion}} </h4>
-                            <h5 class="mb-0">   {{ultima.miembro.get_nombre_completo}} </h5>
+                            <h4 class="mb-0"> {{ultima.tipo}} en
+                                 <a href="{% url 'dashboard:vivienda' pk=ultima.miembro.vivienda.pk %}">{{ultima.miembro.vivienda.get_direccion}} </a></h4>
+                            <h5 class="mb-0"> ,<a href="{% url 'dashboard:usuario' pk=ultima.miembro.pk %}"> {{ultima.miembro}}  </a></h5>
                                                 {% else %}
                                                 <p class="mb-1">Sin alertas</p>
                                                 <h4 class="mb-0"> {{ultima.tipo}}  {{ultima.miembro.vivienda.get_direccion}} </h4>
@@ -67,7 +68,6 @@
                 </div>
             </div>
         </div>
-
 
 
         <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-3">

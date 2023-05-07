@@ -232,6 +232,10 @@ dz_array = {
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
 
                                 ],
+                                 "users_list":[                                   
+                                    f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
+
+                                ],
                                 "barrio_detail":[
                                     f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
                                 ],
@@ -439,6 +443,10 @@ dz_array = {
                                     f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
                                     'cms/blog/js/blog_list.js'
                                 ],
+                                 "users_list":[
+                                    f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
+                                    'cms/blog/js/blog_list.js'
+                                ],
                                 "cms_blog_create":[
                                     f"{foldername_d}/vendor/select2/js/select2.full.min.js",
                                     f"{foldername_d}/js/plugins-init/select2-init.js",
@@ -547,6 +555,14 @@ dz_array = {
                                     f"{foldername_d}/js/dashboard/instructor-student.js",
                                 ],
                                 "alertas":[
+                                    f"{foldername_d}/vendor/chart.js/Chart.bundle.min.js",
+                                    f"{foldername_d}/vendor/apexchart/apexchart.js",
+                                    f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
+                                    f"{foldername_d}/js/plugins-init/datatables.init.js",
+                                    f"{foldername_d}/vendor/owl-carousel/owl.carousel.js",
+                                    f"{foldername_d}/js/dashboard/instructor-student.js",
+                                ],
+                                "users_list":[
                                     f"{foldername_d}/vendor/chart.js/Chart.bundle.min.js",
                                     f"{foldername_d}/vendor/apexchart/apexchart.js",
                                     f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",

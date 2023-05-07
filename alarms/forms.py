@@ -28,7 +28,7 @@ class NewUsuarioForm(ModelForm):
             
             'nota' : TextInput(attrs={'class':"form-control",
             'id':"nota",
-            'placeholder':"nota",}),
+            'placeholder':"Nota de información médica",}),
             
             
             'nombre' : TextInput(attrs={'class':"form-control",

@@ -12,15 +12,21 @@ urlpatterns = [
 
     path('',dashboard_views.index,name="index"),
     path('index/',dashboard_views.index,name="index"),
+    
+    
+    ###  USERS module
 
+    path('usuarios/',dashboard_views.users_list,name="usuarios"),
+    path('usuario/<uuid:pk>/',dashboard_views.usuario_detail, name="usuario"),
+    path('usuario/<uuid:pk>/delete/',dashboard_views.usuario_delete, name="usuariodelete"),
     
   ###  ALARMS ALERTS module
     
     path('alarmas/', dashboard_views.alertas, name="alertas"),
-      path('alarmas/user/<uuid:pk>', dashboard_views.alertas, name="usuarioalertas"),
+    path('alarmas/user/<uuid:pk>', dashboard_views.alertas, name="usuarioalertas"),
 
 
-  ###  BARRIOS VIVIENDA USERS module
+  ###  BARRIOS VIVIENDA  module
 
     path('barrios/',dashboard_views.barrios_list, name="barrios"),
     
@@ -31,9 +37,6 @@ urlpatterns = [
     path('vivienda/<uuid:pk>/delete/',dashboard_views.vivienda_delete, name="viviendadelete"),
     path('vivienda/<uuid:pk>/',dashboard_views.vivienda_detail, name="vivienda"),
     path('vivienda/<uuid:pk>/change/',dashboard_views.vivienda_edit, name="viviendaedit"),
-
-    path('usuario/<uuid:pk>/',dashboard_views.usuario_detail, name="usuario"),
-    path('usuario/<uuid:pk>/delete/',dashboard_views.usuario_delete, name="usuariodelete"),
     
 
 ################   end PLANB += index
