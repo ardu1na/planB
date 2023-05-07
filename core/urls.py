@@ -15,7 +15,7 @@ urlpatterns = [
     
     path('alerta-enviada/<uuid:pk>/', success, name="success"),  
 
-    path('', planb, name="planb"),   
+    path('',  include('dashboard.urls', namespace='dashboard')),   
 
 
 
