@@ -24,9 +24,11 @@ urlpatterns = [
     path('usuario/<uuid:pk>/delete/',dashboard_views.usuario_delete, name="usuariodelete"),
     
   ###  ALARMS ALERTS module
+    path('alarmas/user/<uuid:pk>', dashboard_views.alertas, name="usuarioalertas"),
+
     
     path('alarmas/', dashboard_views.alertas, name="alertas"),
-    path('alarmas/user/<uuid:pk>', dashboard_views.alertas, name="usuarioalertas"),
+    path('alarmas/latest/', dashboard_views.latest, name='latest'),
 
 
   ###  BARRIOS VIVIENDA  module

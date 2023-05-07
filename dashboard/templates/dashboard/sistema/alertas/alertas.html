@@ -34,7 +34,7 @@
                         <div class="media-body">
                             <h4 class="mb-0">  Última  </h4>
                             {% if ultima %}
-                            <h5 class="mb-0 mb-3"> {{ultima.tipo}} en {{ultima.miembro.vivienda.alarma_vecinal}}</h5>
+                            <h5 class="mb-0 mb-3 "> {{ultima.tipo}} en {{ultima.miembro.vivienda.alarma_vecinal}}</h5>
 
                             <p class="my-1 fs-5">El {{ultima.datetime|date:"d/m/Y" }} a las {{ ultima.datetime|time:"H:i" }} hs</p>
                             {% else %}
@@ -229,5 +229,26 @@
 
 
 {% block additional_js %}
+<!-- get real time last alert -->
+<script>
+    function updateUltima() {
+        $.ajax({
+            url: 'latest/',
+            success: function(data) {
+                $('.mb-0.mb-3').text(data.tipo + ' en ' + data.alarma_vecinal);
+                $('.my-1.fs-5').text('El ' + data.datetime + ' hs');
+            },
+            complete: function() {
+                setTimeout(updateUltima, 10000);
+            }
+        });
+    }
+    
+    $(document).ready(function() {
+        updateUltima();
+    });
+    </script>
+    
+
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from dashboard.forms import *
 from alarms.forms import *
+from django.http import JsonResponse
 
 from dashboard.models import Configurations
 from django.contrib import messages
@@ -65,6 +66,14 @@ def index(request):
 ###########################################################################################
 ############ monitoreo dealarmas ################################################
 
+def latest(request):
+    ultima = AlarmaEvent.objects.last()
+    data = {
+        'tipo': str(ultima.tipo),
+        'alarma_vecinal': str(ultima.miembro.vivienda.alarma_vecinal),
+        'datetime': str(ultima.datetime.strftime('%d/%m/%Y %H:%M'))
+    }
+    return JsonResponse(data)
 
 @login_required(login_url='dashboard:login')
 def alertas(request, pk=None):
