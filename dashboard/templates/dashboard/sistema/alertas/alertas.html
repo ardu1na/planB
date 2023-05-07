@@ -20,7 +20,7 @@
             <div class="widget-stat card">
                 <div class="card-body  p-4">
                     <div class="media ai-icon">
-                        <span class="me-3 {% if ultima.tipo == "Emergencia" %}
+                        <span id="spancolor" class="me-3 {% if ultima.tipo == "Emergencia" %}
                                                 bgl-success text-success
                                             {% elif ultima.tipo == "SOS" %}
                                                  bgl-info text-info
@@ -237,12 +237,34 @@
             success: function(data) {
                 $('.mb-0.mb-3').text(data.tipo + ' en ' + data.alarma_vecinal);
                 $('.my-1.fs-5').text('El ' + data.datetime + ' hs');
+                
+                var tipo = data.tipo;
+                var span = $('#spancolor');
+                
+                if (tipo === 'Emergencia') {
+                    if (span.hasClass('bgl-info text-info') || span.hasClass('bgl-danger text-danger')) {
+                        span.removeClass('text-info text-danger bgl-info bgl-danger');
+                    }
+                    span.addClass('text-success bgl-success');
+                } else if (tipo === 'SOS') {
+                    if (span.hasClass('bgl-success text-success')  || span.hasClass('bgl-danger text-danger')) {
+                        span.removeClass('text-success text-danger bgl-successbgl-danger');
+                    }
+                    span.addClass('text-info bgl-info');
+                } else if (tipo === 'Fuego') {
+                    if (span.hasClass('bgl-success text-success') || span.hasClass('bgl-info text-info') ) {
+                        span.removeClass('text-success text-info bgl-success bgl-info');
+                    }
+                    span.addClass('text-danger bgl-danger');
+                }
             },
             complete: function() {
                 setTimeout(updateUltima, 10000);
             }
         });
     }
+    
+    
     
     $(document).ready(function() {
         updateUltima();
