@@ -23,6 +23,7 @@
         <div class="d-flex flex-row-reverse">
         <ul class="metismenu" id="menu">
 
+          
 
             <li><a href="{% url 'dashboard:alertas' %}" class="" aria-expanded="false">
                     <i class="fa-solid fa-broadcast-tower"></i>
@@ -36,6 +37,13 @@
                 </a>
             </li>
 
+
+            <li><a href="{% url 'dashboard:usuarios' %}" class="" aria-expanded="false">
+                <i class="fa-solid fa-users"></i>                <span class="nav-text">Usuarios</span>
+             </a>
+            </li>
+
+            
             <li><a href="{% url 'dashboard:logout' %}" class="" aria-expanded="false">
                 <i class="fa-solid fa-right-from-bracket"></i>                <span class="nav-text">Logout</span>
                 </a>

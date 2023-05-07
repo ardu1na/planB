@@ -374,7 +374,7 @@ def vivienda_edit(request, pk):
 @login_required(login_url='dashboard:login')
 def users_list(request):
     
-    usuarios = Miembro.objects.all()
+    usuarios = Miembro.objects.filter(state="Yes")
     template_name= 'dashboard/sistema/usuarios.html'
             
     context ={
