@@ -153,8 +153,6 @@ class Miembro(models.Model):
     
     # user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
-
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
     avatar = models.ImageField(upload_to='profiles/', null=True, blank=True)
 
@@ -180,6 +178,7 @@ class Miembro(models.Model):
     
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    
     YES="Yes"
     NO="No"
     STATE_CHOICES = [
@@ -188,10 +187,15 @@ class Miembro(models.Model):
     state = models.CharField(max_length=50, choices=STATE_CHOICES, default="Yes")
     deleted_at = models.DateField(blank=True, null=True)
     
+    
+    
+    
     def save(self, *args, **kwargs):
         if self.state == "No":
             self.deleted_at = date.today()
         super(Miembro, self).save(*args, **kwargs)
+        
+        # prevent collapse hd with images and bad display
         if self.avatar:
             image = Image.open(self.avatar.path)
             output_size = (300, 300)
