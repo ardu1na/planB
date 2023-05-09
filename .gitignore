@@ -11,3 +11,4 @@ env/
 frontend/
 requirements.txt
 .vscode
+PyWhatKit_DB.txt
