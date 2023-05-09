@@ -28,7 +28,10 @@ urlpatterns = [
 
     
     path('alarmas/', dashboard_views.alertas, name="alertas"),
+    
+    # ajax 
     path('alarmas/latest/', dashboard_views.latest, name='latest'),
+    path('alarmas/has_new_data/', dashboard_views.has_new_data, name='has_new_data'),
 
 
   ###  BARRIOS VIVIENDA  module

@@ -65,6 +65,7 @@ def index(request):
 ###########################################################################################
 ############ monitoreo de alarmas ################################################
 
+# ajax
 def latest(request):
     ultima = AlarmaEvent.objects.last()
     userurl = reverse('dashboard:usuario', args=[ultima.miembro.id])
@@ -79,10 +80,20 @@ def latest(request):
     }
     return JsonResponse(data)
 
+def has_new_data(request):
+    latest_datetime = request.GET.get('latest_datetime')  # Get the latest datetime from the client-side
+    latest_event = AlarmaEvent.objects.last()
+    has_new_data = latest_event.datetime.strftime('%d/%m/%Y %H:%M') > latest_datetime  # Compare the latest datetime to the client-side value
+
+    data = {
+        'has_new_data': has_new_data
+    }
+    return JsonResponse(data)
 
 
 
 
+###
 @login_required(login_url='dashboard:login')
 def alertas(request, pk=None):
     template_name = 'dashboard/sistema/alertas/alertas.html'

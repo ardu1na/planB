@@ -12,7 +12,7 @@
 
 
 
-<!-- MAIN CLIENTS -->
+<!-- MAIN alarms -->
     
 
     <div class="row">
@@ -251,46 +251,34 @@
 
 <!-- get real time last alert -->
 <script>
-    function updateUltima() {
-        $.ajax({
-            url: 'latest/',
-            success: function(data) {
-                $('#tipoyalarma').text(data.tipo + ' en ' + data.alarma_vecinal);
-                $('#hora').text('El ' + data.datetime + ' hs');
-                $('#miembro').text('Última: ' + data.miembro);
-                $('#miembro').attr('href', data.userurl);
+    var previousData = null;
 
-                var tipo = data.tipo;
-                var span = $('#spancolor');
-                
-                if (tipo === 'Emergencia') {
-                    if (span.hasClass('bgl-info text-info') || span.hasClass('bgl-danger text-danger')) {
-                        span.removeClass('text-info text-danger bgl-info bgl-danger');
-                    }
-                    span.addClass('text-success bgl-success');
-                } else if (tipo === 'SOS') {
-                    if (span.hasClass('bgl-success text-success')  || span.hasClass('bgl-danger text-danger')) {
-                        span.removeClass('text-success text-danger bgl-successbgl-danger');
-                    }
-                    span.addClass('text-info bgl-info');
-                } else if (tipo === 'Fuego') {
-                    if (span.hasClass('bgl-success text-success') || span.hasClass('bgl-info text-info') ) {
-                        span.removeClass('text-success text-info bgl-success bgl-info');
-                    }
-                    span.addClass('text-danger bgl-danger');
-                }
-            },
-            complete: function() {
-                setTimeout(updateUltima, 10000);
-            }
-        });
+    function updateUltima() {
+      $.ajax({
+        url: 'latest/',
+        success: function(data) {
+          if (JSON.stringify(data) !== JSON.stringify(previousData)) {
+            // New data has been received, display an alert
+            alert('New data received!');
+          }
+          previousData = data;
+          
+          // Update the relevant HTML elements with the latest data
+          $('#tipoyalarma').text(data.tipo + ' en ' + data.alarma_vecinal);
+          $('#hora').text('El ' + data.datetime + ' hs');
+          $('#miembro').text('Última: ' + data.miembro);
+          $('#miembro').attr('href', data.userurl);
+        },
+        complete: function() {
+          setTimeout(updateUltima, 10000);
+        }
+      });
     }
     
-    
-    
     $(document).ready(function() {
-        updateUltima();
+      updateUltima();
     });
+    
     </script>
     
 
