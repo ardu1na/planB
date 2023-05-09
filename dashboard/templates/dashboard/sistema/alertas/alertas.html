@@ -18,8 +18,8 @@
             <span><i class="mdi mdi-google-plus"></i></span>
         </div>
         <div class="media-body">
-            <h5 class="mt-1 mb-2 text-white">Google Plus</h5>
-            <p class="mb-0">Cras sit amet nibh libero, in gravida nulla. tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+            <h5 class="mt-1 mb-2 text-white"></h5>
+            <p class="mb-0"></p>
         </div>
     </div>
 </div>
@@ -271,15 +271,34 @@
         success: function(data) {
           if (JSON.stringify(data) !== JSON.stringify(previousData)) {
             // New data has been received, display an alert
+            var tipo = data.tipo;
 
-            $("#social").after('<div class="alert alert-social google-plus alert-dismissible fade show">' +
+            var icon = 'fas fa-star star-orange';
+            var color = 'alert-info';
+
+            if (tipo === 'Emergencia') {
+                color = 'facebook';
+                icon = 'fa-hospital';
+
+
+            } else if (tipo === 'SOS') {
+                color = 'google-plus';
+                icon = 'fa-lock';
+
+
+            } else if (tipo === 'Fuego') {
+                color = 'alert-warning solid';
+                icon = 'fa-fire';
+            }
+
+            $("#social").after('<div class="alert alert-social ' + color + ' alert-dismissible fade show">' +
                 '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">' +
                 '<span><i class="mdi mdi-btn-close"></i></span></button>' +
                 '<div class="media">' +
-                '<div class="alert-social-icon"><span><i class="mdi mdi-google-plus"></i></span></div>' +
+                '<div class="alert-social-icon"><span><i class="fa ' + icon +'"></i></span></div>' +
                 '<div class="media-body">' +
-                '<h5 class="mt-1 mb-2 text-white">Google Plus</h5>' +
-                '<p class="mb-0">' + data.tipo + ' en ' + data.alarma_vecinal + '</p>' +
+                '<h5 class="mt-1 mb-2 text-white">' + data.tipo + ' </h5>' +
+                '<p class="mb-0"> En ' + data.alarma_vecinal + ' ' + data.datetime + '</p>' +
                 '</div></div></div>');
           }
           previousData = data;
