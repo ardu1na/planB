@@ -268,6 +268,27 @@
           $('#hora').text('El ' + data.datetime + ' hs');
           $('#miembro').text('Última: ' + data.miembro);
           $('#miembro').attr('href', data.userurl);
+        
+          var tipo = data.tipo;
+                var span = $('#spancolor');
+
+                if (tipo === 'Emergencia') {
+                    if (span.hasClass('bgl-info text-info') || span.hasClass('bgl-danger text-danger')) {
+                        span.removeClass('text-info text-danger bgl-info bgl-danger');
+                    }
+                    span.addClass('text-success bgl-success');
+                } else if (tipo === 'SOS') {
+                    if (span.hasClass('bgl-success text-success')  || span.hasClass('bgl-danger text-danger')) {
+                        span.removeClass('text-success text-danger bgl-successbgl-danger');
+                    }
+                    span.addClass('text-info bgl-info');
+                } else if (tipo === 'Fuego') {
+                    if (span.hasClass('bgl-success text-success') || span.hasClass('bgl-info text-info') ) {
+                        span.removeClass('text-success text-info bgl-success bgl-info');
+                    }
+                    span.addClass('text-danger bgl-danger');
+                }
+           
         },
         complete: function() {
           setTimeout(updateUltima, 10000);
