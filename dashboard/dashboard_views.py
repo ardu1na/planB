@@ -1,6 +1,8 @@
 
 import json
 import os
+import requests
+
 
 from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse
@@ -23,12 +25,46 @@ from alarms.models import *
 
 today = date.today()
 
+
+# IN PYWHATKIT LIB I:
+#  I CHANGED VARIABLES 
+
+# env\Lib\site-packages\pywhatkit\core\core.py
+
+# def send_message(message: str, receiver: str, wait_time: int) -> None:
+#    time.sleep(wait_time - 7)  TO 1
+
+
+#  env\Lib\site-packages\pywhatkit\whats.py
+# LINE 79 
+# def sendwhatmsg_to_group(
+#    wait_time: int = 15, X 5
+# def sendwhatmsg_to_group_instantly( 
+#    wait_time: int = 15 X 5,
+   
+# LINE 121 tab_close: bool = FALSE TO TrUE,
+
+
+
+
+
+
 ############ monitoreo de alarmas ################################################
 
-# send wsp message
+
+
+# send wsp message   
+
 def sendwsp(request):
-    pywhatkit.sendwhatmsg_to_group_instantly("LkNG4BNQsXK2Xfn99DwbFV", "testing")
+    ultima = AlarmaEvent.objects.last()
+    user = ultima.miembro
+    group = "LkNG4BNQsXK2Xfn99DwbFV"
+    message = f"TEST message from {user} ----> <3 "
+    pywhatkit.sendwhatmsg_to_group_instantly(group, message)
     return JsonResponse({'mensaje': 'Mensaje enviado correctamente'})
+
+
+
 
 # ajax
 def latest(request):
