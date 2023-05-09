@@ -80,7 +80,7 @@
                             <h4 class="mb-0">Emergencia</h4>
 
                             <p class="mb-3">{{emerg|length}} {% if emer|length != 1 %} alertas {% else %} alerta {% endif %}</p> 
-                            {% if emer %}
+                            {% if emerg %}
                             <p class="my-1 fs-5"> Ultima el {{last_e.datetime|date:"l d" }} a las {{ last_e.datetime|time:"H:i" }} hs en {{last_e.miembro.vivienda.alarma_vecinal}}</p>
                             {% else %}
                             <p class="my-1 fs-5"> sin alertas </p>
@@ -265,13 +265,13 @@
 <script>
     var previousData = null;
 
-    function updateUltima() {
-      $.ajax({
-        url: 'latest/',
-        success: function(data) {
-          if (JSON.stringify(data) !== JSON.stringify(previousData)) {
-            // New data has been received, display an alert
-            var tipo = data.tipo;
+function updateUltima() {
+  $.ajax({
+    url: 'latest/',
+    success: function(data) {
+      if (previousData !== null && JSON.stringify(data) !== JSON.stringify(previousData)) {
+        // New data has been received, display an alert
+        var tipo = data.tipo;
 
             var icon = 'fas fa-star star-orange';
             var color = 'alert-info';
@@ -300,45 +300,55 @@
                 '<h5 class="mt-1 mb-2 text-white">' + data.tipo + ' </h5>' +
                 '<p class="mb-0"> En ' + data.alarma_vecinal + ' ' + data.datetime + '</p>' +
                 '</div></div></div>');
-          }
-          previousData = data;
-          
-          // Update the relevant HTML elements with the latest data
-          $('#tipoyalarma').text(data.tipo + ' en ' + data.alarma_vecinal);
-          $('#hora').text('El ' + data.datetime + ' hs');
-          $('#miembro').text('Última: ' + data.miembro);
-          $('#miembro').attr('href', data.userurl);
-          
-          var tipo = data.tipo;
-                var span = $('#spancolor');
+      }
+      previousData = data;
 
-                if (tipo === 'Emergencia') {
-                    if (span.hasClass('bgl-info text-info') || span.hasClass('bgl-danger text-danger')) {
-                        span.removeClass('text-info text-danger bgl-info bgl-danger');
-                    }
-                    span.addClass('text-success bgl-success');
-                } else if (tipo === 'SOS') {
-                    if (span.hasClass('bgl-success text-success')  || span.hasClass('bgl-danger text-danger')) {
-                        span.removeClass('text-success text-danger bgl-successbgl-danger');
-                    }
-                    span.addClass('text-info bgl-info');
-                } else if (tipo === 'Fuego') {
-                    if (span.hasClass('bgl-success text-success') || span.hasClass('bgl-info text-info') ) {
-                        span.removeClass('text-success text-info bgl-success bgl-info');
-                    }
-                    span.addClass('text-danger bgl-danger');
+      // Update the relevant HTML elements with the latest data
+      $('#tipoyalarma').text(data.tipo + ' en ' + data.alarma_vecinal);
+      $('#hora').text('El ' + data.datetime + ' hs');
+      $('#miembro').text('Última: ' + data.miembro);
+      $('#miembro').attr('href', data.userurl);
+      
+      var tipo = data.tipo;
+            var span = $('#spancolor');
+
+            if (tipo === 'Emergencia') {
+                if (span.hasClass('bgl-info text-info') || span.hasClass('bgl-danger text-danger')) {
+                    span.removeClass('text-info text-danger bgl-info bgl-danger');
                 }
-           
-        },
-        complete: function() {
-          setTimeout(updateUltima, 10000);
-        }
-      });
+                span.addClass('text-success bgl-success');
+            } else if (tipo === 'SOS') {
+                if (span.hasClass('bgl-success text-success')  || span.hasClass('bgl-danger text-danger')) {
+                    span.removeClass('text-success text-danger bgl-successbgl-danger');
+                }
+                span.addClass('text-info bgl-info');
+            } else if (tipo === 'Fuego') {
+                if (span.hasClass('bgl-success text-success') || span.hasClass('bgl-info text-info') ) {
+                    span.removeClass('text-success text-info bgl-success bgl-info');
+                }
+                span.addClass('text-danger bgl-danger');
+            }
+
+    },
+    complete: function() {
+      setTimeout(updateUltima, 10000);
     }
-    
-    $(document).ready(function() {
-      updateUltima();
-    });
+  });
+}
+
+$(document).ready(function() {
+  $.ajax({
+    url: 'latest/',
+    success: function(data) {
+      previousData = data;
+      // ...
+    },
+    complete: function() {
+      setTimeout(updateUltima, 10000);
+    }
+  });
+});
+
     
     </script>
     
