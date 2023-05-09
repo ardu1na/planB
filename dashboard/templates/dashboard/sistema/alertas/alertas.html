@@ -300,7 +300,19 @@ function updateUltima() {
                 '<h5 class="mt-1 mb-2 text-white">' + data.tipo + ' </h5>' +
                 '<p class="mb-0"> En ' + data.alarma_vecinal + ' ' + data.datetime + '</p>' +
                 '</div></div></div>');
+
+            // Send a WhatsApp message
+        $.ajax({
+            url: 'sendwsp/',
+            success: function(response) {
+              console.log(response.mensaje);
+            },
+            error: function(xhr, errmsg, err) {
+              console.log(xhr.status + ': ' + xhr.responseText);
+            }
+          });
       }
+
       previousData = data;
 
       // Update the relevant HTML elements with the latest data

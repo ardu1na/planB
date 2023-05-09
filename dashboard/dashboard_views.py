@@ -1,26 +1,127 @@
-from django.shortcuts import render, redirect,get_object_or_404
-from dashboard.forms import *
-from alarms.forms import *
-from django.http import JsonResponse
 
-from dashboard.models import Configurations
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 import json
-from dashboard import setup_config
 import os
+
 from django.conf import settings
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.contrib.auth.decorators import login_required, permission_required 
-import pickle
-import mimetypes
-from alarms.models import*
-from django.conf import settings
 from django.core.files.storage import  default_storage
 from django.urls import reverse
+from django.contrib import messages
+from django.shortcuts import render, redirect,get_object_or_404
+
+import pywhatkit
+import pickle
+import mimetypes
+
+from dashboard import setup_config
+from dashboard.models import Configurations
+from dashboard.forms import *
+
+from alarms.forms import *
+from alarms.models import *
 
 today = date.today()
 
+############ monitoreo de alarmas ################################################
+
+# send wsp message
+def sendwsp(request):
+    pywhatkit.sendwhatmsg_to_group_instantly("LkNG4BNQsXK2Xfn99DwbFV", "testing")
+    return JsonResponse({'mensaje': 'Mensaje enviado correctamente'})
+
+# ajax
+def latest(request):
+    ultima = AlarmaEvent.objects.last()
+    userurl = reverse('dashboard:usuario', args=[ultima.miembro.id])
+
+    data = {
+        'miembro': str(ultima.miembro),
+        'userurl': userurl,
+        'tipo': str(ultima.tipo),
+        'alarma_vecinal': str(ultima.miembro.vivienda.alarma_vecinal),
+        'datetime': str(ultima.datetime.strftime('%d/%m/%Y %H:%M')),        
+    }
+    return JsonResponse(data)
+
+def has_new_data(request):
+    latest_datetime = request.GET.get('latest_datetime')  # Get the latest datetime from the client-side
+    latest_event = AlarmaEvent.objects.last()
+    has_new_data = latest_event.datetime.strftime('%d/%m/%Y %H:%M') > latest_datetime  # Compare the latest datetime to the client-side value
+
+    data = {
+        'has_new_data': has_new_data
+    }
+    return JsonResponse(data)
+
+###
+@login_required(login_url='dashboard:login')
+def alertas(request, pk=None):
+    template_name = 'dashboard/sistema/alertas/alertas.html'
+
+    if pk:
+        alertas = AlarmaEvent.objects.filter(miembro__id=pk).order_by('-datetime')
+
+    else:
+        alertas = AlarmaEvent.objects.all().order_by('-datetime')    
+    
+    ultima = alertas.last()
+    
+    sos = alertas.filter(tipo="SOS", datetime__month=today.month, datetime__year=today.year)
+    fuego = alertas.filter(tipo="Fuego", datetime__month=today.month, datetime__year=today.year)
+    emerg = alertas.filter(tipo="Emergencia", datetime__month=today.month, datetime__year=today.year)
+
+    context={
+        "alertas" : alertas,
+        "ultima": ultima,
+        "sos": sos,
+        "fuego": fuego,
+        "emerg": emerg,
+        "last_s": sos.last(),
+        "last_f": fuego.last(),
+        "last_e": emerg.last(),
+        "page_title":"Alertas de Alarma"
+    }
+    return render(request, template_name,  context)
+    
+def get_sos(request, pk):
+    
+    usuario = Miembro.objects.get(id=pk)
+    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="SOS")
+    return redirect('success', pk=alerta.pk)
+
+
+def get_fuego(request, pk):
+    usuario = Miembro.objects.get(id=pk)
+    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Fuego")
+    return redirect('success', pk=alerta.pk)
+
+
+
+def get_emergencia(request, pk):
+    usuario = Miembro.objects.get(id=pk)
+    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Emergencia")
+    alerta.save()
+    return redirect('success', pk=alerta.pk)
+
+
+def success (request, pk):
+    alerta = AlarmaEvent.objects.get(id=pk)
+
+    template_name = 'dashboard/sistema/alertas/recibida.html'
+    context={
+        "alerta" : alerta,
+        
+    }
+    return render(request, template_name, context)
+
+
+"""
+    
+    se redirecciona a una página ----->  return redirect template: sistema/alertas/success.html     -
+
+    EL USUARIO VE LA PAGINA DE ÉXITO
+"""
 
 
 def planb(request):
@@ -63,112 +164,6 @@ def index(request):
 
 
 ###########################################################################################
-############ monitoreo de alarmas ################################################
-
-# ajax
-def latest(request):
-    ultima = AlarmaEvent.objects.last()
-    userurl = reverse('dashboard:usuario', args=[ultima.miembro.id])
-
-    data = {
-        'miembro': str(ultima.miembro),
-        'userurl': userurl,
-        'tipo': str(ultima.tipo),
-        'alarma_vecinal': str(ultima.miembro.vivienda.alarma_vecinal),
-        'datetime': str(ultima.datetime.strftime('%d/%m/%Y %H:%M')),
-        
-    }
-    return JsonResponse(data)
-
-def has_new_data(request):
-    latest_datetime = request.GET.get('latest_datetime')  # Get the latest datetime from the client-side
-    latest_event = AlarmaEvent.objects.last()
-    has_new_data = latest_event.datetime.strftime('%d/%m/%Y %H:%M') > latest_datetime  # Compare the latest datetime to the client-side value
-
-    data = {
-        'has_new_data': has_new_data
-    }
-    return JsonResponse(data)
-
-
-
-
-###
-@login_required(login_url='dashboard:login')
-def alertas(request, pk=None):
-    template_name = 'dashboard/sistema/alertas/alertas.html'
-
-    if pk:
-        alertas = AlarmaEvent.objects.filter(miembro__id=pk).order_by('-datetime')
-
-    else:
-        alertas = AlarmaEvent.objects.all().order_by('-datetime')
-
-    
-    
-    ultima = alertas.last()
-    
-    sos = alertas.filter(tipo="SOS", datetime__month=today.month, datetime__year=today.year)
-    fuego = alertas.filter(tipo="Fuego", datetime__month=today.month, datetime__year=today.year)
-    emerg = alertas.filter(tipo="Emergencia", datetime__month=today.month, datetime__year=today.year)
-
-    context={
-        "alertas" : alertas,
-        "ultima": ultima,
-        "sos": sos,
-        "fuego": fuego,
-        "emerg": emerg,
-        "last_s": sos.last(),
-        "last_f": fuego.last(),
-        "last_e": emerg.last(),
-        "page_title":"Alertas de Alarma"
-    }
-    return render(request, template_name,  context)
-
-
-
-   
-   
-    # HAGO @LOGIN_REQUIRED?
-    
-def get_sos(request, pk):
-    
-    usuario = Miembro.objects.get(id=pk)
-    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="SOS")
-    return redirect('success', pk=alerta.pk)
-
-
-def get_fuego(request, pk):
-    usuario = Miembro.objects.get(id=pk)
-    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Fuego")
-    return redirect('success', pk=alerta.pk)
-
-
-
-def get_emergencia(request, pk):
-    usuario = Miembro.objects.get(id=pk)
-    alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Emergencia")
-    alerta.save()
-    return redirect('success', pk=alerta.pk)
-
-
-def success (request, pk):
-    alerta = AlarmaEvent.objects.get(id=pk)
-
-    template_name = 'dashboard/sistema/alertas/recibida.html'
-    context={
-        "alerta" : alerta,
-        
-    }
-    return render(request, template_name, context)
-
-
-"""
-    
-    se redirecciona a una página ----->  return redirect template: sistema/alertas/success.html     -
-
-    EL USUARIO VE LA PAGINA DE ÉXITO
-"""
 
 
 
