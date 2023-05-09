@@ -1,6 +1,6 @@
 from django.forms import ModelForm, EmailInput,\
         TextInput, Textarea, FileInput, NumberInput,\
-        HiddenInput, UUIDField, Select
+        HiddenInput, UUIDField, Select, ModelChoiceField
         
 from alarms.models import *
 
@@ -62,6 +62,27 @@ class NewUsuarioForm(ModelForm):
         }
         
 
+class NewUser(NewUsuarioForm):
+    
+    alarma_vecinal = ModelChoiceField(
+        queryset=AlarmaVecinal.objects.filter(state="Yes"),
+        empty_label="Seleccione una Alarma Vecinal",
+        widget=Select(attrs={
+            'class': 'default-select form-control wide mb-3',
+            'id': 'alarma_vecinal',
+            'name': 'alarma_vecinal',
+        }),
+    )
+    
+    vivienda = ModelChoiceField(
+        queryset=Vivienda.objects.filter(state="Yes"),
+        empty_label="Seleccione una vivienda",
+        widget=Select(attrs={
+            'class': 'default-select form-control wide mb-3',
+            'id': 'vivienda',
+            'name': 'vivienda',
+        }),
+    )
 
 
 class NewAlarmaVecinalForm(ModelForm):
@@ -96,7 +117,7 @@ class NewAlarmaVecinalForm(ModelForm):
             'whatsapp_group' : TextInput(attrs={
                 'class':"form-control",
                 'id':"whatsapp_group",
-                'placeholder' : "SOLO EL CÓDIGO - Grupo de WhatsApp (sin el 'https://chat.whatsapp.com/' )"
+                'placeholder' : "ID del Grupo de WhatsApp (ej: LkNG2BNQsXK2xfn99DwbFV)"
                 }
             ),
             

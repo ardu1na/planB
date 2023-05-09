@@ -452,32 +452,65 @@ def vivienda_edit(request, pk):
     return render(request, template_name, context)
 
 
+
+
+
+
+
 ############################################################################################################
 ####################################### USUARIOS GRAL ###########################
 
 
+
+
+
 @login_required(login_url='dashboard:login')
 def users_list(request, pk=None):
+    
+    
     if pk:
         barrio = get_object_or_404(AlarmaVecinal, id=pk)
         usuarios = Miembro.objects.filter(state="Yes", vivienda__alarma_vecinal=barrio)
         context ={
         "usuarios" : usuarios,
         "barrio": barrio,
+        }
         
-    }
     else:
+                
+        
         usuarios = Miembro.objects.filter(state="Yes")
         context ={
-        "usuarios" : usuarios,
-        
-    }
+        "usuarios" : usuarios,  
+        }
         
         
     template_name= 'dashboard/sistema/usuarios.html'
             
     
     return render(request, template_name, context)
+
+
+
+@login_required(login_url='dashboard:login')
+def useradd(request):
+    viviendas = Vivienda.objects.filter(state="Yes")
+    addform=NewUser()
+        
+    
+    
+    
+    context ={
+    "addform": addform, 
+    "viviendas": viviendas,    
+    }
+        
+        
+    template_name= 'dashboard/sistema/useradd.html'
+            
+    
+    return render(request, template_name, context)
+
 
 
 ############################################################################################################

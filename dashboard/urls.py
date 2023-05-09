@@ -18,6 +18,7 @@ urlpatterns = [
 
     path('usuarios/',dashboard_views.users_list,name="usuarios"),
     path('usuarios/<uuid:pk>/',dashboard_views.users_list,name="usuariosbarrio"),
+    path('usuario/add/',dashboard_views.useradd,name="useradd"),
 
     
     path('usuario/<uuid:pk>/',dashboard_views.usuario_detail, name="usuario"),
