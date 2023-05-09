@@ -203,7 +203,14 @@ class Miembro(models.Model):
                 image = background
             image.save(self.avatar.path)
         
-
+    @property
+    def get_wp(self):
+        try:
+            wp = self.vivienda.alarma_vecinal.whatsapp_group
+        except:
+            wp = "no registrado"
+        return wp
+    
     @property
     def get_edad(self):
         if self.fecha_de_nacimiento:
@@ -215,7 +222,7 @@ class Miembro(models.Model):
     
     @property
     def get_nombre_completo(self):
-        return f'{self.apellido}, {self.nombre}'
+        return f'{self.nombre} {self.apellido}'
     
     @property
     def get_barrio(self):

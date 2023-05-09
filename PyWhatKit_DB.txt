@@ -13,3 +13,23 @@ Time: 17:42
 Group ID: LkNG4BNQsXK2Xfn99DwbFV
 Message: TEST message from ser, un ----> <3
 --------------------
+Date: 9/5/2023
+Time: 17:52
+Group ID: LkNG4BNQsXK2Xfn99DwbFV
+Message: Alerta Fuego de un ser.(20, ombú 285)
+--------------------
+Date: 9/5/2023
+Time: 17:56
+Group ID: LkNG4BNQsXK2Xfn99DwbFV
+Message: Alerta SOS de un ser.(20:56 hs en ombú 285)
+--------------------
+Date: 9/5/2023
+Time: 18:7
+Group ID: LkNG4BNQsXK2Xfn99DwbFV
+Message: Alerta Fuego de un ser.(21:06 hs en ombú 285)
+--------------------
+Date: 9/5/2023
+Time: 18:12
+Group ID: LkNG4BNQsXK2Xfn99DwbFV
+Message: Alerta SOS de juru ppniokla.(21:12 hs en guniidoru 123)
+--------------------

@@ -58,9 +58,33 @@ today = date.today()
 def sendwsp(request):
     ultima = AlarmaEvent.objects.last()
     user = ultima.miembro
-    group = "LkNG4BNQsXK2Xfn99DwbFV"
-    message = f"TEST message from {user} ----> <3 "
-    pywhatkit.sendwhatmsg_to_group_instantly(group, message)
+    tipo = ultima.tipo
+    hora = ultima.datetime.hour
+    minutos = ultima.datetime.minute
+    timing = f"{hora:02d}:{minutos:02d} hs"
+
+    lugar = ultima.miembro.vivienda.get_direccion
+    group = ultima.miembro.get_wp ########### cambiar forms templates and models para recibir solo el codigo LkNG4BNQsXK2Xfn99DwbFV
+    normalize = {
+        'á': 'a',
+        'é': 'e',
+        'í': 'i',
+        'ó': 'o',
+        'ú': 'u',
+        'ü': 'u',
+        'ñ': 'ni'
+    }  
+    message = f"Alerta {tipo} de {user}.\n({timing} en {lugar})"
+    mensaje_normalizado = ""
+    
+    for letra in message:
+        if letra in normalize:
+            mensaje_normalizado += normalize[letra]
+        else:
+            mensaje_normalizado += letra
+            
+    pywhatkit.sendwhatmsg_to_group_instantly(group, mensaje_normalizado)
+    
     return JsonResponse({'mensaje': 'Mensaje enviado correctamente'})
 
 
