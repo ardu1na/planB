@@ -499,39 +499,40 @@ def useradd(request):
 
     adduser = NewUser()
     addvivienda = NewVivienda()
+    
+    if request.method == "POST":        
             
-    if request.method == "POST":
-        
-        if 'vivienda' in request.POST:
-            addvivienda = NewVivienda(request.POST)
-            if addvivienda.is_valid():
+            
+        if 'user' in request.POST: 
+            print("############## USER")        
+
+            post_data = request.POST.copy()
+            print(post_data)
+
+            if 'alarma_vecinal' in post_data:
+                del post_data['alarma_vecinal']
                 
-                vivienda = addvivienda.save(commit=False)
-                vivienda.alarma_vecinal = addvivienda.cleaned_data['alarma_vecinal']                
-                vivienda.save()
-                return redirect('dashboard:useradd')
-            else:
-                return HttpResponse("Something wrong with the form")
+            adduser = NewUser(post_data, request.FILES)
+            print(adduser)
             
             
-            
-        if 'user' in request.POST:
-            adduser = NewUser(request.POST, request.FILES)
             if adduser.is_valid():
+                
                 user = adduser.save(commit=False)
+                
                 if 'avatar' in request.FILES:
                     avatar = request.FILES['avatar']
                     filename = default_storage.save('profiles/' + avatar.name, avatar)
                     user.avatar = filename
 
+                
                 user.vivienda = adduser.cleaned_data['vivienda']
-                vivienda = user.vivienda
-                vivienda.alarma_vecinal = adduser.cleaned_data['alarma_vecinal']
-                vivienda.save()
                 user.save()
                 return redirect('dashboard:usuarios')
             else:
-                return HttpResponse("Something wrong with the form")
+                print(adduser.errors)
+
+                return HttpResponse(f"Something wrong with the form: {adduser} \n {adduser.errors}")
         
         
     context ={
@@ -548,7 +549,39 @@ def useradd(request):
     return render(request, template_name, context)
 
 
+@login_required(login_url='dashboard:login')
+def viviendaadd(request):
+    alarmas = AlarmaVecinal.objects.filter(state="Yes")
 
+    addvivienda = NewVivienda()
+    
+    if request.method == "POST":
+        if 'vivienda' in request.POST: 
+            print("$$$$$$$4 vivienda")
+
+            addvivienda = NewVivienda(request.POST)
+            if addvivienda.is_valid():
+                
+                vivienda = addvivienda.save(commit=False)
+                vivienda.alarma_vecinal = addvivienda.cleaned_data['alarma_vecinal']                
+                vivienda.save()
+                return redirect('dashboard:useradd')
+            else:
+                print(addvivienda.errors)
+                return HttpResponse(f"Something wrong with the form: {addvivienda.errors}")
+            
+            
+        
+    context ={
+    "addvivienda": addvivienda, 
+    "alarmas": alarmas,
+    }
+        
+        
+    template_name= 'dashboard/sistema/viviendaadd.html'
+            
+    
+    return render(request, template_name, context)
 ############################################################################################################
 ####################################### crud de usuarios dentro de vivievnda ###########################
 

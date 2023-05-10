@@ -45,6 +45,7 @@ urlpatterns = [
     path('vivienda/<uuid:pk>/delete/',dashboard_views.vivienda_delete, name="viviendadelete"),
     path('vivienda/<uuid:pk>/',dashboard_views.vivienda_detail, name="vivienda"),
     path('vivienda/<uuid:pk>/change/',dashboard_views.vivienda_edit, name="viviendaedit"),
+    path('vivienda/add/',dashboard_views.viviendaadd,name="viviendaadd"),    
     
 
 ################   end PLANB += index

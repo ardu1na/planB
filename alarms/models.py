@@ -244,7 +244,9 @@ class Miembro(models.Model):
         return self.get_nombre_completo
 
     
-        
+"""
+ NEED TO HANDLE WHEN NOT NUMBER IN DIR:
+"""        
 class Vivienda(models.Model):    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
 
@@ -253,6 +255,8 @@ class Vivienda(models.Model):
        
     calle = models.CharField(max_length=300, blank=True, null=True, verbose_name="CALLE")
     numero = models.IntegerField(blank=True, null=True)
+    sin_numero = models.BooleanField(default=False)
+    
     departamento = models.CharField(max_length=300, blank=True, null=True, verbose_name="DEPARTAMENTO (opcional)")
 
     municipio = models.CharField(max_length=300, blank=True, null=True, verbose_name="MUNICIPIO")
@@ -324,6 +328,9 @@ class Vivienda(models.Model):
     def save(self, *args, **kwargs):
         if self.state == "No":
             self.deleted_at = date.today()
+        
+        if self.sin_numero == True:
+            self.numero = 0
         super(Vivienda, self).save(*args, **kwargs)
 
 

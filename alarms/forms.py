@@ -1,6 +1,6 @@
 from django.forms import ModelForm, EmailInput,\
         TextInput, Textarea, FileInput, NumberInput,\
-        HiddenInput, UUIDField, Select, ModelChoiceField
+        HiddenInput, UUIDField, Select, ModelChoiceField, CheckboxInput
         
 from alarms.models import *
 
@@ -65,15 +65,6 @@ class NewUsuarioForm(ModelForm):
     
 class NewUser(NewUsuarioForm):
     
-    alarma_vecinal = ModelChoiceField(
-        queryset=AlarmaVecinal.objects.filter(state="Yes"),
-        empty_label="Selecciona una Alarma Vecinal",
-        widget=Select(attrs={
-            'class': 'default-select form-control wide mb-3',
-            'id': 'alarma_vecinal',
-            'name': 'alarma_vecinal',
-        }),
-    )
     
     vivienda = ModelChoiceField(
         queryset=Vivienda.objects.filter(state="Yes"),
@@ -168,6 +159,7 @@ class NewViviendaForm(ModelForm):
         fields = ( 
                   'calle',
                   'numero',
+                  'sin_numero',
                   'departamento',
                   
                   'nota',                  
@@ -194,6 +186,13 @@ class NewViviendaForm(ModelForm):
                 'class':"form-control",
                 'id':"numero",
                 'placeholder' : "Número"
+                }
+            ),
+            
+            
+            'sin_numero' : CheckboxInput(attrs={
+                'id':"sin_numero",
+                'placeholder' : "Sin número"
                 }
             ),
             

@@ -396,34 +396,11 @@
     <!-- NEWMODAL -->
         <script>
             const deleteusuario = new bootstrap.Modal('#deleteusuario',   {keyboard: true}    )
-            const ver = new bootstrap.Modal('#ver',   {keyboard: true}    )
             const detail = new bootstrap.Modal('#detail',   {keyboard: true}    )
 
 
         </script>
 
-    <!-- charts -->
-    <script src="{% static 'dashboard/vendor/apexcharts/apexcharts.min.js' %}"></script>
-    <script src="{% static 'dashboard/vendor/chart.js/chart.min.js' %}"></script>
-    <script src="{% static 'dashboard/vendor/echarts/echarts.min.js' %}"></script>
-
-   
-    <!-- copiar codigo al pportapapeles -->
-
-    <script>
-        var botonCopiar = document.getElementById('boton-copiar');
-        var texto = document.getElementById('p').innerText;
-      
-        botonCopiar.addEventListener('click', function() {
-          navigator.clipboard.writeText(texto)
-            .then(function() {
-              alert('Texto copiado al portapapeles');
-            })
-            .catch(function() {
-              alert('No se pudo copiar el texto al portapapeles');
-            });
-        });
-      </script>
       
 
 {% endblock %}
