@@ -495,13 +495,49 @@ def users_list(request, pk=None):
 @login_required(login_url='dashboard:login')
 def useradd(request):
     viviendas = Vivienda.objects.filter(state="Yes")
-    addform=NewUser()
+    alarmas = AlarmaVecinal.objects.filter(state="Yes")
+
+    adduser = NewUser()
+    addvivienda = NewVivienda()
+            
+    if request.method == "POST":
         
-    
-    
-    
+        if 'vivienda' in request.POST:
+            addvivienda = NewVivienda(request.POST)
+            if addvivienda.is_valid():
+                
+                vivienda = addvivienda.save(commit=False)
+                vivienda.alarma_vecinal = addvivienda.cleaned_data['alarma_vecinal']                
+                vivienda.save()
+                return redirect('dashboard:useradd')
+            else:
+                return HttpResponse("Something wrong with the form")
+            
+            
+            
+        if 'user' in request.POST:
+            adduser = NewUser(request.POST, request.FILES)
+            if adduser.is_valid():
+                user = adduser.save(commit=False)
+                if 'avatar' in request.FILES:
+                    avatar = request.FILES['avatar']
+                    filename = default_storage.save('profiles/' + avatar.name, avatar)
+                    user.avatar = filename
+
+                user.vivienda = adduser.cleaned_data['vivienda']
+                vivienda = user.vivienda
+                vivienda.alarma_vecinal = adduser.cleaned_data['alarma_vecinal']
+                vivienda.save()
+                user.save()
+                return redirect('dashboard:usuarios')
+            else:
+                return HttpResponse("Something wrong with the form")
+        
+        
     context ={
-    "addform": addform, 
+    "adduser": adduser,
+    "addvivienda": addvivienda, 
+    "alarmas": alarmas,
     "viviendas": viviendas,    
     }
         

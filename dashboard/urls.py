@@ -17,10 +17,7 @@ urlpatterns = [
     ###  USERS module
 
     path('usuarios/',dashboard_views.users_list,name="usuarios"),
-    path('usuarios/<uuid:pk>/',dashboard_views.users_list,name="usuariosbarrio"),
-    path('usuario/add/',dashboard_views.useradd,name="useradd"),
-
-    
+    path('usuario/add/',dashboard_views.useradd,name="useradd"),    
     path('usuario/<uuid:pk>/',dashboard_views.usuario_detail, name="usuario"),
     path('usuario/<uuid:pk>/delete/',dashboard_views.usuario_delete, name="usuariodelete"),
     
@@ -43,6 +40,7 @@ urlpatterns = [
     path('barrio/<uuid:pk>/delete/',dashboard_views.barrio_delete, name="barriodelete"),
     path('barrio/<uuid:pk>/',dashboard_views.barrio_detail, name="barrio"),
     path('barrio/<uuid:pk>/change/',dashboard_views.barrio_edit, name="barrioedit"),
+    path('usuarios/<uuid:pk>/',dashboard_views.users_list,name="usuariosbarrio"),
 
     path('vivienda/<uuid:pk>/delete/',dashboard_views.vivienda_delete, name="viviendadelete"),
     path('vivienda/<uuid:pk>/',dashboard_views.vivienda_detail, name="vivienda"),

@@ -62,11 +62,12 @@ class NewUsuarioForm(ModelForm):
         }
         
 
+    
 class NewUser(NewUsuarioForm):
     
     alarma_vecinal = ModelChoiceField(
         queryset=AlarmaVecinal.objects.filter(state="Yes"),
-        empty_label="Seleccione una Alarma Vecinal",
+        empty_label="Selecciona una Alarma Vecinal",
         widget=Select(attrs={
             'class': 'default-select form-control wide mb-3',
             'id': 'alarma_vecinal',
@@ -76,7 +77,7 @@ class NewUser(NewUsuarioForm):
     
     vivienda = ModelChoiceField(
         queryset=Vivienda.objects.filter(state="Yes"),
-        empty_label="Seleccione una vivienda",
+        empty_label="Selecciona una vivienda",
         widget=Select(attrs={
             'class': 'default-select form-control wide mb-3',
             'id': 'vivienda',
@@ -237,4 +238,17 @@ class NewViviendaForm(ModelForm):
 
 
         }
-        
+
+
+class NewVivienda(NewViviendaForm):
+    
+
+    alarma_vecinal = ModelChoiceField(
+        queryset=AlarmaVecinal.objects.filter(state="Yes"),
+        empty_label="Selecciona una Alarma Vecinal",
+        widget=Select(attrs={
+            'class': 'default-select form-control wide mb-3',
+            'id': 'alarma_vecinal',
+            'name': 'alarma_vecinal',
+        }),
+    )

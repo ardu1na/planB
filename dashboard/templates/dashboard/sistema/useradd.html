@@ -34,85 +34,134 @@
         
         <div class="col-xl-12">            
             <div class="card students-list">
-                 
+                <div class="card-header">
+                    <h3 class="card-title">Crear Usuario</h3>        
+                </div>
 
                 <form  method="post" enctype="multipart/form-data" novalidate autocomplete="off">
                     {% csrf_token %}
-                    <div class="modal-body">
+                    <div class="modal-body mx-5">
                         <div class="pt-1 pb-4">
                             <div class="formcontrol">                                         
                                 <div class="form-floating mb-3">
 
-                                    <div class="form-group my-3">
-                                        
-                                        {{addform.alarma_vecinal}}
-                                    </div>
 
-                                    <div class="my-4">
-                                        <p>Elije una vivienda...</p>                 
-                                        <select id="vivienda" class="form-control" name="vivienda">
+                                    <div class="row">
 
-                                            {% for s in viviendas %}
+                                        <div class="my-2 col-6">
 
-                                                <option id="{{s.alarma_vecinal.id}}" value="{{s.id}}"> {{s}}</option>
-
-                                            {%endfor%}
-                                        </select>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="form-group my-3">
-                                        
-                                        {{addform.nombre}}
-                                    </div>
-                                    <div class="form-group my-3">
-                                        {{addform.apellido}}
-                                    </div>
-                                    <div class="form-group my-3">
-                                        {{addform.telefono}}
-                                    </div>
-
-                                    <div class="form-group my-3">
-                                        {{addform.genero}}
-                                    </div>
-
-
-                                    <div class="form-group my-3">
-                                        {{addform.fecha_de_nacimiento}}
-                                    </div>
-
-                                    <div class="form-group my-3">
-                                        {{addform.nota}}
-                                    </div>
-
-                                    <div class="mb-3 col-md-6">
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                {{ addform.avatar|attr:"type:file" }}
-                                                <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
-                                            </div>
-                                            <div class="avatar-preview">
-                                            {% if addform.instance.avatar %}
-                                            <div id="imagePreview" style="background-image: url('{{ addform.instance.avatar.url }}');">
-                                            {% else %}
-                                            <div id="imagePreview">
-                                            {% endif %}
-                                            
+                                            <div class="form-group">
+                                                
+                                                {{adduser.nombre}}
                                             </div>
                                         </div>
 
+                                        <div class="my-2 col-6 ">
+
+                                            <div class="form-group">
+                                                {{adduser.apellido}}
+                                            </div>
+                                    
+                                        </div>  
+                                    </div>
+
+                                    <div class="form-group my-3">
+                                        
+                                        {{adduser.alarma_vecinal}}
+                                    </div>
+
+                                    <div class="row">
+                                       
+                                        <div class="my-4 col-10">
+
+                                            <p>Elije una vivienda...</p>                 
+                                            <select id="vivienda" class="form-control" name="vivienda">
+
+                                                {% for s in viviendas %}
+
+                                                    <option id="{{s.alarma_vecinal.id}}" value="{{s.id}}"> {{s}}</option>
+
+                                                {%endfor%}
+                                            </select>
+                                        </div>  
+
+
+                                        <div class="my-4 col-2">
+
+                                            <button type="button" class="btn btn-primary py-4 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <i class="fa fa-plus me-2"></i><i class="fa-solid fa-house"></i></button>
+
+                                        </div>    
+                                    </div>
+
+
+                                    <div class="row">
+
+                                        <div class="my-2 col-6">
+
+                                            <div class="form-group">
+                                                
+                                                {{adduser.genero}}
+                                            </div>
+                                        </div>
+
+                                        <div class="my-2 col-6 ">
+
+                                            <div class="form-group">
+                                                {{adduser.fecha_de_nacimiento}}
+                                            </div>
+                                    
+                                        </div>  
+                                    </div>
+
+                                    
+                                    <div class="form-group my-3">
+                                        {{adduser.telefono}}
+                                    </div>
+
+
+
+                                    <div class="row">
+
+                                        <div class="my-2 col-6">
+
+                                            <div class="form-group">
+                                                
+                                                {{adduser.nota}}
+                                            </div>
+                                        </div>
+
+                                        <div class="my-2 col-6 ">
+
+                                            <div class="form-group">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        {{ adduser.avatar|attr:"type:file" }}
+                                                        <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
+                                                    </div>
+        
+                                                    <div class="avatar-preview">
+                                                    {% if adduser.instance.avatar %}
+                                                    <div id="imagePreview" style="background-image: url('{{ adduser.instance.avatar.url }}');">
+                                                    {% else %}
+                                                    <div id="imagePreview">
+                                                    {% endif %}                                            
+                                                    </div>
+        
+                                                </div>
+                                            </div>
+                                    
+                                        </div>  
+                                    </div>
+
+                                    <div class="form-floating my-3 text-left">
+                                        <button type="submit" class=" fs-3 shadow-sm btn btn-secondary" name="user"><i class="fa fa-plus me-2 fs-3 me-3"></i> Agregar </button>
+                                    </div>
+
                                 </div>
-                            </div>       
-    
-                            
+                            </div>                                 
                         </div>
-                        <div class="form-floating my-3 text-center">
-                            <button type="submit" class=" fs-3 shadow-sm btn btn-secondary" name="addnew"><i class="fa fa-plus me-2 fs-3 me-3"></i> Agregar </button>
-                        </div>
+                       
                     </div>
 
                 </form>
@@ -123,23 +172,15 @@
 <!-- end MAIN usuarios -->
 
 
-<!-- modals delete usuarios -->
-    {% for usuario in usuarios %}
-        <div class="modal" id="deleteusuario{{usuario.id}}">
-            {% include 'dashboard/sistema/barrios/deleteusuario.html' %}
-        </div>
-    {% endfor %}
-
-
-<!-- START modal add usuario -->
+<!-- START modal add vivienda -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Usuario</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Vivienda</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>           
-            <form  method="post" enctype="multipart/form-data" novalidate autocomplete="off">
+            <form  method="post">
                 {% csrf_token %}
                     <div class="modal-body">
                         <div class="pt-1 pb-4">
@@ -147,71 +188,66 @@
                                 <div class="form-floating mb-3">
 
                                     <div class="form-group my-3">
+                                            <p>Elije una Alarma Vecinal...</p>                 
+                                            <select id="alarma_vecinal" class="form-control" name="alarma_vecinal">
+
+                                                {% for s in alarmas %}
+
+                                                    <option id="{{s.id}}" value="{{s.id}}"> {{s}}</option>
+
+                                                {%endfor%}
+                                            </select>
+                                    </div>
+
+
+
+                                    <div class="form-group my-3">
                                         
-                                        {{addform.alarma_vecinal}}
+                                        {{addvivienda.calle}}
+                                    </div>
+                                    <div class="form-group my-3">
+                                        {{addvivienda.numero}}
+                                    </div>
+                                    <div class="form-group my-3">
+                                        {{addvivienda.departamento}}
                                     </div>
 
-                                    <div id="vdiv" class="form-group my-3">
-                                        
-                                        {{addform.vivienda}}
+                                    <div class="form-group my-3">
+                                        {{addvivienda.municipio}}
                                     </div>
 
+
+                                    <div class="form-group my-3">
+                                        {{addvivienda.provincia}}
+                                    </div>
+
+
+                                    <div class="form-group my-3">
+                                        {{addvivienda.altitud}}
+                                    </div>
+
+                                    <div class="form-group my-3">
+                                        {{addvivienda.latitud}}
+                                    </div>
+    
                                     <div class="form-group my-3">
                                         
-                                        {{addform.nombre}}
+                                        {{addvivienda.nota}}
                                     </div>
-                                    <div class="form-group my-3">
-                                        {{addform.apellido}}
-                                    </div>
-                                    <div class="form-group my-3">
-                                        {{addform.telefono}}
-                                    </div>
-
-                                    <div class="form-group my-3">
-                                        {{addform.genero}}
-                                    </div>
-
-
-                                    <div class="form-group my-3">
-                                        {{addform.fecha_de_nacimiento}}
-                                    </div>
-
-                                    <div class="form-group my-3">
-                                        {{addform.nota}}
-                                    </div>
-
-                                    <div class="mb-3 col-md-6">
-                                        <div class="avatar-upload">
-                                           <div class="avatar-edit">
-                                              {{ addform.avatar|attr:"type:file" }}
-                                              <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
-                                           </div>
-                                           <div class="avatar-preview">
-                                            {% if addform.instance.avatar %}
-                                            <div id="imagePreview" style="background-image: url('{{ addform.instance.avatar.url }}');">
-                                          {% else %}
-                                            <div id="imagePreview">
-                                          {% endif %}
-                                          
-                                           </div>
-                                     </div>
-
                                 </div>
                             </div>       
     
                             
                         </div>
                         <div class="form-floating my-3 text-center">
-                            <button type="submit" class=" fs-3 shadow-sm btn btn-secondary" name="addnew"><i class="fa fa-plus me-2 fs-3 me-3"></i> Agregar </button>
+                            <button type="submit" class=" fs-3 shadow-sm btn btn-secondary" name="vivienda"><i class="fa fa-plus me-2 fs-3 me-3"></i> Agregar </button>
                         </div>
                     </div>
                 </form>
-
-
         </div>
     </div>
 </div>
-<!-- END modal add usuario -->
+<!-- END modal add vivienda -->
 {% endblock %}
 
 
