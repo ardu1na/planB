@@ -16,7 +16,9 @@ class NewUsuarioForm(ModelForm):
                   'apellido',
                   'genero',
                   
-                  'telefono',                  
+                  'telefono',
+                  'email',                  
+                  
                   'fecha_de_nacimiento',
                   'nota',
                   )
@@ -30,6 +32,9 @@ class NewUsuarioForm(ModelForm):
             'id':"nota",
             'placeholder':"Nota de información médica",}),
             
+            'email' : EmailInput(attrs={'class':"form-control",
+            'id':"email",
+            'placeholder':"E-mail",}),
             
             'nombre' : TextInput(attrs={'class':"form-control",
             'id':"nombre",

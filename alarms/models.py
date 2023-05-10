@@ -3,6 +3,7 @@ from datetime import date
 from PIL import Image
 
 from django.db import models
+from django.contrib.auth.models import Group
 
 
 from dashboard.users.models import CustomUser
@@ -49,6 +50,8 @@ class AlarmaEvent(models.Model):
 class AlarmaVecinal(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     
+    group = models.OneToOneField(Group, on_delete=models.CASCADE, null=True, blank=True)    
+            
     nombre =  models.CharField(max_length=150)
     descripcion =  models.TextField(null=True, blank=True)
 
@@ -69,13 +72,31 @@ class AlarmaVecinal(models.Model):
     state = models.CharField(max_length=50, choices=STATE_CHOICES, default="Yes")
     deleted_at = models.DateField(blank=True, null=True)
     
+    
+    
+    
+    
+    
     def save(self, *args, **kwargs):
         if self.state == "No":
             self.deleted_at = date.today()
-        super(AlarmaVecinal, self).save(*args, **kwargs)    
+            
+        created = not self.pk 
+        super().save(*args, **kwargs)  
+
+        if created:
+            new_group = Group.objects.create(name=self.nombre)
+            self.group = new_group
+        
+        super(AlarmaVecinal, self).save(*args, **kwargs)  
+
+
         
     def __str__ (self):
         return self.nombre
+    
+    
+    
     
     @property
     def get_n_usuarios(self):
@@ -151,7 +172,6 @@ class AlarmaVecinal(models.Model):
     
 class Miembro(models.Model):
     
-    # user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
     avatar = models.ImageField(upload_to='profiles/', null=True, blank=True)
@@ -186,14 +206,29 @@ class Miembro(models.Model):
         (NO, ('No')),]    
     state = models.CharField(max_length=50, choices=STATE_CHOICES, default="Yes")
     deleted_at = models.DateField(blank=True, null=True)
-    
-    
+
+
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)   
+    email = models.EmailField(unique=True, blank=False, null=False)  
     
     
     def save(self, *args, **kwargs):
         if self.state == "No":
             self.deleted_at = date.today()
-        super(Miembro, self).save(*args, **kwargs)
+            
+        super().save(*args, **kwargs)  
+
+        if not self.user:
+            new_user = CustomUser.objects.create(
+                email=self.email,
+                password=f"{self.nombre.lower().replace(' ', '_')}_{self.apellido.lower().replace(' ', '_')}*pass",
+                is_active=True
+            )
+            self.user = new_user
+            
+        
+            
+        super().save(*args, **kwargs)       
         
         # prevent collapse hd with images and bad display
         if self.avatar:
@@ -206,6 +241,10 @@ class Miembro(models.Model):
                 background.paste(image, offset)
                 image = background
             image.save(self.avatar.path)
+            
+            
+            
+            
         
     @property
     def get_wp(self):
@@ -243,10 +282,12 @@ class Miembro(models.Model):
     def __str__ (self):
         return self.get_nombre_completo
 
-    
-"""
- NEED TO HANDLE WHEN NOT NUMBER IN DIR:
-"""        
+ 
+ 
+ 
+ 
+ 
+        
 class Vivienda(models.Model):    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
 

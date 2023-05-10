@@ -63,3 +63,13 @@ Time: 0:5
 Group ID: ELjvTtLzs8CK8YQSGxN5Zo
 Message: Alerta Emergencia de qqqqqqq qqqqqqq.(03:05 hs en asaasasa 121)
 --------------------
+Date: 10/5/2023
+Time: 10:19
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta SOS de esli tejeda.(13:19 hs en noseelnombre 5432)
+--------------------
+Date: 10/5/2023
+Time: 10:20
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta Fuego de un ser.(13:20 hs en camino al cerro perito moreno 285)
+--------------------

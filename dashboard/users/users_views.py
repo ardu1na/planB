@@ -159,7 +159,7 @@ def add_user(request):
 			user_obj.groups.clear()
 			for i in form.cleaned_data.get('groups'):
 				user_obj.groups.add(i)
-			messages.success(request,f'{user_obj.first_name} {user_obj.last_name} is created successfully')
+			messages.success(request,f'{user_obj.username} is created successfully')
 			return redirect('dashboard:users')
 	else:
 		form = CustomUserForm()		
