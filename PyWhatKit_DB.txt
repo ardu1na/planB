@@ -33,3 +33,33 @@ Time: 18:12
 Group ID: LkNG4BNQsXK2Xfn99DwbFV
 Message: Alerta SOS de juru ppniokla.(21:12 hs en guniidoru 123)
 --------------------
+Date: 9/5/2023
+Time: 23:59
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta Fuego de mech che.(02:59 hs en camino al cerro perito moreno 285)
+--------------------
+Date: 10/5/2023
+Time: 0:0
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta Fuego de un ser.(02:59 hs en camino al cerro perito moreno 285)
+--------------------
+Date: 10/5/2023
+Time: 0:0
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta Fuego de un ser.(02:59 hs en camino al cerro perito moreno 285)
+--------------------
+Date: 10/5/2023
+Time: 0:1
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta SOS de mech che.(03:01 hs en camino al cerro perito moreno 285)
+--------------------
+Date: 10/5/2023
+Time: 0:1
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta SOS de mech che.(03:01 hs en camino al cerro perito moreno 285)
+--------------------
+Date: 10/5/2023
+Time: 0:5
+Group ID: ELjvTtLzs8CK8YQSGxN5Zo
+Message: Alerta Emergencia de qqqqqqq qqqqqqq.(03:05 hs en asaasasa 121)
+--------------------

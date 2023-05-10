@@ -485,7 +485,7 @@ def users_list(request, pk=None):
         }
         
         
-    template_name= 'dashboard/sistema/usuarios.html'
+    template_name= 'dashboard/sistema/generic/usuarios.html'
             
     
     return render(request, template_name, context)
@@ -498,7 +498,6 @@ def useradd(request):
     alarmas = AlarmaVecinal.objects.filter(state="Yes")
 
     adduser = NewUser()
-    addvivienda = NewVivienda()
     
     if request.method == "POST":        
             
@@ -537,13 +536,12 @@ def useradd(request):
         
     context ={
     "adduser": adduser,
-    "addvivienda": addvivienda, 
     "alarmas": alarmas,
     "viviendas": viviendas,    
     }
         
         
-    template_name= 'dashboard/sistema/useradd.html'
+    template_name= 'dashboard/sistema/generic/useradd.html'
             
     
     return render(request, template_name, context)
@@ -580,7 +578,7 @@ def viviendaadd(request):
     }
         
         
-    template_name= 'dashboard/sistema/viviendaadd.html'
+    template_name= 'dashboard/sistema/generic/viviendaadd.html'
             
     
     return render(request, template_name, context)
@@ -616,7 +614,7 @@ def barrioadd(request):
     }
         
         
-    template_name= 'dashboard/sistema/barrioadd.html'
+    template_name= 'dashboard/sistema/generic/barrioadd.html'
             
     
     return render(request, template_name, context)
