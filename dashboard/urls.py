@@ -36,7 +36,8 @@ urlpatterns = [
   ###  BARRIOS VIVIENDA  module
 
     path('barrios/',dashboard_views.barrios_list, name="barrios"),
-    
+    path('barrio/add/',dashboard_views.barrioadd,name="barrioadd"),    
+
     path('barrio/<uuid:pk>/delete/',dashboard_views.barrio_delete, name="barriodelete"),
     path('barrio/<uuid:pk>/',dashboard_views.barrio_detail, name="barrio"),
     path('barrio/<uuid:pk>/change/',dashboard_views.barrio_edit, name="barrioedit"),

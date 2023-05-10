@@ -57,18 +57,35 @@
                                         </div>  
                                     </div>
 
-                                    <div class="form-group my-3">
                                         
-                                        <p>Elije una alarma...</p>                 
-                                            <select id="alarma_vecinal" class="form-control" >
+                                        
 
-                                                {% for s in alarmas %}
 
-                                                    <option value="{{s.id}}"> {{s}}</option>
 
-                                                {%endfor%}
-                                            </select>
-                                    </div>
+
+                                            <div class="row">
+                                       
+                                                <div class="my-4 col-10">
+        
+                                                    <p>Elije una alarma Vecinal...</p>                 
+                                                            <select id="alarma_vecinal" class="form-control" >
+
+                                                                {% for s in alarmas %}
+
+                                                                    <option value="{{s.id}}"> {{s}}</option>
+
+                                                                {%endfor%}
+                                                            </select>
+                                                </div>  
+        
+        
+                                                <div class="my-4 col-2">
+        
+                                                    <a class="btn btn-primary py-4 mt-4" href="{% url 'dashboard:barrioadd' %}">
+                                                        <i class="fa fa-plus me-2"></i><i class="fa-solid fa-broadcast-tower"></i></a>
+        
+                                                </div>    
+                                            </div>
 
                                     <div class="row">
                                        

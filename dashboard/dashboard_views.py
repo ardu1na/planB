@@ -557,13 +557,15 @@ def viviendaadd(request):
     
     if request.method == "POST":
         if 'vivienda' in request.POST: 
-            print("$$$$$$$4 vivienda")
 
             addvivienda = NewVivienda(request.POST)
+            
+
+                
             if addvivienda.is_valid():
                 
                 vivienda = addvivienda.save(commit=False)
-                vivienda.alarma_vecinal = addvivienda.cleaned_data['alarma_vecinal']                
+                vivienda.alarma_vecinal = addvivienda.cleaned_data['alarma_vecinal']              
                 vivienda.save()
                 return redirect('dashboard:useradd')
             else:
@@ -579,6 +581,42 @@ def viviendaadd(request):
         
         
     template_name= 'dashboard/sistema/viviendaadd.html'
+            
+    
+    return render(request, template_name, context)
+
+
+
+
+
+
+
+
+@login_required(login_url='dashboard:login')
+def barrioadd(request):
+
+    addbarrio = NewAlarmaVecinalForm()
+    
+    if request.method == "POST":
+        if 'addnew' in request.POST: 
+            
+            new = NewAlarmaVecinalForm(request.POST)
+            if new.is_valid():
+                
+                new.save()
+                return redirect('dashboard:viviendaadd')
+            else:
+                print(new.errors)
+                return HttpResponse(f"Something wrong with the form: {new.errors}")
+            
+            
+        
+    context ={
+    "addform": addbarrio, 
+    }
+        
+        
+    template_name= 'dashboard/sistema/barrioadd.html'
             
     
     return render(request, template_name, context)

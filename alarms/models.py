@@ -254,7 +254,7 @@ class Vivienda(models.Model):
     nota =  models.CharField(max_length=400, null=True, blank=True)
        
     calle = models.CharField(max_length=300, blank=True, null=True, verbose_name="CALLE")
-    numero = models.IntegerField(blank=True, null=True)
+    numero = models.IntegerField(blank=True, null=True, default=0)
     sin_numero = models.BooleanField(default=False)
     
     departamento = models.CharField(max_length=300, blank=True, null=True, verbose_name="DEPARTAMENTO (opcional)")

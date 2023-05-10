@@ -37,7 +37,16 @@
                                 <div class="formcontrol">                                         
                                     <div class="form-floating mb-3">
     
-                                        <div class="form-group my-3">
+
+
+
+
+
+
+                                        <div class="row">
+                                       
+                                            <div class="my-4 col-10">
+    
                                                 <p>Elije una Alarma Vecinal...</p>                 
                                                 <select id="alarma_vecinal" class="form-control" name="alarma_vecinal">
     
@@ -47,6 +56,15 @@
     
                                                     {%endfor%}
                                                 </select>
+                                            </div>  
+    
+    
+                                            <div class="my-4 col-2">
+    
+                                                <a class="btn btn-primary py-4 mt-4" href="{% url 'dashboard:barrioadd' %}">
+                                                    <i class="fa fa-plus me-2"></i><i class="fa-solid fa-broadcast-tower"></i></a>
+    
+                                            </div>    
                                         </div>
     
     
@@ -133,28 +151,6 @@
 
 
 
-
- <script>             
-    var $viviendaSelect = $('#vivienda');
-    var $alarma = $('#alarma_vecinal');
-    $alarma.on('change', filterServices);
-
-    function filterServices() {
-        var alarmaId = $('#alarma_vecinal').val();
-        
-        $viviendaSelect.find('option').each(function() {
-            var $viviendaOption = $(this);
-            
-            if ($viviendaOption.attr('id') === alarmaId) {
-                $viviendaOption.show();
-            } else {
-                $viviendaOption.hide();
-            }
-        });
-        
-        $viviendaSelect.val($viviendaSelect.find('option:visible:first').val());
-    }
-</script>
 
 
 
