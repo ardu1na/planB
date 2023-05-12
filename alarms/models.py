@@ -48,10 +48,7 @@ class AlarmaEvent(models.Model):
     
 
 class AlarmaVecinal(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    
-    group = models.OneToOneField(Group, on_delete=models.CASCADE, null=True, blank=True)    
-            
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)           
     nombre =  models.CharField(max_length=150)
     descripcion =  models.TextField(null=True, blank=True)
 
@@ -84,11 +81,7 @@ class AlarmaVecinal(models.Model):
         created = not self.pk 
         super().save(*args, **kwargs)  
 
-        if created:
-            new_group = Group.objects.create(name=self.nombre)
-            self.group = new_group
-        
-        super(AlarmaVecinal, self).save(*args, **kwargs)  
+    
 
 
         
@@ -219,16 +212,30 @@ class Miembro(models.Model):
         super().save(*args, **kwargs)  
 
         if not self.user:
-            new_user = CustomUser.objects.create(
+            new_user = CustomUser.objects.create(              # hacer doc para esto
                 email=self.email,
                 password=f"{self.nombre.lower().replace(' ', '_')}_{self.apellido.lower().replace(' ', '_')}*pass",
                 is_active=True
             )
             self.user = new_user
-            
-        
-            
+                  
         super().save(*args, **kwargs)       
+        
+        if self.user.groups == None and self.vivienda.alarma_vecinal:
+            try:
+                group = Group.objects.get(name=self.vivienda.alarma_vecinal.nombre)
+                
+            except:
+                group = Group.objects.create(name=self.vivienda.alarma_vecinal.nombre)
+            
+            user = self.user
+                
+            user.groups.add(group)
+            user.save()
+        
+        super().save(*args, **kwargs)  
+        
+        
         
         # prevent collapse hd with images and bad display
         if self.avatar:
