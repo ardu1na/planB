@@ -303,15 +303,7 @@ function updateUltima() {
                 '</div></div></div>');
 
             // Send a WhatsApp message
-        $.ajax({
-            url: 'sendwsp/',
-            success: function(response) {
-              console.log(response.mensaje);
-            },
-            error: function(xhr, errmsg, err) {
-              console.log(xhr.status + ': ' + xhr.responseText);
-            }
-          });
+       
       }
 
       previousData = data;

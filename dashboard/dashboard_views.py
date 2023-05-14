@@ -1,8 +1,8 @@
 
 import json
 import os
-import requests
-
+import pickle
+import mimetypes
 
 from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse
@@ -12,10 +12,9 @@ from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import render, redirect,get_object_or_404
 
-import pywhatkit
-import pickle
-import mimetypes
 
+from rest_framework import generics
+from dashboard.serializers import AlarmaEventSerializer
 from dashboard import setup_config
 from dashboard.models import Configurations
 from dashboard.forms import *
@@ -52,8 +51,9 @@ today = date.today()
 ############ monitoreo de alarmas ################################################
 
 
-
-# send wsp message   
+"""
+# send wsp message not working on prod, because of pyautogui needs a browser
+# im gonna create a API instead
 
 def sendwsp(request):
     ultima = AlarmaEvent.objects.last()
@@ -64,7 +64,7 @@ def sendwsp(request):
     timing = f"{hora:02d}:{minutos:02d} hs"
 
     lugar = ultima.miembro.vivienda.get_direccion
-    group = ultima.miembro.get_wp ########### cambiar forms templates and models para recibir solo el codigo LkNG4BNQsXK2Xfn99DwbFV
+    group = ultima.miembro.get_wp 
     normalize = {
         'á': 'a',
         'é': 'e',
@@ -86,7 +86,28 @@ def sendwsp(request):
     pywhatkit.sendwhatmsg_to_group_instantly(group, mensaje_normalizado)
     
     return JsonResponse({'mensaje': 'Mensaje enviado correctamente'})
+    
+    
+     $.ajax({
+            url: 'sendwsp/',
+            success: function(response) {
+              console.log(response.mensaje);
+            },
+            error: function(xhr, errmsg, err) {
+              console.log(xhr.status + ': ' + xhr.responseText);
+            }
+          });
+          
+          
+          """
 
+
+class AlarmaEventAPIView(generics.RetrieveAPIView):
+    queryset = AlarmaEvent.objects.all()
+    serializer_class = AlarmaEventSerializer
+
+    def get_object(self):
+        return AlarmaEvent.objects.last()
 
 
 
