@@ -25,82 +25,6 @@ from alarms.models import *
 today = date.today()
 
 
-# IN PYWHATKIT LIB I:
-#  I CHANGED VARIABLES 
-
-# env\Lib\site-packages\pywhatkit\core\core.py
-
-# def send_message(message: str, receiver: str, wait_time: int) -> None:
-#    time.sleep(wait_time - 7)  TO 1
-
-
-#  env\Lib\site-packages\pywhatkit\whats.py
-# LINE 79 
-# def sendwhatmsg_to_group(
-#    wait_time: int = 15, X 5
-# def sendwhatmsg_to_group_instantly( 
-#    wait_time: int = 15 X 5,
-   
-# LINE 121 tab_close: bool = FALSE TO TrUE,
-
-
-
-
-
-
-############ monitoreo de alarmas ################################################
-
-
-"""
-# send wsp message not working on prod, because of pyautogui needs a browser
-# im gonna create a API instead
-
-def sendwsp(request):
-    ultima = AlarmaEvent.objects.last()
-    user = ultima.miembro
-    tipo = ultima.tipo
-    hora = ultima.datetime.hour
-    minutos = ultima.datetime.minute
-    timing = f"{hora:02d}:{minutos:02d} hs"
-
-    lugar = ultima.miembro.vivienda.get_direccion
-    group = ultima.miembro.get_wp 
-    normalize = {
-        'á': 'a',
-        'é': 'e',
-        'í': 'i',
-        'ó': 'o',
-        'ú': 'u',
-        'ü': 'u',
-        'ñ': 'ni'
-    }  
-    message = f"Alerta {tipo} de {user}.\n({timing} en {lugar})"
-    mensaje_normalizado = ""
-    
-    for letra in message:
-        if letra in normalize:
-            mensaje_normalizado += normalize[letra]
-        else:
-            mensaje_normalizado += letra
-            
-    pywhatkit.sendwhatmsg_to_group_instantly(group, mensaje_normalizado)
-    
-    return JsonResponse({'mensaje': 'Mensaje enviado correctamente'})
-    
-    
-     $.ajax({
-            url: 'sendwsp/',
-            success: function(response) {
-              console.log(response.mensaje);
-            },
-            error: function(xhr, errmsg, err) {
-              console.log(xhr.status + ': ' + xhr.responseText);
-            }
-          });
-          
-          
-          """
-
 
 class AlarmaEventAPIView(generics.RetrieveAPIView):
     queryset = AlarmaEvent.objects.all()
@@ -197,12 +121,6 @@ def success (request, pk):
     return render(request, template_name, context)
 
 
-"""
-    
-    se redirecciona a una página ----->  return redirect template: sistema/alertas/success.html     -
-
-    EL USUARIO VE LA PAGINA DE ÉXITO
-"""
 
 
 def planb(request):

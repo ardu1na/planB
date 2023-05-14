@@ -30,7 +30,6 @@ urlpatterns = [
     # ajax monitoreo de alarmas
     path('alarmas/latest/', dashboard_views.latest, name='latest'),
     path('alarmas/has_new_data/', dashboard_views.has_new_data, name='has_new_data'),
-    # path('alarmas/sendwsp/', dashboard_views.sendwsp, name='sendwsp'), # cant use this on prod
     path('api/alarms/', dashboard_views.AlarmaEventAPIView.as_view(), name='apialarm'),
 
 
