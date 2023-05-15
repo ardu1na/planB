@@ -63,7 +63,7 @@
                         <div class="media-body">{% if ultima %}
                             <p class="mb-1">Última alerta: {{ultima.datetime}}</p>
                             <h4 class="mb-0"> {{ultima.tipo}} en
-                                 <a href="{% url 'dashboard:vivienda' pk=ultima.miembro.vivienda.pk %}">{{ultima.miembro.vivienda.get_direccion}} </a></h4>
+                                 <a href="{% if ultima.miembro.vivienda %}{% url 'dashboard:vivienda' pk=ultima.miembro.vivienda.pk %}{% else %}#{%endif%}">{{ultima.miembro.vivienda.get_direccion}} </a></h4>
                             <h5 class="mb-0"> ,<a href="{% url 'dashboard:usuario' pk=ultima.miembro.pk %}"> {{ultima.miembro}}  </a></h5>
                                                 {% else %}
                                                 <p class="mb-1">Sin alertas</p>
