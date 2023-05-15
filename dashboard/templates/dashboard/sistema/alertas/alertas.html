@@ -46,7 +46,7 @@
                         </span>
                         <div class="media-body">
                             {% if ultima %}
-                            <a href="{% url 'dashboard:usuario' pk=ultima.miembro.id %}" class="mb-0 fs-3" id="miembro"> <strong> Última: {{ultima.miembro}}</strong> </a>
+                            <a href="{% if ultima.miembro %}{% url 'dashboard:usuario' pk=ultima.miembro.id %}{%else%}#{%endif%}" class="mb-0 fs-3" id="miembro"> <strong> Última: {{ultima.miembro}}</strong> </a>
 
                             <h5 class="mb-0 mb-3" id="tipoyalarma"> {{ultima.tipo}} en {{ultima.miembro.vivienda.alarma_vecinal}}</h5>
 
