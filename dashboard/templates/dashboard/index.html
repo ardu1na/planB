@@ -64,7 +64,7 @@
                             <p class="mb-1">Última alerta: {{ultima.datetime}}</p>
                             <h4 class="mb-0"> {{ultima.tipo}} en
                                  <a href="{% if ultima.miembro.vivienda %}{% url 'dashboard:vivienda' pk=ultima.miembro.vivienda.pk %}{% else %}#{%endif%}">{{ultima.miembro.vivienda.get_direccion}} </a></h4>
-                            <h5 class="mb-0"> ,<a href="{% if ultima.miembro.vivienda %}{% if ultima.miembro.vivienda %}{% url 'dashboard:usuario' pk=ultima.miembro.pk %}{% else %}#{%endif%}"> {{ultima.miembro}}  </a></h5>
+                            <h5 class="mb-0"> ,<a href="{% if ultima.miembro %}{% url 'dashboard:usuario' pk=ultima.miembro.pk %}{% else %}#{% endif %}"> {{ultima.miembro}}  </a></h5>
                                                 {% else %}
                                                 <p class="mb-1">Sin alertas</p>
                                                 <h4 class="mb-0"> {{ultima.tipo}}  {{ultima.miembro.vivienda.get_direccion}} </h4>
