@@ -34,5 +34,6 @@ class UsuarioAdmin(ModelAdmin):
     inlines =  [AlarmaInline,]
 admin.site.register(Miembro, UsuarioAdmin)
 
-
-admin.site.register(AlarmaEvent)
+class AlarmAdmin(ModelAdmin):
+    pass
+admin.site.register(AlarmaEvent, AlarmAdmin)
