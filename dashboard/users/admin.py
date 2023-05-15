@@ -2,9 +2,9 @@ from django.contrib import admin
 from dashboard.users.models import CustomUser
 from django.contrib.auth.admin import UserAdmin
 
+from unfold.admin import ModelAdmin
 
-
-class UserAdminConfig(UserAdmin):
+class UserAdminConfig(UserAdmin, ModelAdmin):
 	model = CustomUser
 	search_fields = ('email',)
 	list_filter = ('email','is_active','is_staff')
