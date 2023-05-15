@@ -203,7 +203,7 @@
                                                 </div>                                                
                                             </td>                                     
 
-                                            <td>  <a href="{% url 'dashboard:barrio' pk=alerta.miembro.vivienda.alarma_vecinal.id %}">
+                                            <td>  <a href="{% if alerta.miembro.vivienda.alarma_vecinal.id %}{% url 'dashboard:barrio' pk=alerta.miembro.vivienda.alarma_vecinal.id %}{%else%}#{%endif%}">
                                                 <strong> {{alerta.miembro.vivienda.alarma_vecinal}}</strong></a>
                                             </td>
                                             
@@ -211,11 +211,11 @@
 
                                             <td>  
                                                 <div class="d-flex align-items-center">
-                                                    <a href="{% url 'dashboard:usuario' pk=alerta.miembro.id %}">{{alerta.miembro}}</a>
+                                                    <a href="{%if alerta.miembro.id %}{% url 'dashboard:usuario' pk=alerta.miembro.id %}{%else%}#{%endif%}">{{alerta.miembro}}</a>
                                                 </div>
                                             </td>
                                             
-                                            <td>  <a href="{% url 'dashboard:vivienda' pk=alerta.miembro.vivienda.id %}">{{alerta.miembro.vivienda}} </a></td>
+                                            <td>  <a href="{%if alerta.miembro.vivienda.id  %}{% url 'dashboard:vivienda' pk=alerta.miembro.vivienda.id %}{%else%}#{%endif%}">{{alerta.miembro.vivienda}} </a></td>
 
                                             
                                         </tr>
