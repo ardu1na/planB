@@ -165,7 +165,7 @@ def add_user(request):
 		form = CustomUserForm()		
 	return render(request, 'dashboard/modules/add-user.html', {'form': form,"page_title":"Add User"})
 
-
+@login_required(login_url='dashboard:login')
 def signup(request):
 	if request.method == 'POST':
 		form = SignupForm(request.POST, request.FILES)
@@ -215,7 +215,7 @@ def signup(request):
 		form = SignupForm()
 	return render(request, 'dashboard/modules/signup.html', {'form': form})
 
-
+@login_required(login_url='dashboard:login')
 def activate(request, uidb64, token):
 	try:
 		uid = force_str(urlsafe_base64_decode(uidb64))
