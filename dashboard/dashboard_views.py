@@ -49,6 +49,9 @@ def latest(request):
     }
     return JsonResponse(data)
 
+
+
+
 def has_new_data(request):
     latest_datetime = request.GET.get('latest_datetime')  # Get the latest datetime from the client-side
     latest_event = AlarmaEvent.objects.last()
