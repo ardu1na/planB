@@ -1,12 +1,24 @@
 from django.forms import ModelForm, EmailInput,\
         TextInput, Textarea, FileInput, NumberInput,\
-        HiddenInput, UUIDField, Select, ModelChoiceField, CheckboxInput
-        
+        HiddenInput, UUIDField, Select, ModelChoiceField, CheckboxInput, EmailField        
 from alarms.models import *
 
 class NewUsuarioForm(ModelForm):
     
     vivienda = UUIDField(widget=HiddenInput())
+    
+    email = EmailField(
+        widget = EmailInput(attrs={
+            'class': 'form-control',
+            'id': 'email',
+            'placeholder': 'E-mail',
+        }),
+        required=True,
+        error_messages={
+            'required': 'Por favor coloca un email.',
+            'invalid': 'Coloca un email válido.',
+        }
+    )
 
     class Meta:
         model = Miembro
@@ -32,9 +44,6 @@ class NewUsuarioForm(ModelForm):
             'id':"nota",
             'placeholder':"Nota de información médica",}),
             
-            'email' : EmailInput(attrs={'class':"form-control",
-            'id':"email",
-            'placeholder':"E-mail",}),
             
             'nombre' : TextInput(attrs={'class':"form-control",
             'id':"nombre",

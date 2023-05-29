@@ -94,14 +94,28 @@
 
                                                                     <div class="mb-3 col-6">
                                                                         <div class="form-group my-3">
+                                                                            Nombre
                                                                             {{editform.nombre}}
                                                                         </div>
 
                                                                         <div class="form-group my-3">
+                                                                            Apellido
                                                                             {{editform.apellido}}
                                                                         </div>
+
+
+                                                                        <div class="form-group my-3"><span class="text-danger">*</span>
+                                                                            Email
+                                                                             {{ editform.email }}
+                                                                             <div class="text-danger w-100 d-block mt-1">
+                                                                                {{ editform.email.errors }}
+                                                                                </div>
+                                                                        </div>
+                                                                        
+
+
                                                                         <div class="form-group my-3">
-                                                                            {{editform.telefono}}
+                                                                          Teléfono  {{editform.telefono}}
                                                                         </div>
                                                                     </div>
 
@@ -133,12 +147,14 @@
                                                                     <div class="mb-3 col-6">
 
                                                                         <div class="form-group my-3">
+                                                                            Fecha de nacimiento
                                                                             {{editform.fecha_de_nacimiento}}
 
                                                                         </div>
                                                                     </div>
                                                                     <div class="mb-3 col-6">
                                                                         <div class="form-group my-3">
+                                                                            Género
                                                                             {{editform.genero}}
 
                                                                         </div>
@@ -149,6 +165,7 @@
                                                                     
 
                                                                     <div class="form-group my-3">
+                                                                        Nota de información médica
                                                                         {{editform.nota}}
                                                                     </div>
                                                                 </div>

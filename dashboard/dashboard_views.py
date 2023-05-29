@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.files.storage import  default_storage
 from django.urls import reverse
 from django.contrib import messages
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 from rest_framework import generics
@@ -329,8 +329,6 @@ def vivienda_detail(request, pk):
                     usuario.avatar = filename
                 usuario.save()
                 return redirect('dashboard:vivienda', pk=vivienda.pk)
-            else:
-                return HttpResponse("Something wrong with the form")
             
     context ={
         "vivienda" : vivienda,
@@ -470,10 +468,7 @@ def useradd(request):
                 user.vivienda = adduser.cleaned_data['vivienda']
                 user.save()
                 return redirect('dashboard:usuarios')
-            else:
-                print(adduser.errors)
-
-                return HttpResponse(f"Something wrong with the form: {adduser} \n {adduser.errors}")
+           
         
         
     context ={
@@ -580,9 +575,6 @@ def usuario_detail(request, pk):
                 usuario.avatar = filename
             usuario.save()
             return redirect('dashboard:usuario', pk=usuario.pk)
-        else:
-            return HttpResponse("Something wrong with the form")
-        
         
 
             
