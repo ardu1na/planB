@@ -92,34 +92,33 @@ def alertas(request, pk=None):
     }
     return render(request, template_name,  context)
     
-def get_sos(request, pk):
     
-    usuario = Miembro.objects.get(id=pk)
+    
+    
+    
+    
+    
+    
+def sos(request): 
+    usuario = Miembro.objects.get(user=request.user)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="SOS")
     return redirect('success', pk=alerta.pk)
 
-
-def get_fuego(request, pk):
-    usuario = Miembro.objects.get(id=pk)
+def fuego(request):
+    usuario = Miembro.objects.get(user=request.user)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Fuego")
     return redirect('success', pk=alerta.pk)
 
-
-
-def get_emergencia(request, pk):
-    usuario = Miembro.objects.get(id=pk)
+def emergencia(request):
+    usuario = Miembro.objects.get(user=request.user)
     alerta = AlarmaEvent.objects.create(miembro=usuario, tipo="Emergencia")
-    alerta.save()
     return redirect('success', pk=alerta.pk)
-
 
 def success (request, pk):
     alerta = AlarmaEvent.objects.get(id=pk)
-
     template_name = 'dashboard/sistema/alertas/recibida.html'
     context={
-        "alerta" : alerta,
-        
+        "alerta" : alerta,     
     }
     return render(request, template_name, context)
 
